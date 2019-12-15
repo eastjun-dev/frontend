@@ -28,7 +28,7 @@
 //   $el.parentElement.remove()
 // })
 
-// // data-index
+// data-index
 // document.querySelector('.toggle').addEventListener('click', (e) => {
 //   const $div = document.querySelector('.toggle').parentNode
 //   $div.parentElement.setAttribute('class', 'completed')
