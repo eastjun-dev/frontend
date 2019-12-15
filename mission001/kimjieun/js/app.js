@@ -1,5 +1,7 @@
+import TodoList from './TodoList.js'
+
 // 초기에는 카운트 나오지만, 할일 추가후 카운트도 변경되어야 한다.
-const $liCount = document.querySelector('#todo-list').childElementCount
+const $liCount = `총<strong> ${document.querySelector('#todo-list').childElementCount} </strong>개`
 document.querySelector('.todo-count').innerHTML = $liCount
 
 document.querySelector('#new-todo-title').addEventListener('keyup', (e) => {
