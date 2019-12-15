@@ -33,44 +33,32 @@ import TodoList from './TodoList.js'
 //   const $div = document.querySelector('.toggle').parentNode
 //   $div.parentElement.setAttribute('class', 'completed')
 // })
-function App() {
-  this.setState = () => {
+
+export default class App {
+  constructor({ todoList, todoInput, data }) {
+    this.todoList = todoList
+    this.todoInput = todoInput
     this.data = data
-    this.todoList.setState(data)
+    this.setState(this.data)
+
+    this.render()
+    this.init()
   }
-  
-  setState()
 
-  this.todoList = new TodoList({
-    data: this.data
-  })
+  init() {
+    this.todoInput.onAddTodo = this.addTodo.bind(this)
+  }
 
-  this.onAddData = (addData) => {
-    console.log(addData)
+  setState() {
+    this.data = data
+    this.render()
+  }
+
+  render() {
+    this.todoList.render(this.data)
+  }
+
+  addTodo(data) {
+    console.log(data)
   }
 }
-
-export default App
-
-// export default class App {
-//   constructor({ todoList, todoInput, data }) {
-//     this.todoList = todoList
-//     this.todoInput = todoInput
-//     this.data = data
-
-//     // new TodoInput({
-//     //   $selector: todoInput,
-//     //   onAddData: this.onAddData()
-//     // })
-
-//     this.render()
-//   }
-
-//   render() {
-//     this.todoList.render(this.data)
-//   }
-
-//   onAddData(data) {
-//     console.log(data)
-//   }
-// }

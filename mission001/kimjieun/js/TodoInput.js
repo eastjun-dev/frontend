@@ -1,7 +1,6 @@
 export default class TodoList {
-  constructor({ $selector, onAddData }) {
+  constructor({ $selector }) {
     this.$selector = $selector
-    this.onAddData = onAddData
     this.init()
   }
 
@@ -13,7 +12,7 @@ export default class TodoList {
           isStatus: '',
         }
 
-        this.onAddData(addData)
+        this.onAddTodo(addData)
       }
     })
   }
