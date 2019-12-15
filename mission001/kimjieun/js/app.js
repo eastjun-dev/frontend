@@ -1,5 +1,5 @@
-// import TodoList from './TodoList.js'
-
+import { data } from './dummyData.js'
+import TodoList from './TodoList.js'
 // 초기에는 카운트 나오지만, 할일 추가후 카운트도 변경되어야 한다.
 // const $liCount = `총<strong> ${document.querySelector('#todo-list').childElementCount} </strong>개`
 // document.querySelector('.todo-count').innerHTML = $liCount
@@ -33,16 +33,44 @@
 //   const $div = document.querySelector('.toggle').parentNode
 //   $div.parentElement.setAttribute('class', 'completed')
 // })
-
-export default class App {
-  constructor({ todoList, data }) {
-    this.todoList = todoList
+function App() {
+  this.setState = () => {
     this.data = data
-
-    this.render()
+    this.todoList.setState(data)
   }
+  
+  setState()
 
-  render() {
-    this.todoList.render(this.data)
+  this.todoList = new TodoList({
+    data: this.data
+  })
+
+  this.onAddData = (addData) => {
+    console.log(addData)
   }
 }
+
+export default App
+
+// export default class App {
+//   constructor({ todoList, todoInput, data }) {
+//     this.todoList = todoList
+//     this.todoInput = todoInput
+//     this.data = data
+
+//     // new TodoInput({
+//     //   $selector: todoInput,
+//     //   onAddData: this.onAddData()
+//     // })
+
+//     this.render()
+//   }
+
+//   render() {
+//     this.todoList.render(this.data)
+//   }
+
+//   onAddData(data) {
+//     console.log(data)
+//   }
+// }
