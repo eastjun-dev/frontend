@@ -36,6 +36,12 @@ TodoList.prototype.render = function(items) {
   }, '')
 
   this.$todoList.innerHTML = itemsHtmlString
+  this.renderCounterContainer(items)
+}
+
+TodoList.prototype.renderCounterContainer = function(items) {
+  const $countContainerSpanComponent = document.querySelector('div.count-container > span')
+  $countContainerSpanComponent.innerHTML = `총 <strong>${items.length}</strong> 개`
 }
 
 TodoList.prototype.addState = function(item) {
@@ -91,14 +97,5 @@ function App(inputSelector, todoListSelector) {
 App.prototype.toggle
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  window.onload = function () {
-    if (!window.getComputedStyle) {
-      window.getComputedStyle = function(element) {
-        return element.currentStyle;
-      }
-    }
-  }
-
   new App('.new-todo', '#todo-list')
 })
