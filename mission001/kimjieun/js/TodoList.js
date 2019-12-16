@@ -14,6 +14,12 @@ export default class TodoList {
         this.toggleTodo(e.target.parentNode, e.target.parentNode.dataset.idx)
       }
     })
+
+    this.$selector.addEventListener('dblclick', (e) => {
+      if (e.target.className === 'label') {
+        this.changeLabelToInput(e.target.parentNode)
+      }
+    })
   }
 
   createTodoListHtmlString = ({ text, isStatus }, index) => {

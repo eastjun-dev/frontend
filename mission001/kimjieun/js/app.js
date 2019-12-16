@@ -16,6 +16,7 @@ export default class App {
     this.todoInput.onAddTodo = this.addTodo.bind(this)
     this.todoList.toggleTodo = this.toggleTodo.bind(this)
     this.todoList.onDeleteTodo = this.onDeleteTodo.bind(this)
+    this.todoList.changeLabelToInput = this.changeLabelToInput.bind(this)
   }
 
   setState(data) {
@@ -48,5 +49,9 @@ export default class App {
     const deletedData = [...this.data]
     deletedData.splice(index, 1)
     this.setState(deletedData)
+  }
+
+  changeLabelToInput(target) {
+    target.parentNode.setAttribute('class', 'editing')
   }
 }
