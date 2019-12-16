@@ -1,6 +1,18 @@
 function TodoList(selector) {
   this.items = []
   this.$todoList = document.querySelector(selector) // #todo-list
+
+  this.$todoList.addEventListener('click', (e) => {
+    const datasetAction = e.target.dataset.action
+    console.log({datasetAction})
+    if(!datasetAction) return ;
+
+    const [action, idx] = datasetAction.split('-')
+    switch(action) {
+      case 'check': this.toggleState(idx); break;
+      case 'remove': this.removeState(idx); break; 
+    }
+  })
 }
 
 TodoList.prototype.render = function(items) {
@@ -9,7 +21,7 @@ TodoList.prototype.render = function(items) {
     const { content, completed } = item
     const inputHtmlString = `<input class="toggle" type="checkbox" data-action=check-${index} ${completed && 'checked'}>`
     const labelHtmlString = `<label class="label">${content}</label>`
-    const buttonHtmlString = `<button class="destroy"></button>`
+    const buttonHtmlString = `<button class="destroy" data-action=remove-${index}></button>`
     const viewHtmlString = `<div class="view">${inputHtmlString}${labelHtmlString}${buttonHtmlString}</div>`
     const liHtmlString = `<li ${completed && 'class="completed"'}>${viewHtmlString}<input class="edit" value="${content}"></li>`
     return `${acc}${liHtmlString}`
@@ -28,6 +40,11 @@ TodoList.prototype.toggleState = function(idx) {
   this.render(this.items) 
 }
 
+TodoList.prototype.removeState = function(idx) {
+  this.items = this.items.filter((items, index) => idx != index)
+  this.render(this.items) 
+}
+
 function App(inputSelector, todoListSelector) {
   this.$input = document.querySelector(inputSelector)
   this.TodoListComponent = new TodoList(todoListSelector)
@@ -38,18 +55,9 @@ function App(inputSelector, todoListSelector) {
         content: e.target.value,
         completed: false,
       }
+      e.target.value = ''
       this.TodoListComponent.addState(item)
     } 
-  })
-
-  this.TodoListComponent.$todoList.addEventListener('click', (e) => {
-    const datasetAction = e.target.dataset.action
-    if(!datasetAction) return ;
-
-    const [action, idx] = datasetAction.split('-')
-    switch(action) {
-      case 'check': this.TodoListComponent.toggleState(idx); break;
-    }
   })
 }
 
