@@ -11,7 +11,7 @@ export default class TodoList {
       }
 
       if (e.target.className === 'toggle') {
-        this.toggleTodo(e.target.parentNode)
+        this.toggleTodo(e.target.parentNode, e.target.parentNode.dataset.idx)
       }
     })
   }
@@ -19,7 +19,7 @@ export default class TodoList {
   createTodoListHtmlString = ({ text, isStatus }, index) => {
     return `<li ${isStatus ? `class=${isStatus}` : ''}>
     <div data-idx=${index} class="view">
-      <input class="toggle" type="checkbox">
+      <input class="toggle" type="checkbox" ${isStatus === 'completed' && 'checked'}>
       <label class="label">${text}</label>
       <button class="destroy"></button>
     </div>

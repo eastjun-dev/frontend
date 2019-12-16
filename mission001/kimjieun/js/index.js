@@ -4,7 +4,7 @@ import TodoInput from './TodoInput.js'
 import TodoCount from './TodoCount.js'
 
 import { data } from './dummyData.js'
-;(function() {
+(function() {
   new App({
     todoList: new TodoList({
       $selector: document.querySelector('#todo-list'),

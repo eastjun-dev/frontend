@@ -39,7 +39,8 @@ export default class App {
     this.setState(addTodoData)
   }
 
-  toggleTodo(target) {
+  toggleTodo(target, dataIndex) {
+    this.data[dataIndex].isStatus = 'completed'
     target.parentNode.setAttribute('class', 'completed')
   }
 
