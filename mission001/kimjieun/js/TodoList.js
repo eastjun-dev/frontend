@@ -1,35 +1,24 @@
-// export default class TodoList {
-//   constructor({ $selector }) {
-//     this.$selector = $selector
-//   }
-
-  // createTodoListHtmlString = ({ text, isStatus }) => {
-  // return `<li ${isStatus ? `class=${isStatus}` : ''}>
-  //   <div class="view">
-  //     <input class="toggle" type="checkbox">
-  //     <label class="label">${text}</label>
-  //     <button class="destroy"></button>
-  //   </div>
-  //   <input class="edit" value="${text}">
-  // </li>`
-  // }
-
-//   render = function(data) {
-//     this.$selector.innerHTML = data.map(this.createTodoListHtmlString).join('')
-//   }
-// }
-
-function TodoList({ data }) {
-  this.data = data
-
-  this.setState = function(data) {
-    this.data = data
-    this.render()
+export default class TodoList {
+  constructor({ $selector }) {
+    this.$selector = $selector
+    this.init()
   }
 
-  this.createTodoListHtmlString = ({ text, isStatus }) => {
-  return `<li ${isStatus ? `class=${isStatus}` : ''}>
-    <div class="view">
+  init() {
+    this.$selector.addEventListener('click', (e) => {
+      if (e.target.className === 'destroy') {
+        this.onDeleteTodo(e.target.parentNode.dataset.idx)
+      }
+
+      if (e.target.className === 'toggle') {
+        this.toggleTodo(e.target.parentNode)
+      }
+    })
+  }
+
+  createTodoListHtmlString = ({ text, isStatus }, index) => {
+    return `<li ${isStatus ? `class=${isStatus}` : ''}>
+    <div data-idx=${index} class="view">
       <input class="toggle" type="checkbox">
       <label class="label">${text}</label>
       <button class="destroy"></button>
@@ -38,11 +27,7 @@ function TodoList({ data }) {
   </li>`
   }
 
-  this.render = () => {
-    const $todoList = document.querySelector('#todo-list')
-    const todoListHTMLString = this.data.map(this.createTodoListHtmlString).join('')
-    $todoList.innerHTML = todoListHTMLString
+  render = function(data) {
+    this.$selector.innerHTML = data.map(this.createTodoListHtmlString).join('')
   }
 }
-
-export default TodoList
