@@ -4,7 +4,6 @@ function TodoList(selector) {
 
   this.$todoList.addEventListener('click', (e) => {
     const datasetAction = e.target.dataset.action
-    console.log({datasetAction})
     if(!datasetAction) return ;
 
     const [action, idx] = datasetAction.split('-')
@@ -13,17 +12,26 @@ function TodoList(selector) {
       case 'remove': this.removeState(idx); break; 
     }
   })
+
+  this.$todoList.addEventListener('dblclick', (e) => {
+    const datasetAction = e.target.dataset.action
+    if(!datasetAction) return ;
+
+    const [action, idx] = datasetAction.split('-')
+    switch(action) {
+      case 'edit': this.toggleEditView(idx); break;
+    } 
+  })
 }
 
 TodoList.prototype.render = function(items) {
-  console.log(items)
   const itemsHtmlString = items.reduce((acc, item, index) => {
     const { content, completed } = item
     const inputHtmlString = `<input class="toggle" type="checkbox" data-action=check-${index} ${completed && 'checked'}>`
-    const labelHtmlString = `<label class="label">${content}</label>`
+    const labelHtmlString = `<label class="label" data-action=edit-${index}>${content}</label>`
     const buttonHtmlString = `<button class="destroy" data-action=remove-${index}></button>`
     const viewHtmlString = `<div class="view">${inputHtmlString}${labelHtmlString}${buttonHtmlString}</div>`
-    const liHtmlString = `<li ${completed && 'class="completed"'}>${viewHtmlString}<input class="edit" value="${content}"></li>`
+    const liHtmlString = `<li ${completed && 'class="completed"'} data-action=edit-${index}>${viewHtmlString}<input class="edit" value="${content}"></li>`
     return `${acc}${liHtmlString}`
   }, '')
 
@@ -45,6 +53,25 @@ TodoList.prototype.removeState = function(idx) {
   this.render(this.items) 
 }
 
+TodoList.prototype.toggleEditView = function(idx) {
+  const $liElement = document.querySelector(`li[data-action=edit-${idx}]`)
+  const $inputElement = $liElement.querySelector('input.edit')
+ 
+  $liElement.setAttribute('class', 'editing')
+
+  $inputElement.addEventListener('keydown', (e) => {
+    switch(e.key) {
+      case 'Escape': this.render(this.items); break;
+      case 'Enter': this.editContent(idx, e.target.value); break;
+    }
+  }) 
+}
+
+TodoList.prototype.editContent = function(idx, content) {
+  this.items = this.items.map((item, index) => index == idx ? {...item, content} : {...item})
+  this.render(this.items)
+}
+
 function App(inputSelector, todoListSelector) {
   this.$input = document.querySelector(inputSelector)
   this.TodoListComponent = new TodoList(todoListSelector)
@@ -64,5 +91,14 @@ function App(inputSelector, todoListSelector) {
 App.prototype.toggle
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  window.onload = function () {
+    if (!window.getComputedStyle) {
+      window.getComputedStyle = function(element) {
+        return element.currentStyle;
+      }
+    }
+  }
+
   new App('.new-todo', '#todo-list')
 })
