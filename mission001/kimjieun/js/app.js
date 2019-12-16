@@ -1,7 +1,8 @@
 export default class App {
-  constructor({ todoList, todoInput, data }) {
+  constructor({ todoList, todoInput, todoCount, data }) {
     this.todoList = todoList
     this.todoInput = todoInput
+    this.todoCount = todoCount
     this.$todoInputEl = document.querySelector('#new-todo-title')
 
     this.data = data
@@ -9,10 +10,6 @@ export default class App {
 
     this.render()
     this.init()
-  }
-
-  render() {
-    this.todoList.render(this.data)
   }
 
   init() {
@@ -24,6 +21,15 @@ export default class App {
   setState(data) {
     this.data = data
     this.render()
+    this.createTodoCount()
+  }
+
+  render() {
+    this.todoList.render(this.data)
+  }
+
+  createTodoCount() {
+    this.todoCount.creatTodoCount(this.data)
   }
 
   addTodo(data) {
