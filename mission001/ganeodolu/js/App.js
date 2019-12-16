@@ -1,7 +1,7 @@
 function App(data) {
     this.data = data;
     // console.log(data)
-    const $todoList = document.querySelector('.view')
+    const $todoList = document.querySelector('.todo-list')
     const todoList = new TodoList($todoList, this.data,
         (index) => {
             const nextData = [...this.data]

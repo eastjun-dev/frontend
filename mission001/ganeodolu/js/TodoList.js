@@ -42,7 +42,7 @@ function TodoList($target, data, onTodoClick, onRemoveClick){
             }
             // // isCompleted 가 참이면 <strike>태그를 넣어서 저장(완료되었다는 의미), false면 <div>만 넣어서 저장
             // return val.isCompleted ? `<li><span id="line${idx}"><strike>${val.text}</strike></span></li>` : `<li><span id="line${idx}">${val.text}</span></li>`;
-            return `${INPUT_VIEW}<label class="label">${val.text}</label>${BUTTON_VIEW}`;
+            return `<li><div class="view">${INPUT_VIEW}<label class="label">${val.text}</label>${BUTTON_VIEW}</div></li>`;
         }).join('');
         // console.log("renderHTMLText", renderHTMLText);    
         this.$target.innerHTML = `${renderHTMLText}`
