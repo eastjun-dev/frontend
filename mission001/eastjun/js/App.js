@@ -24,6 +24,10 @@ function TodoApp() {
             this.todoItems[index].isCompleted = !this.todoItems[index].isCompleted
             this.setState(this.todoItems)
         },
+        onRemoveItem: (index) => {
+            this.todoItems.splice(index, 1)
+            this.setState(this.todoItems)
+        },
     })
 }
 
