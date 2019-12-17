@@ -7,14 +7,15 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<section class="todoapp">
+<section class="todo-app">
   <div>
     <h1>TODOS</h1>
-    <input id="new-todo-title" class="new-todo" placeholder="할일을 추가해주세요" autofocus>
+    <input class="new-todo" id="inputTodo" placeholder="할일을 추가해주세요" autofocus>
   </div>
   <div class="main">
-    <input class="toggle-all" type="checkbox">
-    <ul id="todo-list" class="todo-list">
+    <input class="toggle-all" type="checkbox" id="">
+    <ul id="todoList" class="todo-list"></ul>
+    <!-- <ul id="todo-list" class="todo-list">
       <li>
         <div class="view">
           <input class="toggle" type="checkbox">
@@ -39,10 +40,10 @@
         </div>
         <input class="edit" value="완료된 타이틀">
       </li>
-    </ul>
+    </ul> -->
   </div>
   <div class="count-container">
-    <span class="todo-count">총 <strong>0</strong> 개</span>
+    <span class="todo-count" id="todoCount"></span>
     <ul class="filters">
       <li>
         <a class="all selected" href="#/">전체보기</a>
