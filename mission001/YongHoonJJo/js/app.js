@@ -106,7 +106,7 @@ TodoList.prototype.toggleEditView = function(id) {
 }
 
 TodoList.prototype.editContent = function(id, content) {
-  this.items = this.items.map((item) => index.id == id ? {...item, content} : {...item})
+  this.items = this.items.map((item) => item.id == id ? {...item, content} : {...item})
   this.renderByFilter(this.className)
 }
 
