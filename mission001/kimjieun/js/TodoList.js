@@ -6,19 +6,12 @@ export default class TodoList {
 
   init() {
     this.$selector.addEventListener('click', (e) => {
-      if (e.target.className === 'destroy') {
-        this.onDeleteTodo(e.target.parentNode.dataset.idx)
-      }
-
-      if (e.target.className === 'toggle') {
-        this.toggleTodo(e.target.parentNode, e.target.parentNode.dataset.idx)
-      }
+      if (e.target.className === 'destroy') this.onDeleteTodo(e.target.parentNode.dataset.idx)
+      if (e.target.className === 'toggle') this.toggleTodo(e.target.parentNode, e.target.parentNode.dataset.idx)
     })
 
     this.$selector.addEventListener('dblclick', (e) => {
-      if (e.target.className === 'label') {
-        this.changeLabelToInput(e.target.parentNode)
-      }
+      if (e.target.className === 'label') this.changeLabelToInput(e.target.parentNode)
     })
   }
 
