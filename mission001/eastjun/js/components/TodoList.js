@@ -42,10 +42,10 @@ export default function TodoList({todoItems, onToggleItem, onRemoveItem}) {
 
   const onEdit = (event) => {
     const $target = event.target.closest('li')
-    const inputValue = $target.querySelector('input.edit').value
+    const editValue = $target.querySelector('input.edit').value
 
     if (validator.isEnterKey(event.which)) {
-      isValidInputValue($target, inputValue)
+      isValidInputValue($target, editValue)
     }
 
     if (validator.isEscKey(event.which)) {
