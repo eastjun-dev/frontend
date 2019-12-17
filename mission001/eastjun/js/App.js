@@ -2,6 +2,7 @@ import TodoList from './components/TodoList.js'
 import TodoInput from './components/TodoInput.js'
 import TodoItem from './components/TodoItem.js'
 import TodoCount from './components/TodoCount.js'
+import TodoStatus from "./components/TodoStatus.js"
 
 function TodoApp() {
     this.todoItems = []
@@ -17,6 +18,13 @@ function TodoApp() {
             const newTodoItem = new TodoItem(contents)
             this.todoItems.push(newTodoItem)
             this.setState(this.todoItems)
+        }
+    })
+
+    new TodoStatus({
+        todoItems: this.todoItems,
+        filter: (filteredItems) => {
+            this.setState(filteredItems)
         }
     })
 

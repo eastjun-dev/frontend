@@ -4,4 +4,10 @@ const errorMessagesMap = {
   IS_NOT_ARRAY: '올바른 배열 형태의 데이터가 아닙니다.',
 }
 
-export { errorMessagesMap }
+const todoItemStatusMap = {
+  ALL: 'all',
+  ACTIVE: 'active',
+  COMPLETED: 'completed',
+}
+
+export { errorMessagesMap, todoItemStatusMap }
