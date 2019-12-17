@@ -20,6 +20,10 @@ function TodoApp() {
 
     const todoList = new TodoList({
         todoItems: this.todoItems,
+        onToggleItem: (index) => {
+            this.todoItems[index].isCompleted = !this.todoItems[index].isCompleted
+            this.setState(this.todoItems)
+        },
     })
 }
 
