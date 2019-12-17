@@ -1,6 +1,7 @@
 import TodoList from './components/TodoList.js'
 import TodoInput from './components/TodoInput.js'
 import TodoItem from './components/TodoItem.js'
+import TodoCount from './components/TodoCount.js'
 
 function TodoApp() {
     this.todoItems = []
@@ -8,6 +9,7 @@ function TodoApp() {
     this.setState = (updatedItems) => {
         this.todoItems = updatedItems
         todoList.setState(this.todoItems)
+        todoCount.setState(this.todoItems)
     }
 
     new TodoInput({
@@ -28,6 +30,10 @@ function TodoApp() {
             this.todoItems.splice(index, 1)
             this.setState(this.todoItems)
         },
+    })
+
+    const todoCount = new TodoCount({
+        todoItems: this.todoItems,
     })
 }
 
