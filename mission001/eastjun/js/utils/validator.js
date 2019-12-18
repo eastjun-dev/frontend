@@ -26,7 +26,7 @@ const validator = {
   },
   isEscKey(key) {
     return key === keyboard.ESC
-  },
+  }
 }
 
 export default validator

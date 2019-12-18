@@ -37,7 +37,7 @@ function TodoApp() {
         onRemoveItem: (index) => {
             this.todoItems.splice(index, 1)
             this.setState(this.todoItems)
-        },
+        }
     })
 
     const todoCount = new TodoCount({
