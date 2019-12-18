@@ -5,9 +5,9 @@ const status = {
 };
 
 let todoListData = [
-  { text: "할일A", status: status.COMPLETED, id: 1 },
-  { text: "할일B", status: status.PROCEEDING, id: 2 },
-  { text: "할일D", status: status.NEED_TODO, id: 3 }
+  { text: "AAAAA", status: status.COMPLETED, id: 1 },
+  { text: "BBBBB", status: status.PROCEEDING, id: 2 },
+  { text: "DDDDD", status: status.NEED_TODO, id: 3 }
 ];
 
 let todoIdCount = todoListData.length + 1;
