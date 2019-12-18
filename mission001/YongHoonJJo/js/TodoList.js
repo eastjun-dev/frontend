@@ -67,12 +67,17 @@ TodoList.prototype.render = function(items) {
   const { CHECK, REMOVE, EDIT } = dataActions
   const itemsHtmlString = items.reduce((acc, item) => {
     const { id, content, completed } = item
-    const inputHtmlString = `<input class="toggle" type="checkbox" data-action=${CHECK}-${id} ${completed && 'checked'}>`
-    const labelHtmlString = `<label class="label" data-action=${EDIT}-${id}>${content}</label>`
-    const buttonHtmlString = `<button class="destroy" data-action=${REMOVE}-${id}></button>`
-    const viewHtmlString = `<div class="view">${inputHtmlString}${labelHtmlString}${buttonHtmlString}</div>`
-    const liHtmlString = `<li ${completed && 'class="completed"'} data-action=${EDIT}-${id}>${viewHtmlString}<input class="edit" value="${content}"></li>`
-    return `${acc}${liHtmlString}`
+    const todoItemTemplate = `
+      <li ${completed && 'class="completed"'} data-action=${EDIT}-${id}>
+        <div class="view">
+          <input class="toggle" type="checkbox" data-action=${CHECK}-${id} ${completed && 'checked'}>
+          <label class="label" data-action=${EDIT}-${id}>${content}</label>
+          <button class="destroy" data-action=${REMOVE}-${id}></button>
+        </div>
+        <input class="edit" value="${content}">
+      </li> 
+    `
+    return `${acc}${todoItemTemplate}`
   }, '')
 
   this.$todoList.innerHTML = itemsHtmlString
