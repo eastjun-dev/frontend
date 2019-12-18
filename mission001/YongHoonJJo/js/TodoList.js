@@ -1,11 +1,11 @@
 function TodoList(selector) {
   this.items = []
   this.className = 'all'
-  this.$todoList = document.querySelector(selector) // #todo-list
+  this.$todoList = document.querySelector(selector)
   this.$filters = document.querySelector('ul.filters')
 
   this.$filters.addEventListener('click', (e) => {
-    if(e.target === this.$filters) return ;
+    if(e.target === this.$filters) return 
 
     const aTags = document.querySelectorAll('ul.filters li a')
     for(const tag of aTags) tag.classList.remove('selected')
@@ -18,31 +18,31 @@ function TodoList(selector) {
 
   this.$todoList.addEventListener('click', (e) => {
     const datasetAction = e.target.dataset.action
-    if(!datasetAction) return ;
+    if(!datasetAction) return 
 
     const [action, id] = datasetAction.split('-')
     switch(action) {
-      case 'check': this.toggleState(id); break;
-      case 'remove': this.removeState(id); break; 
+      case 'check': this.toggleState(id); break
+      case 'remove': this.removeState(id); break
     }
   })
 
   this.$todoList.addEventListener('dblclick', (e) => {
     const datasetAction = e.target.dataset.action
-    if(!datasetAction) return ;
+    if(!datasetAction) return 
 
     const [action, id] = datasetAction.split('-')
     switch(action) {
-      case 'edit': this.toggleEditView(id); break;
+      case 'edit': this.toggleEditView(id); break
     } 
   })
 }
 
 TodoList.prototype.renderByFilter = function(filter) {
   switch(filter) {
-    case 'active': this.activeRender(this.items); break;
-    case 'completed': this.completedRender(this.items); break;
-    default: this.render(this.items);
+    case 'active': this.activeRender(this.items); break
+    case 'completed': this.completedRender(this.items); break
+    default: this.render(this.items)
   }
 }
 
@@ -99,8 +99,8 @@ TodoList.prototype.toggleEditView = function(id) {
 
   $inputElement.addEventListener('keydown', (e) => {
     switch(e.key) {
-      case 'Escape': this.render(this.items); break;
-      case 'Enter': this.editContent(id, e.target.value); break;
+      case 'Escape': this.render(this.items); break
+      case 'Enter': this.editContent(id, e.target.value); break
     }
   }) 
 }
