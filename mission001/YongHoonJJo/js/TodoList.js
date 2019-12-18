@@ -1,6 +1,10 @@
+import { eventKeyboards, counterFilters, dataActions  } from './utils/Contants.js'
+
 function TodoList(selector) {
+  const { ALL } = counterFilters
+
   this.items = []
-  this.className = 'all'
+  this.className = ALL
   this.$todoList = document.querySelector(selector)
   this.$filters = document.querySelector('ul.filters')
 
@@ -17,31 +21,34 @@ function TodoList(selector) {
   })
 
   this.$todoList.addEventListener('click', (e) => {
+    const { CHECK, REMOVE } = dataActions
     const datasetAction = e.target.dataset.action
     if(!datasetAction) return 
 
     const [action, id] = datasetAction.split('-')
     switch(action) {
-      case 'check': this.toggleState(id); break
-      case 'remove': this.removeState(id); break
+      case CHECK: this.toggleState(id); break
+      case REMOVE: this.removeState(id); break
     }
   })
 
   this.$todoList.addEventListener('dblclick', (e) => {
+    const { EDIT } = dataActions
     const datasetAction = e.target.dataset.action
     if(!datasetAction) return 
 
     const [action, id] = datasetAction.split('-')
     switch(action) {
-      case 'edit': this.toggleEditView(id); break
+      case EDIT: this.toggleEditView(id); break
     } 
   })
 }
 
 TodoList.prototype.renderByFilter = function(filter) {
+  const { ACTIVE, COMPLETED } = counterFilters
   switch(filter) {
-    case 'active': this.renderActive(this.items); break
-    case 'completed': this.renderCompleted(this.items); break
+    case ACTIVE: this.renderActive(this.items); break
+    case COMPLETED: this.renderCompleted(this.items); break
     default: this.render(this.items)
   }
 }
@@ -57,13 +64,14 @@ TodoList.prototype.renderCompleted = function(items) {
 }
 
 TodoList.prototype.render = function(items) {
+  const { CHECK, REMOVE, EDIT } = dataActions
   const itemsHtmlString = items.reduce((acc, item) => {
     const { id, content, completed } = item
-    const inputHtmlString = `<input class="toggle" type="checkbox" data-action=check-${id} ${completed && 'checked'}>`
-    const labelHtmlString = `<label class="label" data-action=edit-${id}>${content}</label>`
-    const buttonHtmlString = `<button class="destroy" data-action=remove-${id}></button>`
+    const inputHtmlString = `<input class="toggle" type="checkbox" data-action=${CHECK}-${id} ${completed && 'checked'}>`
+    const labelHtmlString = `<label class="label" data-action=${EDIT}-${id}>${content}</label>`
+    const buttonHtmlString = `<button class="destroy" data-action=${REMOVE}-${id}></button>`
     const viewHtmlString = `<div class="view">${inputHtmlString}${labelHtmlString}${buttonHtmlString}</div>`
-    const liHtmlString = `<li ${completed && 'class="completed"'} data-action=edit-${id}>${viewHtmlString}<input class="edit" value="${content}"></li>`
+    const liHtmlString = `<li ${completed && 'class="completed"'} data-action=${EDIT}-${id}>${viewHtmlString}<input class="edit" value="${content}"></li>`
     return `${acc}${liHtmlString}`
   }, '')
 
@@ -98,11 +106,12 @@ TodoList.prototype.toggleEditView = function(id) {
   $liElement.classList.add('editing')
 
   $inputElement.addEventListener('keydown', (e) => {
+    const { ENTER, ESC } = eventKeyboards
     switch(e.key) {
-      case 'Escape': this.render(this.items); break
-      case 'Enter': this.editContent(id, e.target.value); break
+      case ESC: this.render(this.items); break
+      case ENTER: this.editContent(id, e.target.value); break
     }
-  }) 
+  })
 }
 
 TodoList.prototype.editContent = function(id, content) {
