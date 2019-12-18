@@ -26,14 +26,14 @@ const renderTodoList = todoListData => {
       todoList.innerHTML += `<li${
         data.status === status.COMPLETED ? ` class="completed"` : ``
       } id="todo-${data.id}">
-          <div class="view">
-            <input class="toggle" type="checkbox"${data.status ===
-              status.COMPLETED && ` checked`}>
-            <label class="label">${data.text}</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="${data.text}">
-       </li>`;
+            <div class="view">
+              <input class="toggle" type="checkbox"${data.status ===
+                status.COMPLETED && ` checked`}>
+              <label class="label">${data.text}</label>
+              <button class="destroy"></button>
+            </div>
+            <input class="edit" value="${data.text}">
+         </li>`;
     });
   }
 
@@ -168,28 +168,27 @@ const renderCount = todoListData => {
 // 선택한 텝에 따라 랜더링 다시하기 'ㅁ'
 const tab = document.getElementById("tab");
 tab.addEventListener("click", e => {
-  const selectedTab = e.target.id;
+  const selectedTab = e.target;
+  const prevSelectedTab = document.querySelector(".selected");
+
+  prevSelectedTab.classList.remove("selected");
+  selectedTab.classList.add("selected");
+
   let selectedTodoData = [];
 
-  if (selectedTab === status.COMPLETED) {
+  if (
+    selectedTab.id === status.COMPLETED ||
+    selectedTab.id === status.NEED_TODO
+  ) {
     for (let i = 0; i < todoListData.length; ++i) {
-      if (todoListData[i].status === status.COMPLETED) {
+      if (todoListData[i].status === selectedTab.id) {
         selectedTodoData.push(todoListData[i]);
       }
     }
-  } else if (selectedTab === status.NEED_TODO) {
-    for (let i = 0; i < todoListData.length; ++i) {
-      if (todoListData[i].status === status.NEED_TODO) {
-        selectedTodoData.push(todoListData[i]);
-      }
-    }
+    renderTodoList(selectedTodoData);
   } else {
-    for (let i = 0; i < todoListData.length; ++i) {
-      selectedTodoData.push(todoListData[i]);
-    }
+    renderTodoList(todoListData);
   }
-
-  renderTodoList(selectedTodoData);
 });
 
 // 초기값 랜더
