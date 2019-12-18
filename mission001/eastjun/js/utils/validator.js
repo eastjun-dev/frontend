@@ -1,7 +1,7 @@
 import { errorMessagesMap } from './utils.js'
 
-const ENTER_KEY = 13
-const ESC_KEY = 27
+const ENTER_KEY = 'Enter'
+const ESC_KEY = 'Escape'
 
 const validator = {
   validate(result, message) {
@@ -19,11 +19,11 @@ const validator = {
   isNotEmptyArray(list) {
     this.validate(Array.isArray(list) && !!list.length, errorMessagesMap.IS_NOT_ARRAY)
   },
-  isEnterKey(keyCode) {
-    return keyCode === ENTER_KEY
+  isEnterKey(key) {
+    return key === ENTER_KEY
   },
-  isEscKey(keyCode) {
-    return keyCode === ESC_KEY
+  isEscKey(key) {
+    return key === ESC_KEY
   },
 }
 

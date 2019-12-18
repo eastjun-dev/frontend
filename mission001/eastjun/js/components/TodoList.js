@@ -44,11 +44,11 @@ export default function TodoList({todoItems, onToggleItem, onRemoveItem}) {
     const $target = event.target.closest('li')
     const editValue = $target.querySelector('input.edit').value
 
-    if (validator.isEnterKey(event.which)) {
+    if (validator.isEnterKey(event.key)) {
       isValidInputValue($target, editValue)
     }
 
-    if (validator.isEscKey(event.which)) {
+    if (validator.isEscKey(event.key)) {
       $target.classList.toggle('editing')
     }
   }

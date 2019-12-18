@@ -13,7 +13,7 @@ export default function TodoInput({ onAdd }) {
   }
 
   this.validate = (event, newTodoContents) => {
-    return validator.isEnterKey(event.which) && validator.isString(newTodoContents) ? true : false
+    return validator.isEnterKey(event.key) && validator.isString(newTodoContents) ? true : false
   }
 
   this.onAdd = ($newTodoTarget, newTodoContents) => {
