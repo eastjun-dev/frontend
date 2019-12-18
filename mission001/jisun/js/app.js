@@ -1,11 +1,11 @@
 const status = {
-  COMPLETE: "complete",
+  COMPLETED: "completed",
   PROCEEDING: "proceeding",
   NEED_TODO: "needTodo"
 };
 
 let todoListData = [
-  { text: "할일A", status: status.COMPLETE, id: 1 },
+  { text: "할일A", status: status.COMPLETED, id: 1 },
   { text: "할일B", status: status.PROCEEDING, id: 2 },
   { text: "할일D", status: status.NEED_TODO, id: 3 }
 ];
@@ -17,16 +17,18 @@ const todoList = document.getElementById("todoList");
 
 // 초기 데이터에 따라 todoList render
 const renderTodoList = todoListData => {
+  todoList.innerHTML = "";
+
   if (todoListData.length === 0) {
     todoList.innerHTML = `<li>Todo List가 비어있습니다</li>`;
   } else {
     todoListData.forEach(data => {
       todoList.innerHTML += `<li${
-        data.status === status.COMPLETE ? ` class="completed"` : ``
+        data.status === status.COMPLETED ? ` class="completed"` : ``
       } id="todo-${data.id}">
           <div class="view">
             <input class="toggle" type="checkbox"${data.status ===
-              status.COMPLETE && ` checked`}>
+              status.COMPLETED && ` checked`}>
             <label class="label">${data.text}</label>
             <button class="destroy"></button>
           </div>
@@ -50,7 +52,6 @@ const renderTodoList = todoListData => {
     });
   }
 };
-renderTodoList(todoListData);
 
 // TodoList에 new data 추가
 const addTodoList = data => {
@@ -60,7 +61,7 @@ const addTodoList = data => {
 
   list.innerHTML = `<div class="view">
                       <input class="toggle" type="checkbox" ${data.status ===
-                        status.COMPLETE && "checked"}>
+                        status.COMPLETED && "checked"}>
                       <label class="label">${data.text}</label>
                       <button class="destroy"></button>
                     </div>
@@ -84,13 +85,14 @@ const deleteTodoList = e => {
   const list = e.target.parentElement.parentElement;
   todoList.removeChild(list);
   id = list.id.replace(/[^0-9]/g, "");
+
   for (let i = 0; i < todoListData.length; ++i) {
     if (todoListData[i].id.toString() === id) {
       todoListData.splice(i, 1);
     }
   }
 
-  console.log(todoListData);
+  renderCount(todoListData);
 };
 
 // TodoList - checkbox 관련
@@ -107,7 +109,7 @@ const onComplete = e => {
 // input
 const input = document.getElementById("inputTodo");
 
-input.addEventListener("keypress", e => {
+input.addEventListener("keydown", e => {
   if (e.key === "Enter") {
     if (input.value === "") {
       alert("값을 입력해주세요 !");
@@ -126,6 +128,36 @@ input.addEventListener("keypress", e => {
   }
 });
 
+// 더블클릭시 edit 모드
+todoList.addEventListener("dblclick", e => {
+  const label = e.target.childNodes[3];
+  const editInput = e.target.nextSibling.nextSibling;
+  const prevValue = editInput.value;
+  const id = e.target.parentElement.id.replace(/[^0-9]/g, "");
+
+  editInput.style.display = "block";
+  editInput.addEventListener("keydown", e => {
+    if (e.keyCode === 27) {
+      editInput.style.display = "none";
+    }
+
+    if (e.keyCode === 13) {
+      if (prevValue !== editInput.value) {
+        let i = 0;
+        while (i < todoListData.length) {
+          if (todoListData[i].id.toString() === id) {
+            todoListData[i].text = e.target.value;
+            label.innerHTML = e.target.value;
+            break;
+          }
+          ++i;
+        }
+      }
+      editInput.style.display = "none";
+    }
+  });
+});
+
 // count
 const todoCount = document.getElementById("todoCount");
 
@@ -133,5 +165,33 @@ const renderCount = todoListData => {
   todoCount.innerHTML = `총 <strong>${todoListData.length}</strong> 개`;
 };
 
+// 선택한 텝에 따라 랜더링 다시하기 'ㅁ'
+const tab = document.getElementById("tab");
+tab.addEventListener("click", e => {
+  const selectedTab = e.target.id;
+  let selectedTodoData = [];
+
+  if (selectedTab === status.COMPLETED) {
+    for (let i = 0; i < todoListData.length; ++i) {
+      if (todoListData[i].status === status.COMPLETED) {
+        selectedTodoData.push(todoListData[i]);
+      }
+    }
+  } else if (selectedTab === status.NEED_TODO) {
+    for (let i = 0; i < todoListData.length; ++i) {
+      if (todoListData[i].status === status.NEED_TODO) {
+        selectedTodoData.push(todoListData[i]);
+      }
+    }
+  } else {
+    for (let i = 0; i < todoListData.length; ++i) {
+      selectedTodoData.push(todoListData[i]);
+    }
+  }
+
+  renderTodoList(selectedTodoData);
+});
+
 // 초기값 랜더
 renderCount(todoListData);
+renderTodoList(todoListData);
