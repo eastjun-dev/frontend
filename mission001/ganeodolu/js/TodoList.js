@@ -15,8 +15,8 @@ function TodoList($target, data, onToggleClick, onTodoEdit, onRemoveClick, onTod
     }
     // 토글버튼과 삭제버튼 기능구현
     this.$target.addEventListener('click', (e) => {
-        const { className, dataset } = e.target;
-        const { index } = dataset
+        const { className } = e.target;
+        const { index } = e.target.parentNode.parentNode.dataset
         if (className === 'toggle') {
             onToggleClick(index)
         } else if (className === 'destroy') {
@@ -26,8 +26,7 @@ function TodoList($target, data, onToggleClick, onTodoEdit, onRemoveClick, onTod
     // 할일 더블클릭시 에디트 모드로 변경
     this.$target.addEventListener('dblclick', (e) => {
         const { className } = e.target;
-        const { dataset } = e.target.previousSibling;
-        const { index } = dataset
+        const { index } = e.target.parentNode.parentNode.dataset
         if (className === 'label') {
             onTodoEdit(index)
         }
@@ -49,7 +48,8 @@ function TodoList($target, data, onToggleClick, onTodoEdit, onRemoveClick, onTod
     this.render = function () {
         // renderHTMLText 변수 안에 data객체안의 text의 value 값에 태그를 붙여서 저장
         const renderHTMLText = this.data.map((val, idx) => {
-            const TOGGLE_INPUT = `<input class="toggle" type="checkbox" data-index=${idx} ${val.isCompleted ? 'checked' : ""}>`;
+            // const TOGGLE_INPUT = `<input class="toggle" type="checkbox" data-index=${idx} ${val.isCompleted ? 'checked' : ""}>`;
+            const TOGGLE_INPUT = `<input class="toggle" type="checkbox"  ${val.isCompleted ? 'checked' : ""}>`;
             const DESTROY_BUTTON = '<button class="destroy"></button>';
             const EDIT_INPUT = `<input class="edit" value="${val.text}">`
             if (!val.text) {            // data.text 값이 있는지 확인
@@ -60,7 +60,7 @@ function TodoList($target, data, onToggleClick, onTodoEdit, onRemoveClick, onTod
                 throw new Error(error.INVALID_DATA)
             }
             // // isCompleted 가 참이면 <strike>태그를 넣어서 저장(완료되었다는 의미), false면 <div>만 넣어서 저장
-            return `<li ${val.isCompleted ? 'class="completed"' : (val.isCompleted === false && val.isEditing === false) ? "" : 'class="editing"'}><div class="view">${TOGGLE_INPUT}<label class="label">${val.text}</label>${DESTROY_BUTTON}</div>${EDIT_INPUT}</li>`;
+            return `<li ${val.isCompleted ? 'class="completed"' : (val.isCompleted === false && val.isEditing === false) ? "" : 'class="editing"'} data-index=${idx}><div class="view">${TOGGLE_INPUT}<label class="label">${val.text}</label>${DESTROY_BUTTON}</div>${EDIT_INPUT}</li>`;
         }).join('');
         this.$target.innerHTML = `${renderHTMLText}`
     }
