@@ -6,7 +6,7 @@ const keyboard = {
 }
 
 const validator = {
-  validate(result, message) {
+  isValid(result, message) {
     if (!result) throw new Error(message)
   },
   isString(str) {
