@@ -25,8 +25,6 @@ export default function TodoCount({ todoItems, filter }) {
             case todoItemStatusMap.COMPLETED:
                 filter(this.todoItems.filter(item => item.isCompleted === true))
                 break
-            default:
-                console.log('default')
         }
     }
 
