@@ -16,6 +16,10 @@ export default function TodoList({todoItems, onToggleItem, onRemoveItem}) {
       const { classList } = event.target
       if (classList.contains('label')) onFocusItem(event)
     })
+
+    this.$todoList.addEventListener('keydown', (event) => {
+      if (event.target.classList.contains('edit')) onEdit(event)
+    })
   }
 
   initEventListener()
@@ -37,7 +41,6 @@ export default function TodoList({todoItems, onToggleItem, onRemoveItem}) {
   const onFocusItem = (event) => {
     const $target = event.target.closest('li')
     $target.classList.toggle('editing')
-    $target.addEventListener('keydown', onEdit)
   }
 
   const onEdit = (event) => {
