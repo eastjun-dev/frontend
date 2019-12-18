@@ -10,4 +10,9 @@ const todoItemStatusMap = {
   COMPLETED: 'completed'
 }
 
-export { errorMessagesMap, todoItemStatusMap }
+const keyboardMap = {
+  ENTER: 'Enter',
+  ESC: 'Escape'
+}
+
+export { errorMessagesMap, todoItemStatusMap, keyboardMap }

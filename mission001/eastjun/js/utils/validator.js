@@ -1,9 +1,6 @@
-import { errorMessagesMap } from './utils.js'
+import { errorMessagesMap, keyboardMap } from './utils.js'
 
-const keyboard = {
-  ENTER: 'Enter',
-  ESC: 'Escape'
-}
+
 
 const validator = {
   isValid(result, message) {
@@ -22,10 +19,10 @@ const validator = {
     this.validate(Array.isArray(list) && !!list.length, errorMessagesMap.IS_NOT_ARRAY)
   },
   isEnterKey(key) {
-    return key === keyboard.ENTER
+    return key === keyboardMap.ENTER
   },
   isEscKey(key) {
-    return key === keyboard.ESC
+    return key === keyboardMap.ESC
   }
 }
 
