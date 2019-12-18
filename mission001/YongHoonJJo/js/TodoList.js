@@ -4,7 +4,7 @@ function TodoList(selector) {
   const { ALL } = counterFilters
 
   this.items = []
-  this.className = ALL
+  this.filter = ALL
   this.$todoList = document.querySelector(selector)
   this.$filters = document.querySelector('ul.filters')
 
@@ -12,12 +12,12 @@ function TodoList(selector) {
     if(e.target === this.$filters) return 
 
     const aTags = document.querySelectorAll('ul.filters li a')
-    for(const tag of aTags) tag.classList.remove('selected')
-    
-    this.className = e.target.className
+    for(const tag of aTags) tag.classList.contains('selected') && tag.classList.remove('selected')
+     
+    this.filter = e.target.className
     e.target.classList.add('selected')
 
-    this.renderByFilter(this.className)
+    this.renderByFilter()
   })
 
   this.$todoList.addEventListener('click', (e) => {
@@ -44,9 +44,9 @@ function TodoList(selector) {
   })
 }
 
-TodoList.prototype.renderByFilter = function(filter) {
+TodoList.prototype.renderByFilter = function() {
   const { ACTIVE, COMPLETED } = counterFilters
-  switch(filter) {
+  switch(this.filter) {
     case ACTIVE: this.renderActive(this.items); break
     case COMPLETED: this.renderCompleted(this.items); break
     default: this.render(this.items)
@@ -91,17 +91,17 @@ TodoList.prototype.renderCounterContainer = function(items) {
 
 TodoList.prototype.addItem = function(item) {
   this.items.push(item)
-  this.renderByFilter(this.className)
+  this.renderByFilter()
 }
 
 TodoList.prototype.toggleState = function(id) {
   this.items = this.items.map((item) => id == item.id ? ({...item, completed: !item.completed}) : ({...item}))
-  this.renderByFilter(this.className)
+  this.renderByFilter()
 }
 
 TodoList.prototype.removeState = function(id) {
   this.items = this.items.filter((item) => id != item.id)
-  this.renderByFilter(this.className)
+  this.renderByFilter()
 }
 
 TodoList.prototype.toggleEditView = function(id) {
@@ -121,7 +121,7 @@ TodoList.prototype.toggleEditView = function(id) {
 
 TodoList.prototype.editContent = function(id, content) {
   this.items = this.items.map((item) => item.id == id ? {...item, content} : {...item})
-  this.renderByFilter(this.className)
+  this.renderByFilter()
 }
 
 export default TodoList
