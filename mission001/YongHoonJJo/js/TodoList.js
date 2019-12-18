@@ -95,7 +95,7 @@ TodoList.prototype.toggleEditView = function(id) {
   const $liElement = document.querySelector(`li[data-action=edit-${id}]`)
   const $inputElement = $liElement.querySelector('input.edit')
  
-  $liElement.setAttribute('class', 'editing')
+  $liElement.classList.add('editing')
 
   $inputElement.addEventListener('keydown', (e) => {
     switch(e.key) {
