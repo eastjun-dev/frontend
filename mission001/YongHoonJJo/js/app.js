@@ -18,6 +18,4 @@ function App(inputSelector, todoListSelector) {
   })
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  new App('.new-todo', '#todo-list')
-})
+new App('.new-todo', '#todo-list')
