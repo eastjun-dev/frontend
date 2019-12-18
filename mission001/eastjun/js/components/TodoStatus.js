@@ -1,6 +1,6 @@
 import { todoItemStatusMap } from '../utils/utils.js'
 
-export default function TodoCount({ todoItems, filter }) {
+export default function TodoStatus({ todoItems, filter }) {
     this.$todoStatus = document.querySelector('#todo-status-tabs')
     this.todoItems = todoItems
 
