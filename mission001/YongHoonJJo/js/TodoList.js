@@ -113,7 +113,7 @@ TodoList.prototype.toggleEditView = function(id) {
   $inputElement.addEventListener('keydown', (e) => {
     const { ENTER, ESC } = eventKeyboards
     switch(e.key) {
-      case ESC: this.render(this.items); break
+      case ESC: this.renderByFilter(); break
       case ENTER: this.editContent(id, e.target.value); break
     }
   })
