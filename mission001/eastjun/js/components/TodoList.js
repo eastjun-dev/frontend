@@ -26,7 +26,7 @@ export default function TodoList({todoItems, onToggleItem, onRemoveItem}) {
   }
 
   this.render = (items) => {
-    const template = items.map((item, index) => todoItemTemplate(item, index))
+    const template = items.map(todoItemTemplate)
     this.$todoList.innerHTML = template.join('')
   }
 
