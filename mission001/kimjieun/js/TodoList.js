@@ -16,7 +16,7 @@ export default class TodoList {
   }
 
   createTodoListHtmlString = ({ text, isStatus }, index) => {
-    return `<li ${isStatus ? `class=${isStatus}` : ''}>
+    return `<li class=${isStatus}>
     <div data-idx=${index} class="view">
       <input class="toggle" type="checkbox" ${isStatus === 'completed' && 'checked'}>
       <label class="label">${text}</label>

@@ -2,9 +2,10 @@ import App from './App.js'
 import TodoList from './TodoList.js'
 import TodoInput from './TodoInput.js'
 import TodoCount from './TodoCount.js'
+import TodoCheck from './TodoCheck.js'
 
 import { data } from './dummyData.js'
-(function() {
+;(function() {
   new App({
     todoList: new TodoList({
       $selector: document.querySelector('#todo-list'),
@@ -14,6 +15,9 @@ import { data } from './dummyData.js'
     }),
     todoCount: new TodoCount({
       $selector: document.querySelector('.todo-count'),
+    }),
+    todoCheck: new TodoCheck({
+      $selector: document.querySelector('.filters'),
     }),
     data,
   })

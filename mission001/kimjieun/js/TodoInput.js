@@ -9,7 +9,7 @@ export default class TodoList {
       if (e.keyCode === 13) {
         const addData = {
           text: e.target.value,
-          isStatus: '',
+          isStatus: 'new',
         }
 
         this.onAddTodo(addData)
