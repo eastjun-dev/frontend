@@ -1,37 +1,62 @@
 function App(data) {
     this.data = data;
-    // console.log(data)
+    this.setState = function (nextData) {
+        this.data = nextData;
+        todoList.setState(this.data)
+        todoCount.setState({
+            totalCount: this.data.length,
+            completedCount: this.data.filter(todo => todo.isComplete).length
+        })
+    }
+
     const $todoList = document.querySelector('.todo-list')
     const todoList = new TodoList($todoList, this.data,
         (index) => {
             const nextData = [...this.data]
-            nextData[index].isComplete = !nextData[index].isComplete
+            nextData[index].isCompleted = !nextData[index].isCompleted
+            this.setState(nextData)
+        },
+        (index) => {
+            const nextData = [...this.data]
+            if (!nextData[index].isCompleted) {
+                nextData[index].isEditing = nextData[index].isEditing ? false : true;
+            }
             this.setState(nextData)
         },
         (index) => {
             const nextData = [...this.data]
             nextData.splice(index, 1)
             this.setState(nextData)
-        }
+        },
+        (index, value) => {
+            const nextData = [...this.data]
+            nextData[index] = {
+                text: value,
+                isCompleted: false,
+                isEditing: false
+            };
+            this.setState(nextData)
+        },
     );
 
-    // const $todoCount = document.querySelector('.todo-count');
-    // const todoCount = new TodoCount($todoCount, this.data);
-    const $todoInput = document.querySelector('.new-todo')
-    const todoInput = new TodoInput($todoInput, (text) => {
-        this.data.push({
-            text: text,  // 키,값이 같으므로 text로 생략가능함
-            isCompleted: false,
-        })
-        todoList.setState(this.data)
-        // todoCount.setState(this.data)
-
+    const $todoCount = document.querySelector('.todo-count');
+    const $todoCountFilter = document.querySelector('.filters');
+    const todoCount = new TodoCount($todoCount, $todoCountFilter, {
+        totalCount: this.data.length,
+        completedCount: this.data.filter(todo => todo.isCompleted).length
     })
-    $todoInput.focus()
 
-    this.setState = function (nextData) {
-        this.data = nextData;
-        this.todoList.setState(this.data)
-        // this.todoCount.setState(this.data)
-    }
+    const $todoInput = document.querySelector('.new-todo')
+    const $todoEdit = document.querySelector('.todo-list')
+    const todoInput = new TodoInput($todoInput, $todoEdit,
+        (text) => {
+            const nextData = [...this.data]
+            nextData.push({
+                text: text,
+                isCompleted: false,
+                isEditing: false,
+            })
+            this.setState(nextData)
+        }
+    )
 }

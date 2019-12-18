@@ -1,8 +1,8 @@
-function TodoList($target, data, onTodoClick, onRemoveClick){
+function TodoList($target, data, onToggleClick, onTodoEdit, onRemoveClick, onTodoChange) {
     this.$target = $target;
     this.data = data;
-    // console.log(data)
-    this.setState = function (nextData){
+
+    this.setState = function (nextData) {
         this.data = nextData;
         this.render()
     }
@@ -13,26 +13,45 @@ function TodoList($target, data, onTodoClick, onRemoveClick){
     else if (Array.isArray(this.data) == false) {
         throw new Error(error.NOARRAY_DATA)
     }
-
+    // 토글버튼과 삭제버튼 기능구현
     this.$target.addEventListener('click', (e) => {
         const { className, dataset } = e.target;
-        console.log(e.target)
-        console.log(className)
-        console.log(dataset)
-        const { index } = dataset;
-        // console.log(index)
-        if (className.includes('todo-text')) {
-            onTodoClick(index)
-        } else if (className === 'remove') {
+        const { index } = dataset
+        if (className === 'toggle') {
+            onToggleClick(index)
+        } else if (className === 'destroy') {
             onRemoveClick(index)
         }
     })
+    // 할일 더블클릭시 에디트 모드로 변경
+    this.$target.addEventListener('dblclick', (e) => {
+        const { className } = e.target;
+        const { dataset } = e.target.previousSibling;
+        const { index } = dataset
+        if (className === 'label') {
+            onTodoEdit(index)
+        }
+    })
 
-    this.render = function (){
-        const INPUT_VIEW = '<input class="toggle" type="checkbox">';
-        const BUTTON_VIEW = '<button class="destroy"></button>';
+    // 에디트 모드에서 엔터키 또는 ESC 키 클릭시 기능 구현
+    this.$target.addEventListener('keydown', (e) => {
+        const { className } = e.target;
+        const { index } = e.target.previousSibling.firstChild.dataset
+        if (className === 'edit') {
+            if (e.keyCode === ENTER_KEY_CODE) {
+                onTodoChange(index, e.target.value)
+            } else if (e.keyCode === ESC_KEY_CODE) {
+                onTodoEdit(index)
+            }
+        }
+    })
+
+    this.render = function () {
         // renderHTMLText 변수 안에 data객체안의 text의 value 값에 태그를 붙여서 저장
         const renderHTMLText = this.data.map((val, idx) => {
+            const TOGGLE_INPUT = `<input class="toggle" type="checkbox" data-index=${idx} ${val.isCompleted ? 'checked' : ""}>`;
+            const DESTROY_BUTTON = '<button class="destroy"></button>';
+            const EDIT_INPUT = `<input class="edit" value="${val.text}">`
             if (!val.text) {            // data.text 값이 있는지 확인
                 throw new Error(error.NOT_DATA)
             }
@@ -41,15 +60,9 @@ function TodoList($target, data, onTodoClick, onRemoveClick){
                 throw new Error(error.INVALID_DATA)
             }
             // // isCompleted 가 참이면 <strike>태그를 넣어서 저장(완료되었다는 의미), false면 <div>만 넣어서 저장
-            // return val.isCompleted ? `<li><span id="line${idx}"><strike>${val.text}</strike></span></li>` : `<li><span id="line${idx}">${val.text}</span></li>`;
-            return `<li><div class="view">${INPUT_VIEW}<label class="label">${val.text}</label>${BUTTON_VIEW}</div></li>`;
+            return `<li ${val.isCompleted ? 'class="completed"' : (val.isCompleted === false && val.isEditing === false) ? "" : 'class="editing"'}><div class="view">${TOGGLE_INPUT}<label class="label">${val.text}</label>${DESTROY_BUTTON}</div>${EDIT_INPUT}</li>`;
         }).join('');
-        // console.log("renderHTMLText", renderHTMLText);    
         this.$target.innerHTML = `${renderHTMLText}`
     }
-
-
-
     this.render()
-
 }
