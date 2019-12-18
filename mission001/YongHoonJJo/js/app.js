@@ -3,7 +3,7 @@ import TodoList from './TodoList.js'
 function App(inputSelector, todoListSelector) {
   this.index = 0
   this.$input = document.querySelector(inputSelector)
-  this.TodoListComponent = new TodoList(todoListSelector)
+  this.todoListComponent = new TodoList(todoListSelector)
 
   this.$input.addEventListener('keydown', e => {
     if(e.key === 'Enter') {
@@ -13,7 +13,7 @@ function App(inputSelector, todoListSelector) {
         completed: false,
       }
       e.target.value = ''
-      this.TodoListComponent.addState(item)
+      this.todoListComponent.addItem(item)
     } 
   })
 }

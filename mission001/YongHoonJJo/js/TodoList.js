@@ -40,18 +40,18 @@ function TodoList(selector) {
 
 TodoList.prototype.renderByFilter = function(filter) {
   switch(filter) {
-    case 'active': this.activeRender(this.items); break
-    case 'completed': this.completedRender(this.items); break
+    case 'active': this.renderActive(this.items); break
+    case 'completed': this.renderCompleted(this.items); break
     default: this.render(this.items)
   }
 }
 
-TodoList.prototype.activeRender = function(items) {
+TodoList.prototype.renderActive = function(items) {
   const activeItems = items.filter((item) => !item.completed)
   this.render(activeItems) 
 }
 
-TodoList.prototype.completedRender = function(items) {
+TodoList.prototype.renderCompleted = function(items) {
   const completedItems = items.filter((item) => item.completed)
   this.render(completedItems) 
 }
@@ -76,7 +76,7 @@ TodoList.prototype.renderCounterContainer = function(items) {
   $countContainerSpanComponent.innerHTML = `총 <strong>${items.length}</strong> 개`
 }
 
-TodoList.prototype.addState = function(item) {
+TodoList.prototype.addItem = function(item) {
   this.items.push(item)
   this.renderByFilter(this.className)
 }
