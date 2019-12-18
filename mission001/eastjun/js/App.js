@@ -41,7 +41,7 @@ function TodoApp() {
     })
 
     const todoCount = new TodoCount({
-        todoItems: this.todoItems,
+        todoItems: this.todoItems
     })
 }
 
