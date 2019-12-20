@@ -3,7 +3,6 @@ function TodoCount($targetCount, $targetCountFilter, data) {
     this.$targetCount = $targetCount;
     this.$targetCountFilter = $targetCountFilter;
 
-    // 새로운 데이터를 불러서 다시 렌더링하는 setState함수
     this.setState = function (nextData) {
         this.data = nextData;
         this.render();

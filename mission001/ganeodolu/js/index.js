@@ -4,8 +4,6 @@ const error = {
     NOT_DATA: "data가 null 또는 undefined 입니다.",
     INVALID_DATA: "data타입이 문자열이 아닙니다.",
 };
-const ENTER_KEY_CODE = 13;
-const ESC_KEY_CODE = 27;
 
 const data = [
     {

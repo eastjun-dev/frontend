@@ -10,25 +10,27 @@ function App(data) {
     }
 
     const $todoList = document.querySelector('.todo-list')
-    const todoList = new TodoList($todoList, this.data,
-        (index) => {
+    const todoList = new TodoList({
+        $target: $todoList,
+        data: this.data,
+        onToggleClick: (index) => {
             const nextData = [...this.data]
             nextData[index].isCompleted = !nextData[index].isCompleted
             this.setState(nextData)
         },
-        (index) => {
+        onTodoEdit: (index) => {
             const nextData = [...this.data]
             if (!nextData[index].isCompleted) {
                 nextData[index].isEditing = nextData[index].isEditing ? false : true;
             }
             this.setState(nextData)
         },
-        (index) => {
+        onRemoveClick: (index) => {
             const nextData = [...this.data]
             nextData.splice(index, 1)
             this.setState(nextData)
         },
-        (index, value) => {
+        onTodoChange: (index, value) => {
             const nextData = [...this.data]
             nextData[index] = {
                 text: value,
@@ -37,7 +39,7 @@ function App(data) {
             };
             this.setState(nextData)
         },
-    );
+    });
 
     const $todoCount = document.querySelector('.todo-count');
     const $todoCountFilter = document.querySelector('.filters');
@@ -49,14 +51,16 @@ function App(data) {
     const $todoInput = document.querySelector('.new-todo')
     const $todoEdit = document.querySelector('.todo-list')
     const todoInput = new TodoInput($todoInput, $todoEdit,
-        (text) => {
-            const nextData = [...this.data]
-            nextData.push({
-                text: text,
-                isCompleted: false,
-                isEditing: false,
-            })
-            this.setState(nextData)
+        {
+            onAdd: (text) => {
+                const nextData = [...this.data]
+                nextData.push({
+                    text: text,
+                    isCompleted: false,
+                    isEditing: false,
+                })
+                this.setState(nextData)
+            }
         }
     )
 }
