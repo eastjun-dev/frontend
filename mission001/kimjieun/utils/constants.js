@@ -8,4 +8,5 @@ export const constant = {
   COMPLETED: 'completed',
   ALL: 'all',
   EDITING: 'editing',
+  ENTER: 'Enter',
 }

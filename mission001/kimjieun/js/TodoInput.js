@@ -7,8 +7,8 @@ export default class TodoList {
   }
 
   init = () => {
-    this.$selector.addEventListener('keyup', (e) => {
-      if (e.keyCode === 13) {
+    this.$selector.addEventListener('keydown', (e) => {
+      if (e.key === constant.ENTER) {
         const todoItem = {
           text: e.target.value,
           isCompleted: constant.NEW,
