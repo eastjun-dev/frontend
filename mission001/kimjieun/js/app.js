@@ -1,3 +1,5 @@
+import { constant } from '../utils/constants.js'
+
 export default class App {
   constructor({ todoList, todoInput, todoCount, todoCheck, data }) {
     this.todoList = todoList
@@ -40,8 +42,8 @@ export default class App {
   }
 
   toggleTodo = (target, dataIndex) => {
-    this.data[dataIndex].isCompleted = 'completed'
-    target.closest('.new').setAttribute('class', 'completed')
+    this.data[dataIndex].isCompleted = constant.COMPLETED
+    target.closest('.new').setAttribute('class', constant.COMPLETED)
   }
 
   onDeleteTodo = (index) => {
@@ -51,11 +53,11 @@ export default class App {
   }
 
   changeLabelToInput = (target) => {
-    target.closest('.new').setAttribute('class', 'editing')
+    target.closest('.new').setAttribute('class', constant.EDITING)
   }
 
   onTodoCheck = (status) => {
-    if (status === 'all') return this.render(this.data)
+    if (status === constant.ALL) return this.render(this.data)
     const filteredData = this.data.filter((d) => d.isCompleted === status)
     this.render(filteredData)
   }

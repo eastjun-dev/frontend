@@ -7,4 +7,5 @@ export const constant = {
   ACTIVE: 'active',
   COMPLETED: 'completed',
   ALL: 'all',
+  EDITING: 'editing',
 }
