@@ -1,14 +1,14 @@
 export const data = [
   {
     text: '새로운 타이틀',
-    isStatus: 'new',
+    isCompleted: 'new',
   },
   {
     text: '완료된 타이틀',
-    isStatus: 'editing',
+    isCompleted: 'editing',
   },
   {
     text: '완료된 타이틀',
-    isStatus: 'completed',
+    isCompleted: 'completed',
   },
 ]

@@ -4,16 +4,13 @@ export default class App {
     this.todoInput = todoInput
     this.todoCount = todoCount
     this.todoCheck = todoCheck
-    this.$todoInputEl = document.querySelector('#new-todo-title')
+    this.$todoInput = document.querySelector('#new-todo-title')
 
-    this.data = data
     this.setState(data)
-
-    this.render(data)
     this.init()
   }
 
-  init() {
+  init = () => {
     this.todoInput.onAddTodo = this.addTodo.bind(this)
     this.todoList.toggleTodo = this.toggleTodo.bind(this)
     this.todoList.onDeleteTodo = this.onDeleteTodo.bind(this)
@@ -21,45 +18,45 @@ export default class App {
     this.todoCheck.onTodoCheck = this.onTodoCheck.bind(this)
   }
 
-  setState(data) {
+  setState = (data) => {
     this.data = data
     this.render(data)
     this.createTodoCount()
   }
 
-  render(data) {
+  render = (data) => {
     this.todoList.render(data)
   }
 
-  createTodoCount() {
-    this.todoCount.creatTodoCount(this.data)
+  createTodoCount = () => {
+    this.todoCount.createTodoCount(this.data)
   }
 
-  addTodo(data) {
+  addTodo = (data) => {
     const addTodoData = [...this.data]
     addTodoData.push(data)
-    this.$todoInputEl.value = ''
+    this.$todoInput.value = ''
     this.setState(addTodoData)
   }
 
-  toggleTodo(target, dataIndex) {
-    this.data[dataIndex].isStatus = 'completed'
-    target.parentNode.setAttribute('class', 'completed')
+  toggleTodo = (target, dataIndex) => {
+    this.data[dataIndex].isCompleted = 'completed'
+    target.closest('.new').setAttribute('class', 'completed')
   }
 
-  onDeleteTodo(index) {
+  onDeleteTodo = (index) => {
     const deletedData = [...this.data]
     deletedData.splice(index, 1)
     this.setState(deletedData)
   }
 
-  changeLabelToInput(target) {
-    target.parentNode.setAttribute('class', 'editing')
+  changeLabelToInput = (target) => {
+    target.closest('.new').setAttribute('class', 'editing')
   }
 
-  onTodoCheck(status) {
+  onTodoCheck = (status) => {
     if (status === 'all') return this.render(this.data)
-    const filteredData = this.data.filter((d) => d.isStatus === status)
+    const filteredData = this.data.filter((d) => d.isCompleted === status)
     this.render(filteredData)
   }
 }

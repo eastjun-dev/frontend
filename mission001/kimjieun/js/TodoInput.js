@@ -1,18 +1,20 @@
+import { constant } from '../utils/constants.js'
+
 export default class TodoList {
   constructor({ $selector }) {
     this.$selector = $selector
     this.init()
   }
 
-  init() {
+  init = () => {
     this.$selector.addEventListener('keyup', (e) => {
       if (e.keyCode === 13) {
-        const addData = {
+        const todoItem = {
           text: e.target.value,
-          isStatus: 'new',
+          isCompleted: constant.NEW,
         }
 
-        this.onAddTodo(addData)
+        this.onAddTodo(todoItem)
       }
     })
   }

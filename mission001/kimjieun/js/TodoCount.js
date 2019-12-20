@@ -3,11 +3,11 @@ export default class TodoCount {
     this.$selector = $selector
   }
 
-  creatHtmlString(data) {
+  createHtmlString = (data) => {
     return `총 <strong>${data.length}</strong> 개`
   }
 
-  creatTodoCount = function(data) {
-    this.$selector.innerHTML = this.creatHtmlString(data)
+  createTodoCount = (data) => {
+    this.$selector.innerHTML = this.createHtmlString(data)
   }
 }
