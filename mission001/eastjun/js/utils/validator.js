@@ -1,7 +1,5 @@
 import { errorMessagesMap, keyboardMap } from './utils.js'
 
-
-
 const validator = {
   isValid(result, message) {
     if (!result) throw new Error(message)

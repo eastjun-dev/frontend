@@ -30,7 +30,6 @@ export default function TodoStatus({ todoItems, filter }) {
 
     const toggleTab = ($target) => {
         const $tabs = document.querySelectorAll('#todo-status-tabs li a')
-
         $tabs.forEach(status => {
             if (status.classList.contains('selected')) {
                 status.classList.remove('selected')
