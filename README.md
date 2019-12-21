@@ -39,8 +39,8 @@ live-server 폴더명
 
 ## 🚀 Getting Started
 
-- ```mission002/eastjun```과 같은 형태로 본인의 브랜치를 생성하고, ```mission002``` 디렉토리의 하위에 자신의 아이디로 네이밍하여 디렉토리를 생성하고 미션을 시작해주세요.
-- 미션 수행 후 ```[mission002] todolist ajax & onoffline``` 형태로 PR을 보내주세요.
+- ```mission001/eastjun```과 같은 형태로 본인의 브랜치를 생성하고, ```mission001``` 디렉토리의 하위에 자신의 아이디로 네이밍하여 디렉토리를 생성하고 미션을 시작해주세요.
+- 미션 수행 후 ```[mission001] mission title``` 형태로 PR을 보내주세요.
 - PR에는 이 미션의 issue number를 태그로 추가해주세요.
 - **최소 3명**의 리뷰어가 본인의 코드에 대해 리뷰해주고 approve 해줘야만 PR이 끝이나고, master에 merge될 수 있습니다.
 
