@@ -10,8 +10,8 @@
 
 이 Repository는 총 999개의 mission으로 채워지는 것을 목표로 하고 있습니다.  
 
-[mission001](https://github.com/EastjunDev/frontend/issues/1)
-[mission002](https://github.com/EastjunDev/frontend/issues/7)
+- [mission001](https://github.com/EastjunDev/frontend/issues/1) : TodoList CRUD
+- [mission002](https://github.com/EastjunDev/frontend/issues/7) : TodoList Ajax, localStorage
 
 <br>
 
