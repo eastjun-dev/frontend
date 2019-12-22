@@ -30,8 +30,8 @@ export default class App {
     this.todoList.render(data)
   }
 
-  createTodoCount = () => {
-    this.todoCount.createTodoCount(this.data)
+  createTodoCount = (status) => {
+    this.todoCount.createTodoCount(status, this.data)
   }
 
   addTodo = (data) => {
@@ -64,6 +64,7 @@ export default class App {
   }
 
   onTodoCheck = (status) => {
+    this.createTodoCount(status)
     if (status === constant.ALL) return this.render(this.data)
     const filteredData = this.data.filter((d) => d.isCompleted === status)
     this.render(filteredData)
