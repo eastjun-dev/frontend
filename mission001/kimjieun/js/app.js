@@ -42,8 +42,15 @@ export default class App {
   }
 
   toggleTodo = (target, dataIndex) => {
-    this.data[dataIndex].isCompleted = constant.COMPLETED
-    target.closest('.new').setAttribute('class', constant.COMPLETED)
+    if (this.data[dataIndex].isCompleted === constant.COMPLETED) {
+      this.data[dataIndex].isCompleted = constant.COMPLETED
+      target.closest('.completed').setAttribute('class', constant.NEW)
+    }
+
+    if (this.data[dataIndex].isCompleted === constant.NEW) {
+      this.data[dataIndex].isCompleted = constant.COMPLETED
+      target.closest('.new').setAttribute('class', constant.COMPLETED)
+    }
   }
 
   onDeleteTodo = (index) => {
