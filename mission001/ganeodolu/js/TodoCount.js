@@ -7,6 +7,10 @@ function TodoCount($targetCount, $targetCountFilter, data) {
         this.data = nextData;
         this.render();
     }
+
+    if (this === window) {
+        throw new Error(error.NO_USED_NEW_KEYWORD)
+    }
     // // 상태별 아이템 골라서 보여주기 미구현
     // this.$targetCountFilter.addEventListener('click', (e) => {
     //     const { className, dataset } = e.target;

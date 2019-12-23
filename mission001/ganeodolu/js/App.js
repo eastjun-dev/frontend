@@ -21,7 +21,7 @@ function App(data) {
         onTodoEdit: (index) => {
             const nextData = [...this.data]
             if (!nextData[index].isCompleted) {
-                nextData[index].isEditing = nextData[index].isEditing ? false : true;
+                nextData[index].isEditing = !nextData[index].isEditing
             }
             this.setState(nextData)
         },
@@ -49,8 +49,7 @@ function App(data) {
     })
 
     const $todoInput = document.querySelector('.new-todo')
-    const $todoEdit = document.querySelector('.todo-list')
-    const todoInput = new TodoInput($todoInput, $todoEdit,
+    const todoInput = TodoInput($todoInput,
         {
             onAdd: (text) => {
                 const nextData = [...this.data]

@@ -1,4 +1,4 @@
-function TodoList({$target, data, onToggleClick, onTodoEdit, onRemoveClick, onTodoChange}) {
+function TodoList({ $target, data, onToggleClick, onTodoEdit, onRemoveClick, onTodoChange }) {
     this.$target = $target;
     this.data = data;
 
@@ -46,16 +46,21 @@ function TodoList({$target, data, onToggleClick, onTodoEdit, onRemoveClick, onTo
 
     this.render = function () {
         const renderHTMLText = this.data.map((val, idx) => {
-            const TOGGLE_INPUT = `<input class="toggle" type="checkbox"  ${val.isCompleted ? 'checked' : ""}>`;
-            const DESTROY_BUTTON = '<button class="destroy"></button>';
-            const EDIT_INPUT = `<input class="edit" value="${val.text}">`
-            if (!val.text) {            // data.text 값이 있는지 확인
+            if (!val.text) {
                 throw new Error(error.NOT_DATA)
             }
             else if (typeof (val.text) != "string") {
                 throw new Error(error.INVALID_DATA)
             }
-            return `<li ${val.isCompleted ? 'class="completed"' : (val.isCompleted === false && val.isEditing === false) ? "" : 'class="editing"'} data-index=${idx}><div class="view">${TOGGLE_INPUT}<label class="label">${val.text}</label>${DESTROY_BUTTON}</div>${EDIT_INPUT}</li>`;
+            return `
+                <li ${val.isCompleted ? 'class="completed"' : (val.isCompleted === false && val.isEditing === false) ? "" : 'class="editing"'} data-index=${idx}>
+                    <div class="view">
+                        <input class="toggle" type="checkbox"  ${val.isCompleted ? 'checked' : ""}>
+                        <label class="label">${val.text}</label>
+                        <button class="destroy"></button>
+                    </div>
+                    <input class="edit" value="${val.text}">
+                </li>`
         }).join('');
         this.$target.innerHTML = renderHTMLText
     }

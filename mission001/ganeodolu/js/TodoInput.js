@@ -1,4 +1,5 @@
-function TodoInput($targetInput, $targetEdit, {onAdd}) {
+function TodoInput($targetInput, {onAdd}) {
+    
     $targetInput.addEventListener('keydown', (e) => {
         if (e.code === "Enter") {
             onAdd($targetInput.value)
