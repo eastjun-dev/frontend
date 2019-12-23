@@ -1,16 +1,24 @@
-import { status, todoIdCount, setTodoIdCount, todoListData } from '../store/store.js';
-import { TodoCount } from './TodoCount.js';
+import {
+  status,
+  todoIdCount,
+  setTodoIdCount,
+  todoListData
+} from "../store/store.js";
+import { TodoCount } from "./TodoCount.js";
 
 const todoList = document.getElementById("todoList");
 
-export function TodoList (data) {
-  renderTodoList(data);
-  onEditMode(data);
+export function TodoList(data) {
+  this.setState = nextData => {
+    data = nextData;
+    renderTodoList(data);
+    onEditMode(data);
+  };
 }
 
 // 초기 데이터에 따라 todoList render
-export const renderTodoList = (list) => {
-  todoList.innerHTML = '';
+export const renderTodoList = list => {
+  todoList.innerHTML = "";
 
   if (list.length === 0) {
     todoList.innerHTML = `<li>Todo List가 비어있습니다</li>`;
@@ -41,7 +49,7 @@ export const renderTodoList = (list) => {
 
   for (let i = 0; i < deleteBtns.length; ++i) {
     deleteBtns[i].addEventListener("click", e => {
-      deleteTodoList(e, list);
+      deleteTodoList(e);
     });
   }
 };
@@ -64,14 +72,14 @@ export const addTodoList = data => {
   const deleteBtn = list.firstChild.childNodes[5];
 
   setTodoIdCount(todoIdCount + 1);
-  console.log(todoListData)
+  console.log(todoListData);
 
   checkbox.addEventListener("change", e => {
     onComplete(e);
   });
 
   deleteBtn.addEventListener("click", (e, data) => {
-    deleteTodoList(e, data);
+    deleteTodoList(e);
   });
 };
 
@@ -85,51 +93,60 @@ export const onComplete = e => {
   }
 };
 
-
 // TodoList의 data 제거
-export const deleteTodoList = (e, data) => {
+export const deleteTodoList = e => {
   const list = e.target.parentElement.parentElement;
-  console.log(list.id);
+
   const id = list.id.replace(/[^0-9]/g, "");
-  todoList.removeChild(list);
- 
-  for (let i = 0; i < data.length; ++i) {
-    if (data[i].id.toString() === id) {
-      data.splice(i, 1);
+
+  for (let i = 0; i < todoListData.length; ++i) {
+    if (todoListData[i].id.toString() === id) {
+      todoListData.splice(i, 1);
     }
   }
 
-  TodoCount(data);
+  todoList.removeChild(list);
+
+  const todoCount = new TodoCount(todoListData);
+  todoCount.setState(todoListData);
 };
 
-const onEditMode = (data) => {
-   // 더블클릭시 edit 모드
-   todoList.addEventListener("dblclick", e => {
-    const label = e.target.childNodes[3];
-    const editInput = e.target.nextSibling.nextSibling;
-    const prevValue = editInput.value;
-    const id = e.target.parentElement.id.replace(/[^0-9]/g, "");
-  
-    editInput.style.display = "block";
-    editInput.addEventListener("keydown", e => {
-      if (e.keyCode === 27) {
-        editInput.style.display = "none";
-      }
-  
-      if (e.keyCode === 13) {
-        if (prevValue !== editInput.value) {
-          let i = 0;
-          while (i < data.length) {
-            if (data[i].id.toString() === id) {
-              data[i].text = e.target.value;
-              label.innerHTML = e.target.value;
-              break;
-            }
-            ++i;
-          }
+// 더블클릭시 edit 모드
+const onEditMode = data => {
+  let clickCount = 0;
+
+  todoList.addEventListener("click", e => {
+    clickCount++;
+    if (clickCount === 2) {
+      const label = e.target.childNodes[3];
+      const editInput = e.target.nextSibling.nextSibling;
+      const prevValue = editInput.value;
+      const id = e.target.parentElement.id.replace(/[^0-9]/g, "");
+
+      editInput.style.display = "block";
+      editInput.addEventListener("keydown", e => {
+        if (e.keyCode === 27) {
+          editInput.style.display = "none";
         }
-        editInput.style.display = "none";
-      }
-    });
+
+        if (e.keyCode === 13) {
+          if (prevValue !== editInput.value) {
+            let i = 0;
+            while (i < data.length) {
+              if (data[i].id.toString() === id) {
+                data[i].text = e.target.value;
+                label.innerHTML = e.target.value;
+                break;
+              }
+              ++i;
+            }
+          }
+          editInput.style.display = "none";
+        }
+      });
+    }
+    setTimeout(() => {
+      clickCount = 0;
+    }, 200);
   });
-}
+};

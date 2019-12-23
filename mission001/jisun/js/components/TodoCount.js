@@ -1,9 +1,12 @@
 const todoCount = document.getElementById("todoCount");
 
-export function TodoCount (data) {
-  renderCount(data, todoCount);
+export function TodoCount(data) {
+  this.setState = nextData => {
+    data = nextData;
+    render(data);
+  };
 }
 
-export const renderCount = (data, selector) => {
-  selector.innerHTML = `총 <strong>${data.length}</strong> 개`;
-}
+const render = data => {
+  todoCount.innerHTML = `총 <strong>${data.length}</strong> 개`;
+};
