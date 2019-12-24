@@ -13,6 +13,7 @@ export default class App {
 
   init = () => {
     this.todoInput.onKeyDown = this.onKeyDown.bind(this)
+    this.todoList.onDeleteTodo = this.onDeleteTodo.bind(this)
   }
 
   fetchTodoData = async () => {
@@ -42,6 +43,17 @@ export default class App {
 
       if (data) e.target.value = ''
     }
+
+    this.fetchTodoData()
+  }
+
+  onDeleteTodo = async (id) => {
+    await fetch(`${hostUrl}/kimjieun/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
 
     this.fetchTodoData()
   }

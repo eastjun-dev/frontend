@@ -1,6 +1,15 @@
+import { DESTROY } from '../utils/constants.js'
+
 export default class TodoList {
   constructor({ $selector }) {
     this.$selector = $selector
+    this.init()
+  }
+
+  init = () => {
+    this.$selector.addEventListener('click', (e) => {
+      if (e.target.className === DESTROY) this.onDeleteTodo(e.target.parentNode.dataset.idx)
+    })
   }
 
   createLiClassName = (isCompleted) => {
@@ -8,9 +17,9 @@ export default class TodoList {
     return 'completed'
   }
 
-  createTodoListHtmlString = ({ content, isCompleted }, index) => {
+  createTodoListHtmlString = ({ content, isCompleted, _id }) => {
     return `<li class=${this.createLiClassName(isCompleted)}>
-              <div data-idx=${index} class="view">
+              <div data-idx=${_id} class="view">
                 <input class="toggle" type="checkbox" ${isCompleted === true && 'checked'}>
                 <label class="label">${content}</label>
                 <button class="destroy"></button>
