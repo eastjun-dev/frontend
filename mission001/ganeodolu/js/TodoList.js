@@ -1,5 +1,6 @@
-function TodoList({ $target, data, onToggleClick, onTodoEdit, onRemoveClick, onTodoChange }) {
+function TodoList({ $target, $targetFilter, data, onToggleClick, onTodoEdit, onRemoveClick, onTodoChange, onFilterClick }) {
     this.$target = $target;
+    this.$targetFilter = $targetFilter
     this.data = data;
 
     this.setState = function (nextData) {
@@ -44,6 +45,19 @@ function TodoList({ $target, data, onToggleClick, onTodoEdit, onRemoveClick, onT
         }
     })
 
+    this.$targetFilter.addEventListener('click', (e) => {
+        const { className } = e.target;
+        // const { index } = dataset
+        // console.log(e.target)
+        if (className === 'all selected') {
+            onFilterClick()
+        } else if (className === 'active') {
+            onFilterClick(true)
+        } else if (className === 'completed') {
+            onFilterClick(false)
+        }
+    })
+
     this.render = function () {
         const renderHTMLText = this.data.map((val, idx) => {
             if (!val.text) {
@@ -62,6 +76,7 @@ function TodoList({ $target, data, onToggleClick, onTodoEdit, onRemoveClick, onT
                     <input class="edit" value="${val.text}">
                 </li>`
         }).join('');
+        // console.log("list",renderHTMLText)
         this.$target.innerHTML = renderHTMLText
     }
     this.render()

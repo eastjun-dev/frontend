@@ -1,7 +1,7 @@
-function TodoCount($targetCount, $targetCountFilter, data) {
+function TodoCount({$targetCount, $targetFilter, data, onFilterClick}) {
     this.data = data;
     this.$targetCount = $targetCount;
-    this.$targetCountFilter = $targetCountFilter;
+    this.$targetFilter = $targetFilter;
 
     this.setState = function (nextData) {
         this.data = nextData;
@@ -11,17 +11,17 @@ function TodoCount($targetCount, $targetCountFilter, data) {
     if (this === window) {
         throw new Error(error.NO_USED_NEW_KEYWORD)
     }
-    // // 상태별 아이템 골라서 보여주기 미구현
-    // this.$targetCountFilter.addEventListener('click', (e) => {
-    //     const { className, dataset } = e.target;
-    //     const { index } = dataset
-    //     console.log(e.target)
+
+    // this.$targetFilter.addEventListener('click', (e) => {
+    //     const { className } = e.target;
+    //     // const { index } = dataset
+    //     // console.log(e.target)
     //     if (className === 'all selected') {
-    //         onAllClick()
+    //         onFilterClick()
     //     } else if (className === 'active') {
-    //         onActiveClick()
+    //         onFilterClick(true)
     //     } else if (className === 'completed') {
-    //         onCompletedClick()
+    //         onFilterClick(false)
     //     }
     // })
 
