@@ -1,35 +1,36 @@
-import TodoList from '../components/TodoList.js'
-import TodoInput from '../components/TodoInput.js'
 import { apiHandler } from '../utils/api.js'
+import { ENTER } from '../utils/constants.js'
+import { hostUrl } from '../utils/url.js'
 
-function App() {
-  this.data = []
+export default class App {
+  constructor({ todoList, todoInput }) {
+    this.todoList = todoList
+    this.todoInput = todoInput
 
-  const fetchTodoData = async () => {
-    const data = await apiHandler({ url: 'http://todo-api.roto.codes' })
-    setState(data)
+    this.init()
+    this.fetchTodoData()
   }
 
-  fetchTodoData()
-
-  this.todoList = new TodoList({
-    data: this.data,
-  })
-
-  function setState(data) {
-    this.todoList.setState(data)
+  init = () => {
+    this.todoInput.onKeyDown = this.onKeyDown.bind(this)
   }
 
-  // this.setState = (updateData) => {
-  //   console.log(updateData)
-  //   this.todoList.setState(updateData)
-  // }
+  fetchTodoData = async () => {
+    const data = await apiHandler({ url: hostUrl })
+    this.setState(data)
+  }
 
-  const onKeyDown = async (e) => {
-    const $todoInput = document.querySelector('#new-todo-title')
+  setState = (data) => {
+    this.render(data)
+  }
 
-    if (e.key === 'Enter') {
-      const data = await fetch('http://todo-api.roto.codes/kimjieun', {
+  render = (data) => {
+    this.todoList.render(data)
+  }
+
+  onKeyDown = async (e) => {
+    if (e.key === ENTER) {
+      const data = await fetch(`${hostUrl}/kimjieun`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,18 +40,9 @@ function App() {
         }),
       })
 
-      if (data) {
-        $todoInput.value = ''
-        $todoInput.focus()
-      }
+      if (data) e.target.value = ''
     }
 
-    fetchTodoData()
+    this.fetchTodoData()
   }
-
-  this.todoInput = new TodoInput({
-    onKeyDown,
-  })
 }
-
-export default App

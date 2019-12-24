@@ -1,5 +1,13 @@
-export default function TodoInput({ onKeyDown }) {
-  document.querySelector('#new-todo-title').addEventListener('keydown', (e) => {
-    onKeyDown(e)
-  })
+export default class TodoInput {
+  constructor({ $selector }) {
+    this.$selector = $selector
+
+    this.init()
+  }
+
+  init() {
+    this.$selector.addEventListener('keydown', (e) => {
+      this.onKeyDown(e)
+    })
+  }
 }

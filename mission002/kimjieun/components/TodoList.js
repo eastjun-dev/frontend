@@ -1,13 +1,15 @@
-export default function TodoList({ data }) {
-  this.data = data
+export default class TodoList {
+  constructor({ $selector }) {
+    this.$selector = $selector
+  }
 
-  this.setState = (data) => {
-    this.data = data
-    this.render()
+  createLiClassName = (isCompleted) => {
+    if (!isCompleted) return 'view'
+    return 'completed'
   }
 
   createTodoListHtmlString = ({ content, isCompleted }, index) => {
-    return `<li class=${isCompleted}>
+    return `<li class=${this.createLiClassName(isCompleted)}>
               <div data-idx=${index} class="view">
                 <input class="toggle" type="checkbox" ${isCompleted === true && 'checked'}>
                 <label class="label">${content}</label>
@@ -17,8 +19,8 @@ export default function TodoList({ data }) {
             </li>`
   }
 
-  this.render = () => {
+  render = (data) => {
     const $todoList = document.querySelector('#todo-list')
-    $todoList.innerHTML = this.data.map(this.createTodoListHtmlString).join('')
+    $todoList.innerHTML = data.map(this.createTodoListHtmlString).join('')
   }
 }
