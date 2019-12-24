@@ -2,28 +2,28 @@ import TodoList from '../components/TodoList.js'
 import TodoInput from '../components/TodoInput.js'
 import { apiHandler } from '../utils/api.js'
 
-function App({ target }) {
+function App() {
   this.data = []
 
   const fetchTodoData = async () => {
-    try {
-      const data = await apiHandler({ url: 'http://todo-api.roto.codes' })
-
-      setState(data)
-    } catch (error) {
-      throw new Error(error)
-    }
+    const data = await apiHandler({ url: 'http://todo-api.roto.codes' })
+    setState(data)
   }
 
   fetchTodoData()
 
-  const setState = (updateData) => {
-    this.todoList.setState(updateData)
-  }
-
   this.todoList = new TodoList({
     data: this.data,
   })
+
+  function setState(data) {
+    this.todoList.setState(data)
+  }
+
+  // this.setState = (updateData) => {
+  //   console.log(updateData)
+  //   this.todoList.setState(updateData)
+  // }
 
   const onKeyDown = async (e) => {
     const $todoInput = document.querySelector('#new-todo-title')
