@@ -1,4 +1,4 @@
-import { DESTROY } from '../utils/constants.js'
+import { DESTROY, TOGGLE } from '../utils/constants.js'
 
 export default class TodoList {
   constructor({ $selector }) {
@@ -9,12 +9,14 @@ export default class TodoList {
   init = () => {
     this.$selector.addEventListener('click', (e) => {
       if (e.target.className === DESTROY) this.onDeleteTodo(e.target.parentNode.dataset.idx)
+      if (e.target.className === TOGGLE) this.onToggleTodo(e.target.parentNode.dataset.idx)
     })
   }
 
   createLiClassName = (isCompleted) => {
     if (!isCompleted) return 'view'
-    return 'completed'
+    if (isCompleted) return 'completed'
+    return ''
   }
 
   createTodoListHtmlString = ({ content, isCompleted, _id }) => {

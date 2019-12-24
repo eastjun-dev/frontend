@@ -1,11 +1,12 @@
 import { apiHandler } from '../utils/api.js'
-import { ENTER } from '../utils/constants.js'
+import { ENTER, NAME } from '../utils/constants.js'
 import { hostUrl } from '../utils/url.js'
 
 export default class App {
-  constructor({ todoList, todoInput }) {
+  constructor({ todoList, todoInput, todoCount }) {
     this.todoList = todoList
     this.todoInput = todoInput
+    this.todoCount = todoCount
 
     this.init()
     this.fetchTodoData()
@@ -14,6 +15,7 @@ export default class App {
   init = () => {
     this.todoInput.onKeyDown = this.onKeyDown.bind(this)
     this.todoList.onDeleteTodo = this.onDeleteTodo.bind(this)
+    this.todoList.onToggleTodo = this.onToggleTodo.bind(this)
   }
 
   fetchTodoData = async () => {
@@ -23,15 +25,20 @@ export default class App {
 
   setState = (data) => {
     this.render(data)
+    this.createTodoCount(data)
   }
 
   render = (data) => {
     this.todoList.render(data)
   }
 
+  createTodoCount = (data) => {
+    this.todoCount.createTodoCount(data)
+  }
+
   onKeyDown = async (e) => {
     if (e.key === ENTER) {
-      const data = await fetch(`${hostUrl}/kimjieun`, {
+      const data = await fetch(`${hostUrl}/${NAME}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,8 +55,19 @@ export default class App {
   }
 
   onDeleteTodo = async (id) => {
-    await fetch(`${hostUrl}/kimjieun/${id}`, {
+    await fetch(`${hostUrl}/${NAME}/${id}`, {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    this.fetchTodoData()
+  }
+
+  onToggleTodo = async (id) => {
+    await fetch(`${hostUrl}/${NAME}/${id}/toggle`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
