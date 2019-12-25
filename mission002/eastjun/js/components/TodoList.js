@@ -2,17 +2,8 @@ import { todoItemTemplate } from '../utils/templates.js'
 import validator from '../utils/validator.js'
 import api from '../api/api.js'
 
-export default function TodoList({setState, onToggleItem}) {
+export default function TodoList({loadTodoItems, setState, onToggleItem}) {
   this.$todoList = document.querySelector('#todo-list')
-
-  const loadTodoItems = async () => {
-    try {
-      const todoItems = await api.todoItem.get()
-      setState(todoItems)
-    } catch (e) {
-      throw new Error(e)
-    }
-  }
 
   const initEventListener = () => {
     this.$todoList.addEventListener('click', (event) => {
@@ -61,12 +52,6 @@ export default function TodoList({setState, onToggleItem}) {
   }
 
   this.init()
-
-
-  this.setState = (updatedTodoItems) => {
-    this.todoItems = updatedTodoItems
-    this.render(this.todoItems)
-  }
 
   this.render = (items) => {
     const template = items.map(todoItemTemplate)
