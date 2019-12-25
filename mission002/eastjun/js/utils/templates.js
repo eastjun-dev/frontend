@@ -5,6 +5,7 @@ const todoItemTemplate = (todoItem, index) => `
           <label class="label">${todoItem.content}</label>
           <button class="destroy"></button>
       </div>
+      <input class="edit" value="${todoItem.content}">
     </li>`
 
 
