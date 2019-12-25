@@ -1,8 +1,10 @@
 import { eventKeyboards, counterFilters, dataActions  } from './utils/Contants.js'
+import { createTodoItem, getTodoList, toggleTodoItem, deleteTodoItem } from './utils/apis.js'
 
 function TodoList(selector) {
   const { ALL } = counterFilters
 
+  this.username = 'yonghoonjjo'
   this.items = []
   this.filter = ALL
   this.$todoList = document.querySelector(selector)
@@ -42,9 +44,15 @@ function TodoList(selector) {
       case EDIT: this.toggleEditView(id); break
     } 
   })
+
+  ;(async function() {
+    await this.renderByFilter()
+  }).bind(this)() 
 }
 
-TodoList.prototype.renderByFilter = function() {
+TodoList.prototype.renderByFilter = async function() {
+  const res = await getTodoList(this.username)
+  this.items = await res.json()
   const { ACTIVE, COMPLETED } = counterFilters
   switch(this.filter) {
     case ACTIVE: this.renderActive(this.items); break
@@ -54,25 +62,26 @@ TodoList.prototype.renderByFilter = function() {
 }
 
 TodoList.prototype.renderActive = function(items) {
-  const activeItems = items.filter((item) => !item.completed)
+  const activeItems = items.filter((item) => !item.isCompleted)
   this.render(activeItems) 
 }
 
 TodoList.prototype.renderCompleted = function(items) {
-  const completedItems = items.filter((item) => item.completed)
+  const completedItems = items.filter((item) => item.isCompleted)
   this.render(completedItems) 
 }
 
 TodoList.prototype.render = function(items) {
   const { CHECK, REMOVE, EDIT } = dataActions
+  console.log({items})
   const itemsHtmlString = items.reduce((acc, item) => {
-    const { id, content, completed } = item
+    const { _id, content, isCompleted } = item
     const todoItemTemplate = `
-      <li ${completed && 'class="completed"'} data-action=${EDIT}-${id}>
+      <li ${isCompleted && 'class="completed"'} data-action=${EDIT}-${_id}>
         <div class="view">
-          <input class="toggle" type="checkbox" data-action=${CHECK}-${id} ${completed && 'checked'}>
-          <label class="label" data-action=${EDIT}-${id}>${content}</label>
-          <button class="destroy" data-action=${REMOVE}-${id}></button>
+          <input class="toggle" type="checkbox" data-action=${CHECK}-${_id} ${isCompleted && 'checked'}>
+          <label class="label" data-action=${EDIT}-${_id}>${content}</label>
+          <button class="destroy" data-action=${REMOVE}-${_id}></button>
         </div>
         <input class="edit" value="${content}">
       </li> 
@@ -89,19 +98,21 @@ TodoList.prototype.renderCounterContainer = function(items) {
   $countContainerSpanComponent.innerHTML = `총 <strong>${items.length}</strong> 개`
 }
 
-TodoList.prototype.addItem = function(item) {
-  this.items.push(item)
-  this.renderByFilter()
+TodoList.prototype.addItem = async function(content) {
+  await createTodoItem(this.username, content)
+  await this.renderByFilter()
 }
 
-TodoList.prototype.toggleState = function(id) {
-  this.items = this.items.map((item) => id == item.id ? ({...item, completed: !item.completed}) : ({...item}))
-  this.renderByFilter()
+TodoList.prototype.toggleState = async function(id) {
+  // this.items = this.items.map((item) => id == item._id ? ({...item, isCompleted: !item.isCompleted}) : ({...item}))
+  await toggleTodoItem(this.username, id)
+  await this.renderByFilter()
 }
 
-TodoList.prototype.removeState = function(id) {
-  this.items = this.items.filter((item) => id != item.id)
-  this.renderByFilter()
+TodoList.prototype.removeState = async function(id) {
+  // this.items = this.items.filter((item) => id != item._id)
+  await deleteTodoItem(this.username, id)
+  await this.renderByFilter()
 }
 
 TodoList.prototype.toggleEditView = function(id) {
@@ -120,7 +131,7 @@ TodoList.prototype.toggleEditView = function(id) {
 }
 
 TodoList.prototype.editContent = function(id, content) {
-  this.items = this.items.map((item) => item.id == id ? {...item, content} : {...item})
+  this.items = this.items.map((item) => item._id == id ? {...item, content} : {...item})
   this.renderByFilter()
 }
 

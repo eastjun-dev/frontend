@@ -5,15 +5,13 @@ function App(inputSelector, todoListSelector) {
   this.$input = document.querySelector(inputSelector)
   this.todoListComponent = new TodoList(todoListSelector)
 
-  this.$input.addEventListener('keydown', e => {
+  this.$input.addEventListener('keydown', async e => {
     if(e.key === 'Enter') {
-      const item = {
-        id: this.index++,
-        content: e.target.value,
-        completed: false,
-      }
+      const content = e.target.value
+      if(content.length === 0) return
+      
       e.target.value = ''
-      this.todoListComponent.addItem(item)
+      await this.todoListComponent.addItem(content)
     } 
   })
 }
