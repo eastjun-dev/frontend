@@ -22,15 +22,19 @@ function TodoList(selector) {
     this.renderByFilter()
   })
 
-  this.$todoList.addEventListener('click', (e) => {
+  this.$todoList.addEventListener('click', async (e) => {
     const { CHECK, REMOVE } = dataActions
     const datasetAction = e.target.dataset.action
     if(!datasetAction) return 
 
     const [action, id] = datasetAction.split('-')
-    switch(action) {
-      case CHECK: this.toggleState(id); break
-      case REMOVE: this.removeState(id); break
+    try {
+      switch(action) {
+        case CHECK: await this.toggleState(id); break
+        case REMOVE: await this.removeState(id); break
+      }
+    } catch(e) {
+      console.error({e})
     }
   })
 
@@ -46,7 +50,11 @@ function TodoList(selector) {
   })
 
   ;(async function() {
-    await this.renderByFilter()
+    try {
+      await this.renderByFilter()
+    } catch (e) {
+      console.error({e})
+    }
   }).bind(this)() 
 }
 
@@ -73,7 +81,6 @@ TodoList.prototype.renderCompleted = function(items) {
 
 TodoList.prototype.render = function(items) {
   const { CHECK, REMOVE, EDIT } = dataActions
-  console.log({items})
   const itemsHtmlString = items.reduce((acc, item) => {
     const { _id, content, isCompleted } = item
     const todoItemTemplate = `
@@ -104,13 +111,11 @@ TodoList.prototype.addItem = async function(content) {
 }
 
 TodoList.prototype.toggleState = async function(id) {
-  // this.items = this.items.map((item) => id == item._id ? ({...item, isCompleted: !item.isCompleted}) : ({...item}))
   await toggleTodoItem(this.username, id)
   await this.renderByFilter()
 }
 
 TodoList.prototype.removeState = async function(id) {
-  // this.items = this.items.filter((item) => id != item._id)
   await deleteTodoItem(this.username, id)
   await this.renderByFilter()
 }
@@ -121,18 +126,22 @@ TodoList.prototype.toggleEditView = function(id) {
  
   $liElement.classList.add('editing')
 
-  $inputElement.addEventListener('keydown', (e) => {
+  $inputElement.addEventListener('keydown', async (e) => {
     const { ENTER, ESC } = eventKeyboards
-    switch(e.key) {
-      case ESC: this.renderByFilter(); break
-      case ENTER: this.editContent(id, e.target.value); break
+    try {
+      switch(e.key) {
+        case ESC: await this.renderByFilter(); break
+        case ENTER: await this.editContent(id, e.target.value); break
+      }
+    } catch(e) {
+      console.error({e})
     }
   })
 }
 
-TodoList.prototype.editContent = function(id, content) {
+TodoList.prototype.editContent = async function(id, content) {
   this.items = this.items.map((item) => item._id == id ? {...item, content} : {...item})
-  this.renderByFilter()
+  await this.renderByFilter()
 }
 
 export default TodoList

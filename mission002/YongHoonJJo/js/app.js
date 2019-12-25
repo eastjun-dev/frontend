@@ -11,7 +11,11 @@ function App(inputSelector, todoListSelector) {
       if(content.length === 0) return
       
       e.target.value = ''
-      await this.todoListComponent.addItem(content)
+      try {
+        await this.todoListComponent.addItem(content)
+      } catch(e) {
+        console.error({e})
+      }
     } 
   })
 }
