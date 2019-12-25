@@ -8,16 +8,12 @@ export default function TodoInput({ onAdd }) {
   this.addTodoItem = (event) => {
     const $newTodoTarget = event.target
     if (this.isValid(event, $newTodoTarget.value)) {
-      this.onAdd($newTodoTarget, $newTodoTarget.value)
+      onAdd($newTodoTarget.value)
+      $newTodoTarget.value = ''
     }
   }
 
   this.isValid = (event, newTodoContents) => {
     return validator.isEnterKey(event.key) && validator.isString(newTodoContents)
-  }
-
-  this.onAdd = ($newTodoTarget, newTodoContents) => {
-    onAdd(newTodoContents)
-    $newTodoTarget.value = ''
   }
 }
