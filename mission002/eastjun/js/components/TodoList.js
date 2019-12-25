@@ -7,22 +7,23 @@ export default function TodoList({loadTodoItems, setState, onToggleItem}) {
 
   const initEventListener = () => {
     this.$todoList.addEventListener('click', (event) => {
-      const { classList } = event.target
-      if (classList.contains('toggle')) this.toggleItem(event)
-      if (classList.contains('destroy')) this.removeItem(event)
+      const classList = event.target.classList
+      if (classList.contains('toggle')) onToggleItem(event)
+      if (classList.contains('destroy')) onRemoveItem(event)
     })
 
     this.$todoList.addEventListener('dblclick', (event) => {
-      const { classList } = event.target
+      const classList = event.target.classList
       if (classList.contains('label')) onFocusItem(event)
     })
 
     this.$todoList.addEventListener('keydown', (event) => {
-      if (event.target.classList.contains('edit')) onEdit(event)
+      const classList  = event.target.classList
+      if (classList.contains('edit')) onEdit(event)
     })
   }
 
-  this.toggleItem = async (event) => {
+  const onToggleItem = async (event) => {
     const $targetTodoItem = event.target.closest('li')
     const itemId = $targetTodoItem.dataset.id
     try {
@@ -34,7 +35,7 @@ export default function TodoList({loadTodoItems, setState, onToggleItem}) {
     }
   }
 
-  this.removeItem = async (event) => {
+  const onRemoveItem = async (event) => {
     const $targetTodoItem = event.target.closest('li')
     const itemId = $targetTodoItem.dataset.id
     try {
@@ -72,11 +73,11 @@ export default function TodoList({loadTodoItems, setState, onToggleItem}) {
     const editValue = $target.querySelector('input.edit').value
 
     if (validator.isEnterKey(event.key)) {
-      isValidInputValue($target, editValue)
+      return isValidInputValue($target, editValue)
     }
 
     if (validator.isEscKey(event.key)) {
-      $target.classList.toggle('editing')
+      return $target.classList.toggle('editing')
     }
   }
 
