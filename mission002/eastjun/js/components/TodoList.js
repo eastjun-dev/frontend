@@ -17,7 +17,8 @@ export default function TodoList({setState, onToggleItem}) {
   const initEventListener = () => {
     this.$todoList.addEventListener('click', (event) => {
       const { classList } = event.target
-      if (classList.contains('toggle')) onToggleItem(getIndex(event))
+      // if (classList.contains('toggle')) onToggleItem(getIndex(event))
+      if (classList.contains('toggle')) this.toggleItem(event)
       if (classList.contains('destroy')) this.removeItem(event)
     })
 
@@ -29,6 +30,18 @@ export default function TodoList({setState, onToggleItem}) {
     this.$todoList.addEventListener('keydown', (event) => {
       if (event.target.classList.contains('edit')) onEdit(event)
     })
+  }
+
+  this.toggleItem = async (event) => {
+    const $targetTodoItem = event.target.closest('li')
+    const itemId = $targetTodoItem.dataset.id
+    try {
+      await api.todoItem.complete(itemId)
+      $targetTodoItem.classList.toggle('completed')
+      onToggleItem(getIndex(event))
+    } catch (e) {
+      throw new Error(e)
+    }
   }
 
   this.removeItem = async (event) => {
@@ -62,7 +75,7 @@ export default function TodoList({setState, onToggleItem}) {
   }
 
   const getIndex = (event) => {
-    return event.target.closest('li').dataset.id
+    return event.target.closest('li').dataset.index
   }
 
   const onFocusItem = (event) => {
