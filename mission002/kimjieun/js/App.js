@@ -1,12 +1,13 @@
 import { apiHandler } from '../utils/api.js'
-import { ENTER, NAME } from '../utils/constants.js'
+import { ENTER, NAME, ACTIVE, COMPLETED, ALLSELECTED } from '../utils/constants.js'
 import { hostUrl } from '../utils/url.js'
 
 export default class App {
-  constructor({ todoList, todoInput, todoCount }) {
+  constructor({ todoList, todoInput, todoCount, todoCheck }) {
     this.todoList = todoList
     this.todoInput = todoInput
     this.todoCount = todoCount
+    this.todoCheck = todoCheck
 
     this.init()
     this.fetchTodoData()
@@ -16,10 +17,12 @@ export default class App {
     this.todoInput.onKeyDown = this.onKeyDown.bind(this)
     this.todoList.onDeleteTodo = this.onDeleteTodo.bind(this)
     this.todoList.onToggleTodo = this.onToggleTodo.bind(this)
+    this.todoCheck.onTodoCheck = this.onTodoCheck.bind(this)
   }
 
   fetchTodoData = async () => {
     const data = await apiHandler({ url: hostUrl })
+    this.data = data
     this.setState(data)
   }
 
@@ -74,5 +77,15 @@ export default class App {
     })
 
     this.fetchTodoData()
+  }
+
+  onTodoCheck = (todoStatus) => {
+    const todoData = this.data.filter(d => {
+      if (todoStatus === ACTIVE) return !d.isCompleted
+      if (todoStatus === COMPLETED) return d.isCompleted
+      if (todoStatus === ALLSELECTED) return this.data
+    })
+
+    this.setState(todoData)
   }
 }
