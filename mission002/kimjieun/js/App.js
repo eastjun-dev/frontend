@@ -1,7 +1,6 @@
 import { apiHandler } from '../utils/api.js'
 import {
   ENTER,
-  NAME,
   ACTIVE,
   COMPLETED,
   ALLSELECTED,
@@ -36,9 +35,13 @@ export default class App {
     const storageData = localStorage.getItem('todoData')
     if (isStatus === INIT && storageData) return this.getStorageData(storageData)
 
-    this.data = await apiHandler({ url: hostUrl })
-    localStorage.setItem('todoData', JSON.stringify(this.data))
-    this.setState(this.data)
+    try {
+      this.data = await apiHandler({ url: hostUrl })
+      localStorage.setItem('todoData', JSON.stringify(this.data))
+      this.setState(this.data)
+    } catch (error) {
+      throw new Error(error)
+    }
   }
 
   setState = (data) => {
@@ -56,34 +59,48 @@ export default class App {
 
   onKeyDown = async (e) => {
     if (e.key === ENTER) {
-      const data = await fetch(`${hostUrl}/${NAME}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          content: e.target.value,
-        }),
-      })
-
-      if (data) e.target.value = ''
+      try {
+        const data = await apiHandler({
+          url: hostUrl,
+          method: 'POST',
+          body: JSON.stringify({
+            content: e.target.value,
+          }),
+        })
+  
+        if (data) e.target.value = ''
+      } catch (error) {
+        throw new Error(error)
+      }
     }
 
     this.fetchTodoData()
   }
 
   onDeleteTodo = async (id) => {
-    await fetch(`${hostUrl}/${NAME}/${id}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-    })
+    try {
+      await apiHandler({
+        url: hostUrl,
+        customUrl: id,
+        method: 'DELETE',
+      })
+    } catch (error) {
+      throw new Error(error)
+    }
 
     this.fetchTodoData()
   }
 
   onToggleTodo = async (id) => {
-    await fetch(`${hostUrl}/${NAME}/${id}/toggle`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-    })
+    try {
+      await apiHandler({
+        url: hostUrl,
+        customUrl: `${id}/toggle`,
+        method: 'PUT',
+      })
+    } catch (error) {
+      throw new Error(error)
+    }
 
     this.fetchTodoData()
   }

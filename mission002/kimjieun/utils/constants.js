@@ -1,7 +1,6 @@
 export const ENTER = 'Enter'
 export const DESTROY = 'destroy'
 export const TOGGLE = 'toggle'
-export const NAME = 'kimjieun'
 export const ACTIVE = 'active'
 export const COMPLETED = 'completed'
 export const ALLSELECTED = 'all selected'

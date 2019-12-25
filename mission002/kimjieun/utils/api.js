@@ -1,6 +1,6 @@
 const username = 'kimjieun'
 
-export const apiHandler = async ({ url, method, body }) => {
+export const apiHandler = async ({ url, method, body, customUrl }) => {
   const options = {
     method,
     headers: {
@@ -10,7 +10,7 @@ export const apiHandler = async ({ url, method, body }) => {
   }
 
   try {
-    const res = await fetch(`${url}/${username}`, options)
+    const res = await fetch(`${url}/${username}${customUrl ? `/${customUrl}` : ''}`, options)
 
     if (res.ok) {
       const data = await res.json()
