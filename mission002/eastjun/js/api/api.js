@@ -31,7 +31,7 @@ const api = (() => {
 
   const todoItem = {
     get: () => request(`${DOMAIN}${USERNAME}`),
-    add: (data) => request(`${DOMAIN}${USERNAME}`, METHOD.POST(data)),
+    add: (todoItem) => request(`${DOMAIN}${USERNAME}`, METHOD.POST(todoItem.content)),
     complete: (id) => request(`${DOMAIN}${USERNAME}/${id}/toggle`, METHOD.PUT()),
     remove: (id) => request(`${DOMAIN}${USERNAME}/${id}`, METHOD.DELETE()),
   }

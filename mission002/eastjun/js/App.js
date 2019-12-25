@@ -9,19 +9,17 @@ function TodoApp() {
 
     this.setState = (updatedItems) => {
         this.todoItems = updatedItems
-        todoList.render(this.todoItems)
-        todoCount.render(this.todoItems)
+        this.render(this.todoItems)
     }
 
-    this.render = (filteredItems) => {
-        todoList.render(filteredItems)
-        todoCount.render(filteredItems)
+    this.render = (items) => {
+        todoList.render(items)
+        todoCount.render(items)
     }
 
     new TodoInput({
         setState: (todoItems) => {
-            this.todoItems = todoItems
-            this.setState(this.todoItems)
+            this.setState(todoItems)
         }
     })
 
@@ -48,8 +46,7 @@ function TodoApp() {
 
     const todoList = new TodoList({
         setState: (todoItems) => {
-            this.todoItems = todoItems
-            this.setState(this.todoItems)
+            this.setState(todoItems)
         },
         onToggleItem: (index) => {
             this.todoItems[index].isCompleted = !this.todoItems[index].isCompleted

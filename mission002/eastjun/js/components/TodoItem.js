@@ -1,4 +1,4 @@
 export default function TodoItem(contents) {
-    this.contents = contents
+    this.content = contents
     this.isCompleted = false
 }

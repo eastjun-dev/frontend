@@ -17,7 +17,6 @@ export default function TodoList({setState, onToggleItem}) {
   const initEventListener = () => {
     this.$todoList.addEventListener('click', (event) => {
       const { classList } = event.target
-      // if (classList.contains('toggle')) onToggleItem(getIndex(event))
       if (classList.contains('toggle')) this.toggleItem(event)
       if (classList.contains('destroy')) this.removeItem(event)
     })

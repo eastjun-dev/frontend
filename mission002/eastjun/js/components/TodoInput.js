@@ -1,5 +1,6 @@
 import validator from '../utils/validator.js'
 import api from '../api/api.js'
+import TodoItem from './TodoItem.js'
 
 export default function TodoInput({ onAdd, setState }) {
   const $todoInput = document.querySelector('#new-todo-title')
@@ -19,7 +20,7 @@ export default function TodoInput({ onAdd, setState }) {
 
   this.onAdd = async ($newTodoTarget) => {
     try {
-      await api.todoItem.add($newTodoTarget.value)
+      await api.todoItem.add(new TodoItem($newTodoTarget.value))
       const updateTodoItems = await api.todoItem.get()
       setState(updateTodoItems)
       this.initValue($newTodoTarget)
