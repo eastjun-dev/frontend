@@ -2,7 +2,7 @@ import { todoItemTemplate } from '../utils/templates.js'
 import validator from '../utils/validator.js'
 import api from '../api/api.js'
 
-export default function TodoList({loadTodoItems, setState, onToggleItem}) {
+export default function TodoList({loadTodoItems, setState, toggleItem}) {
   this.$todoList = document.querySelector('#todo-list')
 
   const initEventListener = () => {
