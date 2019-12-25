@@ -29,7 +29,7 @@ export default function TodoList({loadTodoItems, setState, onToggleItem}) {
     try {
       await api.todoItem.complete(itemId)
       $targetTodoItem.classList.toggle('completed')
-      onToggleItem(getIndex(event))
+      toggleItem(getIndex(event))
     } catch (e) {
       throw new Error(e)
     }

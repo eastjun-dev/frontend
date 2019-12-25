@@ -69,7 +69,7 @@ function TodoApp() {
         setState: (todoItems) => {
             this.setState(todoItems)
         },
-        onToggleItem: (index) => {
+        toggleItem: (index) => {
             this.todoItems[index].isCompleted = !this.todoItems[index].isCompleted
         }
     })
