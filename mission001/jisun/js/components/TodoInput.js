@@ -1,4 +1,3 @@
-import { todoIdCount } from "../store/store.js";
 import { addTodoList } from "./TodoList.js";
 import { TodoCount } from "./TodoCount.js";
 

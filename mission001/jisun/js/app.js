@@ -1,24 +1,21 @@
-import { todoListData, todoIdCount } from "./store/store.js";
+import { todoListData } from "./store/store.js";
 import { TodoList } from "./components/TodoList.js";
 import { TodoInput } from "./components/TodoInput.js";
 import { TodoCount } from "./components/TodoCount.js";
-import { onSelectTab } from "./util/utils.js";
+import { TodoTab } from "./components/TodoTab.js";
 import { getTodoListData } from './store/store.js';
 
-// 데이터 로드
-getTodoListData();
+// 데이터 로드, 컴포넌트 랜더링
+getTodoListData(() => {
+  const todoList = new TodoList(todoListData);
+  todoList.setState(todoListData);
 
-setTimeout(() => {
-// 초기값 랜더
-const todoList = new TodoList(todoListData);
-todoList.setState(todoListData);
+  const todoInput = new TodoInput(todoListData);
+  todoInput.setState(todoListData);
 
-const todoInput = new TodoInput(todoListData);
-todoInput.setState(todoListData);
+  const todoCount = new TodoCount(todoListData);
+  todoCount.setState(todoListData);
 
-const todoCount = new TodoCount(todoListData);
-todoCount.setState(todoListData);
-}, 2000)
-
-// 선택한 텝에 따라 랜더링 다시하기
-onSelectTab(todoListData);
+  const todoTab = new TodoTab(todoListData);
+  todoTab.setState(todoListData);
+});

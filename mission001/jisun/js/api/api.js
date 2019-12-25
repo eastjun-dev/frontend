@@ -5,17 +5,13 @@ export let isLoading = true;
 
 export const getData = async (username) => {
   return await fetch(`${URL}/${username}`);
-  // return await fetch(`${URL}/${username}`).then(function(res) {
-  //   isLoading = false;
-  //   console.log(JSON.stringify(res))
-  // });
 };
 
 export const putData = async (username, id) => {
   await fetch(`${URL}/${username}/${id}/toggle`, {
-
-
     method: 'PUT',
+  }).then(() => {
+    
   })
 };
 

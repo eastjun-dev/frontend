@@ -12,12 +12,16 @@ export const onSelectTab = (data) => {
   
     let selectedTodoData = [];
   
-    if (
-      selectedTab.id === 'completed' ||
-      selectedTab.id === 'needTodo'
-    ) {
+    if (selectedTab.id === 'completed') {
       for (let i = 0; i < data.length; ++i) {
-        if (data[i].status === selectedTab.id) {
+        if (data[i].isCompleted) {
+          selectedTodoData.push(data[i]);
+        }
+      }
+      renderTodoList(selectedTodoData);
+    } else if (selectedTab.id === 'needTodo') {
+      for (let i = 0; i < data.length; ++i) {
+        if (!data[i].isCompleted) {
           selectedTodoData.push(data[i]);
         }
       }

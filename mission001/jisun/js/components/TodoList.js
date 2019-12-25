@@ -1,8 +1,7 @@
 import {
-  todoIdCount,
   setTodoData,
   deleteTodoData,
-  setTodoIdCount,
+  editTodoData,
   todoListData
 } from "../store/store.js";
 import { TodoCount } from "./TodoCount.js";
@@ -56,61 +55,38 @@ export const renderTodoList = list => {
 
 // TodoList에 new data 추가
 export const addTodoList = data => {
-  const list = document.createElement("li");
-  list.id = `${data._id}`;
-  todoList.appendChild(list);
+  setTodoData(data, () => {
+    const todoList = new TodoList(todoListData);
+    todoList.setState(todoListData);
 
-  list.innerHTML = `<div class="view">
-                      <input class="toggle" type="checkbox">
-                      <label class="label">${data}</label>
-                      <button class="destroy"></button>
-                    </div>
-                    <input class="edit" value="${data}">`;
-
-  const checkbox = list.firstChild.childNodes[1];
-  const deleteBtn = list.firstChild.childNodes[5];
-
-  setTodoData(data);
-  setTodoIdCount(todoIdCount + 1);
-  console.log(todoListData);
-
-  checkbox.addEventListener("change", e => {
-    onComplete(e);
-  });
-
-  deleteBtn.addEventListener("click", (e) => {
-    deleteTodoList(e);
+    const todoCount = new TodoCount(todoListData);
+    todoCount.setState(todoListData);
   });
 };
 
 export const onComplete = e => {
   const list = e.target.parentElement.parentElement;
-
-  if (e.target.checked) {
-    list.classList.add("completed");
-  } else {
-    list.classList.remove("completed");
-  }
+  const id = list.id;
+  editTodoData(id, () => {
+    if (e.target.checked) {
+      list.classList.add("completed");
+    } else {
+      list.classList.remove("completed");
+    }
+  });
 };
 
 // TodoList의 data 제거
 export const deleteTodoList = e => {
-  const list = e.target.parentElement.parentElement;
-  const id = list.id;
+  const id = e.target.parentElement.parentElement.id;
 
-  deleteTodoData(id);
-  
-  for (let i = 0; i < todoListData.length; ++i) {
-    if (todoListData[i]._id.toString() === id) {
-      todoListData.splice(i, 1);
-    }
-  }
+  deleteTodoData(id, () => {
+    const todoList = new TodoList(todoListData);
+    todoList.setState(todoListData);
 
-  
-  todoList.removeChild(list);
-
-  const todoCount = new TodoCount(todoListData);
-  todoCount.setState(todoListData);
+    const todoCount = new TodoCount(todoListData);
+    todoCount.setState(todoListData);
+  });
 };
 
 // 더블클릭시 edit 모드
@@ -123,7 +99,7 @@ const onEditMode = data => {
       const label = e.target.childNodes[3];
       const editInput = e.target.nextSibling.nextSibling;
       const prevValue = editInput.value;
-      const id = e.target.parentElement.id.replace(/[^0-9]/g, "");
+      const id = e.target.parentElement.id;
 
       editInput.style.display = "block";
       editInput.addEventListener("keydown", e => {

@@ -1,4 +1,4 @@
-import { getData, postData, deleteData } from '../api/api.js';
+import { getData, postData, deleteData, putData } from '../api/api.js';
 
 const username = 'jisun';
 
@@ -9,24 +9,28 @@ export async function fetchData() {
   return await res.json();
 };
 
-export async function getTodoListData() {
+export async function getTodoListData(callback) {
   todoListData = await fetchData();
+  callback();
 };
 
-export async function setTodoData(data) {
+export async function setTodoData(data, callback) {
   await postData(username, data);
-  getTodoListData();
-  console.log('추가후: ' + todoListData);
+  getTodoListData(() => {
+    callback();
+  });
 };
 
-export async function deleteTodoData(id) {
+export async function deleteTodoData(id, callback) {
   await deleteData(username, id);
-  getTodoListData();
-  console.log('삭제후: ' + todoListData);
+  getTodoListData(() => {
+    callback();
+  });
 }
 
-export let todoIdCount = todoListData.length + 1; 
-
-export const setTodoIdCount = value => {
-  todoIdCount = value;
-};
+export async function editTodoData(id, callback) {
+  await putData(username, id);
+  getTodoListData(() => {
+    callback();
+  });
+}
