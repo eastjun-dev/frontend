@@ -1,5 +1,12 @@
 import { apiHandler } from '../utils/api.js'
-import { ENTER, NAME, ACTIVE, COMPLETED, ALLSELECTED } from '../utils/constants.js'
+import {
+  ENTER,
+  NAME,
+  ACTIVE,
+  COMPLETED,
+  ALLSELECTED,
+  INIT,
+} from '../utils/constants.js'
 import { hostUrl } from '../utils/url.js'
 
 export default class App {
@@ -10,7 +17,7 @@ export default class App {
     this.todoCheck = todoCheck
 
     this.init()
-    this.fetchTodoData()
+    this.fetchTodoData(INIT)
   }
 
   init = () => {
@@ -20,10 +27,18 @@ export default class App {
     this.todoCheck.onTodoCheck = this.onTodoCheck.bind(this)
   }
 
-  fetchTodoData = async () => {
-    const data = await apiHandler({ url: hostUrl })
-    this.data = data
-    this.setState(data)
+  getStorageData = (storageData) => {
+    this.data = JSON.parse(storageData)
+    this.setState(this.data)
+  }
+
+  fetchTodoData = async (isStatus) => {
+    const storageData = localStorage.getItem('todoData')
+    if (isStatus === INIT && storageData) return this.getStorageData(storageData)
+
+    this.data = await apiHandler({ url: hostUrl })
+    localStorage.setItem('todoData', JSON.stringify(this.data))
+    this.setState(this.data)
   }
 
   setState = (data) => {
@@ -43,9 +58,7 @@ export default class App {
     if (e.key === ENTER) {
       const data = await fetch(`${hostUrl}/${NAME}`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           content: e.target.value,
         }),
@@ -60,9 +73,7 @@ export default class App {
   onDeleteTodo = async (id) => {
     await fetch(`${hostUrl}/${NAME}/${id}`, {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
     })
 
     this.fetchTodoData()
@@ -71,9 +82,7 @@ export default class App {
   onToggleTodo = async (id) => {
     await fetch(`${hostUrl}/${NAME}/${id}/toggle`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
     })
 
     this.fetchTodoData()
