@@ -2,7 +2,7 @@ import { todoItemTemplate } from '../utils/templates.js'
 import validator from '../utils/validator.js'
 import api from '../api/api.js'
 
-export default function TodoList({setState, onToggleItem, onRemoveItem}) {
+export default function TodoList({setState, onToggleItem}) {
   this.$todoList = document.querySelector('#todo-list')
 
   const loadTodoItems = async () => {
@@ -18,7 +18,7 @@ export default function TodoList({setState, onToggleItem, onRemoveItem}) {
     this.$todoList.addEventListener('click', (event) => {
       const { classList } = event.target
       if (classList.contains('toggle')) onToggleItem(getIndex(event))
-      if (classList.contains('destroy')) onRemoveItem(getIndex(event))
+      if (classList.contains('destroy')) this.removeItem(event)
     })
 
     this.$todoList.addEventListener('dblclick', (event) => {
@@ -29,6 +29,18 @@ export default function TodoList({setState, onToggleItem, onRemoveItem}) {
     this.$todoList.addEventListener('keydown', (event) => {
       if (event.target.classList.contains('edit')) onEdit(event)
     })
+  }
+
+  this.removeItem = async (event) => {
+    const $targetTodoItem = event.target.closest('li')
+    const itemId = $targetTodoItem.dataset.id
+    try {
+      await api.todoItem.remove(itemId)
+      const todoItems = await api.todoItem.get()
+      setState(todoItems)
+    } catch (e) {
+      throw new Error(e)
+    }
   }
 
   this.init = () => {

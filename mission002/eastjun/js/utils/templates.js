@@ -3,7 +3,7 @@ const todoItemTemplate = (todoItem) => `
       <div class="view">
           <input class="toggle" type="checkbox" ${todoItem.isCompleted ? 'checked' : ''}>
           <label class="label">${todoItem.content}</label>
-          <button class="delete"></button>
+          <button class="destroy"></button>
       </div>
     </li>`
 

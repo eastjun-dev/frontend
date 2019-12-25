@@ -2,7 +2,6 @@ import TodoList from './components/TodoList.js'
 import TodoInput from './components/TodoInput.js'
 import TodoCount from './components/TodoCount.js'
 import TodoStatus from './components/TodoStatus.js'
-import api from './api/api.js'
 
 function TodoApp() {
     this.todoItems = []
@@ -34,10 +33,6 @@ function TodoApp() {
         },
         onToggleItem: (index) => {
             this.todoItems[index].isCompleted = !this.todoItems[index].isCompleted
-            this.setState(this.todoItems)
-        },
-        onRemoveItem: (index) => {
-            this.todoItems.splice(index, 1)
             this.setState(this.todoItems)
         }
     })

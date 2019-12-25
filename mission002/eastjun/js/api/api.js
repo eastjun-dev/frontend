@@ -27,22 +27,17 @@ const METHOD = {
 }
 
 const api = (() => {
-  const request = (uri, config) => fetch(uri, config).then((data) => data.json())
+  const request = (uri, config) => fetch(uri, config).then((response) => response.json())
 
   const todoItem = {
     get: () => request(`${DOMAIN}${USERNAME}`),
     add: (data) => request(`${DOMAIN}${USERNAME}`, METHOD.POST(data)),
-    complete: (id) => request(`${DOMAIN}${USERNAME}/${id}/toggle`, METHOD.PUT),
-    remove: (id) => request(`${DOMAIN}${USERNAME}/${id}`, METHOD.DELETE),
-  }
-
-  const user = {
-    get: () => request(`${DOMAIN}users`),
+    complete: (id) => request(`${DOMAIN}${USERNAME}/${id}/toggle`, METHOD.PUT()),
+    remove: (id) => request(`${DOMAIN}${USERNAME}/${id}`, METHOD.DELETE()),
   }
 
   return {
-    todoItem,
-    user,
+    todoItem
   }
 })()
 
