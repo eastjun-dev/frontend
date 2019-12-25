@@ -1,4 +1,3 @@
-import { status } from '../store/store.js';
 import { renderTodoList } from '../components/TodoList.js';
 
 export const onSelectTab = (data) => {
@@ -14,8 +13,8 @@ export const onSelectTab = (data) => {
     let selectedTodoData = [];
   
     if (
-      selectedTab.id === status.COMPLETED ||
-      selectedTab.id === status.NEED_TODO
+      selectedTab.id === 'completed' ||
+      selectedTab.id === 'needTodo'
     ) {
       for (let i = 0; i < data.length; ++i) {
         if (data[i].status === selectedTab.id) {

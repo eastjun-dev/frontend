@@ -1,6 +1,7 @@
 import {
-  status,
   todoIdCount,
+  setTodoData,
+  deleteTodoData,
   setTodoIdCount,
   todoListData
 } from "../store/store.js";
@@ -25,15 +26,14 @@ export const renderTodoList = list => {
   } else {
     list.forEach(data => {
       todoList.innerHTML += `<li${
-        data.status === status.COMPLETED ? ` class="completed"` : ``
-      } id="todo-${data.id}">
+        data.isCompleted ? ` class="completed"` : ``
+      } id="${data._id}">
             <div class="view">
-              <input class="toggle" type="checkbox"${data.status ===
-                status.COMPLETED && ` checked`}>
-              <label class="label">${data.text}</label>
+              <input class="toggle" type="checkbox"${data.isCompleted ? ` checked` : ''}>
+              <label class="label">${data.content}</label>
               <button class="destroy"></button>
             </div>
-            <input class="edit" value="${data.text}">
+            <input class="edit" value="${data.content}">
          </li>`;
     });
   }
@@ -57,20 +57,20 @@ export const renderTodoList = list => {
 // TodoList에 new data 추가
 export const addTodoList = data => {
   const list = document.createElement("li");
-  list.id = `todo-${data.id}`;
+  list.id = `${data._id}`;
   todoList.appendChild(list);
 
   list.innerHTML = `<div class="view">
-                      <input class="toggle" type="checkbox" ${data.status ===
-                        status.COMPLETED && "checked"}>
-                      <label class="label">${data.text}</label>
+                      <input class="toggle" type="checkbox">
+                      <label class="label">${data}</label>
                       <button class="destroy"></button>
                     </div>
-                    <input class="edit" value="${data.text}">`;
+                    <input class="edit" value="${data}">`;
 
   const checkbox = list.firstChild.childNodes[1];
   const deleteBtn = list.firstChild.childNodes[5];
 
+  setTodoData(data);
   setTodoIdCount(todoIdCount + 1);
   console.log(todoListData);
 
@@ -78,7 +78,7 @@ export const addTodoList = data => {
     onComplete(e);
   });
 
-  deleteBtn.addEventListener("click", (e, data) => {
+  deleteBtn.addEventListener("click", (e) => {
     deleteTodoList(e);
   });
 };
@@ -96,15 +96,17 @@ export const onComplete = e => {
 // TodoList의 data 제거
 export const deleteTodoList = e => {
   const list = e.target.parentElement.parentElement;
+  const id = list.id;
 
-  const id = list.id.replace(/[^0-9]/g, "");
-
+  deleteTodoData(id);
+  
   for (let i = 0; i < todoListData.length; ++i) {
-    if (todoListData[i].id.toString() === id) {
+    if (todoListData[i]._id.toString() === id) {
       todoListData.splice(i, 1);
     }
   }
 
+  
   todoList.removeChild(list);
 
   const todoCount = new TodoCount(todoListData);
@@ -133,8 +135,8 @@ const onEditMode = data => {
           if (prevValue !== editInput.value) {
             let i = 0;
             while (i < data.length) {
-              if (data[i].id.toString() === id) {
-                data[i].text = e.target.value;
+              if (data[i]._id.toString() === id) {
+                data[i].content = e.target.value;
                 label.innerHTML = e.target.value;
                 break;
               }

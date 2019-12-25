@@ -1,23 +1,32 @@
-export const status = {
-  COMPLETED: "completed",
-  PROCEEDING: "proceeding",
-  NEED_TODO: "needTodo"
+import { getData, postData, deleteData } from '../api/api.js';
+
+const username = 'jisun';
+
+export let todoListData = [];
+
+export async function fetchData() {
+  const res = await getData(username);
+  return await res.json();
 };
 
-export let todoListData = [
-  { text: "AAAAA", status: status.COMPLETED, id: 1 },
-  { text: "BBBBB", status: status.PROCEEDING, id: 2 },
-  { text: "DDDDD", status: status.NEED_TODO, id: 3 }
-];
-
-export const setData = value => {
-  todoListData = value;
-  console.log("set data: ");
-  console.log(todoListData);
+export async function getTodoListData() {
+  todoListData = await fetchData();
 };
+
+export async function setTodoData(data) {
+  await postData(username, data);
+  getTodoListData();
+  console.log('추가후: ' + todoListData);
+};
+
+export async function deleteTodoData(id) {
+  await deleteData(username, id);
+  getTodoListData();
+  console.log('삭제후: ' + todoListData);
+}
 
 export let todoIdCount = todoListData.length + 1; 
 
 export const setTodoIdCount = value => {
   todoIdCount = value;
-} 
+};

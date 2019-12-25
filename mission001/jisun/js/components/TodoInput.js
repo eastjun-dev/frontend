@@ -1,4 +1,4 @@
-import { status, todoIdCount } from "../store/store.js";
+import { todoIdCount } from "../store/store.js";
 import { addTodoList } from "./TodoList.js";
 import { TodoCount } from "./TodoCount.js";
 
@@ -24,13 +24,8 @@ const onAddData = (e, data) => {
       return;
     }
 
-    const newTodoData = {
-      text: input.value,
-      status: status.NEED_TODO,
-      id: todoIdCount
-    };
+    const newTodoData = input.value;
 
-    data.push(newTodoData);
     addTodoList(newTodoData);
 
     const todoCount = new TodoCount(data);
