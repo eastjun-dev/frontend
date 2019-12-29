@@ -8,7 +8,6 @@ const todoItemTemplate = (todoItem, index) => `
       <input class="edit" value="${todoItem.content}">
     </li>`
 
-
 export {
-  todoItemTemplate
+  todoItemTemplate,
 }

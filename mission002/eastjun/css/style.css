@@ -66,6 +66,15 @@ body {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
+.todoapp .offline {
+    position: absolute;
+    top: -45px;
+    width: 100%;
+    text-align: center;
+    color: red;
+
+}
+
 .new-todo,
 .edit {
     position: relative;

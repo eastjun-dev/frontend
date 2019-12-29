@@ -2,7 +2,7 @@ import { todoItemTemplate } from '../utils/templates.js'
 import validator from '../utils/validator.js'
 import api from '../api/api.js'
 
-export default function TodoList({loadTodoItems, setState, toggleItem}) {
+export default function TodoList({ loadTodoItems, setState, toggleItem }) {
   this.$todoList = document.querySelector('#todo-list')
 
   const initEventListener = () => {
@@ -24,11 +24,21 @@ export default function TodoList({loadTodoItems, setState, toggleItem}) {
   }
 
   const onToggleItem = async (event) => {
+    if (!navigator.onLine) {
+      return
+    }
+
     const $targetTodoItem = event.target.closest('li')
-    const itemId = $targetTodoItem.dataset.id
+    $targetTodoItem.classList.toggle('completed')
+
+    if (!navigator.onLine) {
+      toggleItem(getIndex(event))
+      return
+    }
+
     try {
+      const itemId = $targetTodoItem.dataset.id
       await api.todoItem.complete(itemId)
-      $targetTodoItem.classList.toggle('completed')
       toggleItem(getIndex(event))
     } catch (e) {
       throw new Error(e)
@@ -36,6 +46,10 @@ export default function TodoList({loadTodoItems, setState, toggleItem}) {
   }
 
   const onRemoveItem = async (event) => {
+    if (!navigator.onLine) {
+      return
+    }
+
     const $targetTodoItem = event.target.closest('li')
     const itemId = $targetTodoItem.dataset.id
     try {
@@ -48,7 +62,9 @@ export default function TodoList({loadTodoItems, setState, toggleItem}) {
   }
 
   this.init = () => {
-    loadTodoItems()
+    if (navigator.onLine) {
+      loadTodoItems()
+    }
     initEventListener()
   }
 
@@ -69,6 +85,10 @@ export default function TodoList({loadTodoItems, setState, toggleItem}) {
   }
 
   const onEdit = (event) => {
+    if (!navigator.onLine) {
+      return
+    }
+
     const $target = event.target.closest('li')
     const editValue = $target.querySelector('input.edit').value
 

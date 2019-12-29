@@ -11,17 +11,19 @@ function TodoApp() {
     this.isOnline = navigator.onLine
 
     const initNetworkEventListener = () => {
-        window.addEventListener('offline', () => this.isOnline = false)
-        window.addEventListener('online', () => this.isOnline = true)
+        window.addEventListener('offline', () => setIsOnline())
+        window.addEventListener('online', () => setIsOnline())
     }
 
     initNetworkEventListener()
 
-    this.setState = (updatedItems) => {
-        this.todoItems = updatedItems
-        this.render(this.todoItems)
+    const setIsOnline = () => {
+        this.isOnline = navigator.onLine
+        const $offlineAlert = document.querySelector('.alert-container .offline')
         if (!this.isOnline) {
-            storage.set(this.todoItems)
+            $offlineAlert.classList.remove('hidden')
+        } else {
+            $offlineAlert.classList.add('hidden')
         }
     }
 
@@ -30,9 +32,33 @@ function TodoApp() {
         todoCount.render(items)
     }
 
+    this.setState = (updatedItems) => {
+        this.todoItems = updatedItems
+        storage.set(this.todoItems)
+        this.render(this.todoItems)
+    }
+
+    const offlineMode = () => {
+        const initTodoList = () => {
+            const $offlineAlert = document.querySelector('.alert-container .offline')
+            $offlineAlert.classList.remove('hidden')
+            this.todoItems = storage.get()
+            if (this.todoItems) {
+                this.render(this.todoItems)
+            }
+        }
+
+        return {
+            initTodoList,
+        }
+    }
+
     new TodoInput({
         setState: (todoItems) => {
             this.setState(todoItems)
+        },
+        addTodoItem: (todoItem) => {
+            offlineMode().addTodoItem(todoItem)
         }
     })
 
@@ -60,7 +86,7 @@ function TodoApp() {
     const todoList = new TodoList({
         loadTodoItems: async () => {
             try {
-                const todoItems = this.isOnline ? await api.todoItem.get() : storage.get(this.todoItems)
+                const todoItems = await api.todoItem.get()
                 this.setState(todoItems)
             } catch (e) {
                 throw new Error(e)
@@ -71,12 +97,17 @@ function TodoApp() {
         },
         toggleItem: (index) => {
             this.todoItems[index].isCompleted = !this.todoItems[index].isCompleted
-        }
+        },
     })
 
     const todoCount = new TodoCount({
-        todoItems: this.todoItems
+        todoItems: this.todoItems,
     })
+
+    if (!this.isOnline) {
+        offlineMode().initTodoList()
+    }
+
 }
 
 new TodoApp()
