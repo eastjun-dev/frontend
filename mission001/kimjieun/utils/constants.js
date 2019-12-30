@@ -1,4 +1,4 @@
-export const constant = {
+export const todoStatus = {
   DESTROY: 'destroy',
   TOGGLE: 'toggle',
   LABEL: 'label',

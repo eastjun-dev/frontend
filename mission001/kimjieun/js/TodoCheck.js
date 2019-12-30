@@ -1,4 +1,4 @@
-import { constant } from '../utils/constants.js'
+import { todoStatus } from '../utils/constants.js'
 
 export default class TodoCheck {
   constructor({ $selector }) {
@@ -8,9 +8,16 @@ export default class TodoCheck {
 
   init = () => {
     this.$selector.addEventListener('click', (e) => {
-      if (e.target.className === constant.ALLSELECTED) this.onTodoCheck(constant.ALL)
-      if (e.target.className === constant.ACTIVE) this.onTodoCheck(constant.NEW)
-      if (e.target.className === constant.COMPLETED) this.onTodoCheck(constant.COMPLETED)
+      switch (e.target.className) {
+        case todoStatus.ALLSELECTED:
+          return this.onTodoCheck(todoStatus.ALL)
+        case todoStatus.ACTIVE:
+          return this.onTodoCheck(todoStatus.NEW)
+        case todoStatus.COMPLETED:
+          return this.onTodoCheck(todoStatus.COMPLETED)
+        default:
+          return
+      }
     })
   }
 }

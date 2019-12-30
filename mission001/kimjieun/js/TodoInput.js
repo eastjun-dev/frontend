@@ -1,4 +1,4 @@
-import { constant } from '../utils/constants.js'
+import { todoStatus } from '../utils/constants.js'
 
 export default class TodoList {
   constructor({ $selector }) {
@@ -8,10 +8,10 @@ export default class TodoList {
 
   init = () => {
     this.$selector.addEventListener('keydown', (e) => {
-      if (e.key === constant.ENTER) {
+      if (e.key === todoStatus.ENTER) {
         const todoItem = {
           text: e.target.value,
-          isCompleted: constant.NEW,
+          isCompleted: todoStatus.NEW,
         }
 
         this.onAddTodo(todoItem)

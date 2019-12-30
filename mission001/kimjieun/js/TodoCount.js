@@ -1,4 +1,4 @@
-import { constant } from '../utils/constants.js'
+import { todoStatus } from '../utils/constants.js'
 
 export default class TodoCount {
   constructor({ $selector }) {
@@ -10,10 +10,8 @@ export default class TodoCount {
   }
 
   createTodoCount = (status, data) => {
-    if (status === constant.ALL || !status) return this.$selector.innerHTML = this.createHtmlString(data)
-    if (status) {
-      const checkTodoData = data.filter(d => d.isCompleted === status)
-      return this.$selector.innerHTML = this.createHtmlString(checkTodoData)
-    }
+    let checkTodoData = data
+    if (status && status !== todoStatus.ALL) checkTodoData = data.filter(d => d.isCompleted === status)
+    return this.$selector.innerHTML = this.createHtmlString(checkTodoData)
   }
 }

@@ -1,4 +1,4 @@
-import { constant } from '../utils/constants.js'
+import { todoStatus } from '../utils/constants.js'
 
 export default class App {
   constructor({ todoList, todoInput, todoCount, todoCheck, data }) {
@@ -42,15 +42,18 @@ export default class App {
   }
 
   toggleTodo = (target, dataIndex) => {
-    if (this.data[dataIndex].isCompleted === constant.COMPLETED) {
-      this.data[dataIndex].isCompleted = constant.COMPLETED
-      target.closest('.completed').setAttribute('class', constant.NEW)
+    if (this.data[dataIndex].isCompleted === todoStatus.COMPLETED) {
+      return this.setToggleTodo(dataIndex, target, '.completed', todoStatus.NEW)
     }
 
-    if (this.data[dataIndex].isCompleted === constant.NEW) {
-      this.data[dataIndex].isCompleted = constant.COMPLETED
-      target.closest('.new').setAttribute('class', constant.COMPLETED)
+    if (this.data[dataIndex].isCompleted === todoStatus.NEW) {
+      return this.setToggleTodo(dataIndex, target, '.new', todoStatus.COMPLETED)
     }
+  }
+
+  setToggleTodo = (index, target, closet, className) => {
+    this.data[index].isCompleted = todoStatus.COMPLETED
+    target.closest(`${closet}`).setAttribute('class', className)
   }
 
   onDeleteTodo = (index) => {
@@ -60,13 +63,13 @@ export default class App {
   }
 
   changeLabelToInput = (target) => {
-    target.closest('.new').setAttribute('class', constant.EDITING)
+    target.closest('.new').setAttribute('class', todoStatus.EDITING)
   }
 
   onTodoCheck = (status) => {
     this.createTodoCount(status)
-    if (status === constant.ALL) return this.render(this.data)
-    const filteredData = this.data.filter((d) => d.isCompleted === status)
+    if (status === todoStatus.ALL) return this.render(this.data)
+    const filteredData = this.data.filter(({ isCompleted }) => isCompleted === status)
     this.render(filteredData)
   }
 }
