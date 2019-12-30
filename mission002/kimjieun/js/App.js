@@ -58,6 +58,8 @@ export default class App {
   }
 
   onKeyDown = async (e) => {
+    if (!e.target.value) return
+
     if (e.key === ENTER) {
       try {
         const data = await apiHandler({
@@ -72,9 +74,9 @@ export default class App {
       } catch (error) {
         throw new Error(error)
       }
-    }
 
-    this.fetchTodoData()
+      this.fetchTodoData()
+    }
   }
 
   onDeleteTodo = async (id) => {

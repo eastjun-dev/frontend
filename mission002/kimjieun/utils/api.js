@@ -1,4 +1,4 @@
-const username = 'kimjieun'
+import { USERNAME } from './constants.js'
 
 export const apiHandler = async ({ url, method, body, customUrl }) => {
   const options = {
@@ -10,7 +10,7 @@ export const apiHandler = async ({ url, method, body, customUrl }) => {
   }
 
   try {
-    const res = await fetch(`${url}/${username}${customUrl ? `/${customUrl}` : ''}`, options)
+    const res = await fetch(`${url}/${USERNAME}${customUrl ? `/${customUrl}` : ''}`, options)
 
     if (res.ok) {
       const data = await res.json()
