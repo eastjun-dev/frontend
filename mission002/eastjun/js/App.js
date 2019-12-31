@@ -38,27 +38,18 @@ function TodoApp() {
         this.render(this.todoItems)
     }
 
-    const offlineMode = () => {
-        const initTodoList = () => {
-            const $offlineAlert = document.querySelector('.alert-container .offline')
-            $offlineAlert.classList.remove('hidden')
-            this.todoItems = storage.get()
-            if (this.todoItems) {
-                this.render(this.todoItems)
-            }
-        }
-
-        return {
-            initTodoList,
+    this.initOfflineTodoList = () => {
+        const $offlineAlert = document.querySelector('.alert-container .offline')
+        $offlineAlert.classList.remove('hidden')
+        this.todoItems = storage.get()
+        if (this.todoItems) {
+            this.render(this.todoItems)
         }
     }
 
     new TodoInput({
         setState: (todoItems) => {
             this.setState(todoItems)
-        },
-        addTodoItem: (todoItem) => {
-            offlineMode().addTodoItem(todoItem)
         }
     })
 
@@ -105,7 +96,7 @@ function TodoApp() {
     })
 
     if (!this.isOnline) {
-        offlineMode().initTodoList()
+        this.initOfflineTodoList()
     }
 
 }

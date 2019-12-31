@@ -2,7 +2,7 @@ import validator from '../utils/validator.js'
 import api from '../api/api.js'
 import TodoItem from './TodoItem.js'
 
-export default function TodoInput({ addTodoItem, setState }) {
+export default function TodoInput({ setState }) {
   const $todoInput = document.querySelector('#new-todo-title')
 
   const initEventListener = () => {
