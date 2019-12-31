@@ -1,0 +1,38 @@
+.signup-card {
+  max-width: 400px;
+  margin: 100px auto;
+}
+
+.signup-card h2{
+  margin-top: 32px;
+}
+
+form.signup {
+  padding: 24px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mdc-text-field {
+  /*width: 300px;*/
+  width: 100%;
+  margin: 10px auto;
+}
+
+.field-container {
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.mdc-card__actions {
+  padding: 0;
+}
+
+:root {
+  --mdc-theme-primary: #333;
+}
+.mdc-button--raised:not(:disabled), .mdc-button--unelevated:not(:disabled) {
+  background-color: var(--mdc-theme-primary,#333);
+}
