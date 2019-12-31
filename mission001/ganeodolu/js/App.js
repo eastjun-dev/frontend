@@ -1,22 +1,22 @@
 function App(data) {
     this.data = data;
-    // this.render = function (filteredData){
-    //     console.log(filteredData)
-    //     todoList.render(filteredData)
-    //     todoCount.render(filteredData)
-    // }
+    this.render = function (filteredData) {
+        todoList.setState(filteredData)
+        todoCount.render(filteredData)
+        todoCount.setState({
+            totalCount: filteredData.length,
+        })
+    }
     this.setState = function (nextData) {
         this.data = nextData;
         todoList.setState(this.data)
         todoCount.setState({
             totalCount: this.data.length,
-            completedCount: this.data.filter(todo => todo.isComplete).length
         })
     }
 
     const $todoList = document.querySelector('.todo-list')
     const $todoFilter = document.querySelector('.filters');
-    
     const todoList = new TodoList({
         $target: $todoList,
         $targetFilter: $todoFilter,
@@ -43,46 +43,24 @@ function App(data) {
             nextData[index] = {
                 text: value,
                 isCompleted: false,
-                isEditing: false,
-                // isFiltered: false
+                isEditing: false
             };
             this.setState(nextData)
         },
         onFilterClick: (filterBoolean) => {
-            // let filteredData = [...this.data]
-            // console.log(this.data)
-            // console.log(filterBoolean)
-            // // filteredData = this.data.filter(todo => todo.isCompleted !== filterBoolean)
-            // filteredData = this.data.map((todo, idx) => {
-            //     (todo.isCompleted !== filterBoolean) && todo[idx].isFiltered = true;
-            // })
-            // console.log(filteredData)
-            // this.setState(filteredData)
-            // // this.setState(nextData)
+            let filteredData = [...this.data]
+            filteredData = this.data.filter(todo => todo.isCompleted !== filterBoolean)
+            this.render(filteredData)
         }
     });
 
     const $todoCount = document.querySelector('.todo-count');
-    // const $todoFilter = document.querySelector('.filters');
     const todoCount = new TodoCount({
         $targetCount: $todoCount,
         $targetFilter: $todoFilter,
         data: {
             totalCount: this.data.length,
-            completedCount: this.data.filter(todo => todo.isComplete).length
         },
-        // onFilterClick: (filterBoolean) => {
-        //     let filteredData = [...this.data]
-        //     console.log(this.data)
-        //     console.log(filterBoolean)
-        //     filteredData = this.data.filter(todo => todo.isCompleted !== filterBoolean)
-        //     console.log(filteredData)
-        //     this.render(filteredData)
-        //     // this.setState(nextData)
-        // }
-
-        // totalCount: this.data.length,
-        // completedCount: this.data.filter(todo => todo.isCompleted).length
     })
 
     const $todoInput = document.querySelector('.new-todo')
@@ -93,8 +71,7 @@ function App(data) {
                 nextData.push({
                     text: text,
                     isCompleted: false,
-                    isEditing: false,
-                    // isFiltered: false
+                    isEditing: false
                 })
                 this.setState(nextData)
             }

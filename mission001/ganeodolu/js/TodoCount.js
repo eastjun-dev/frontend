@@ -12,21 +12,8 @@ function TodoCount({$targetCount, $targetFilter, data, onFilterClick}) {
         throw new Error(error.NO_USED_NEW_KEYWORD)
     }
 
-    // this.$targetFilter.addEventListener('click', (e) => {
-    //     const { className } = e.target;
-    //     // const { index } = dataset
-    //     // console.log(e.target)
-    //     if (className === 'all selected') {
-    //         onFilterClick()
-    //     } else if (className === 'active') {
-    //         onFilterClick(true)
-    //     } else if (className === 'completed') {
-    //         onFilterClick(false)
-    //     }
-    // })
-
     this.render = function () {
-        const { totalCount, completedCount } = this.data
+        const { totalCount } = this.data
         $targetCount.innerHTML = `총 <strong>${totalCount}</strong>개`
     }
     this.render();

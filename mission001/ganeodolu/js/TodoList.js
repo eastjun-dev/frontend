@@ -8,6 +8,8 @@ function TodoList({ $target, $targetFilter, data, onToggleClick, onTodoEdit, onR
         this.render()
     }
 
+    const filterTypes = document.querySelectorAll(".filters li a")
+
     if (this === window) {
         throw new Error(error.NO_USED_NEW_KEYWORD)
     }
@@ -18,6 +20,8 @@ function TodoList({ $target, $targetFilter, data, onToggleClick, onTodoEdit, onR
     this.$target.addEventListener('click', (e) => {
         const { className } = e.target;
         const { index } = e.target.parentNode.parentNode.dataset
+        if(!filterTypes[0].classList.contains("selected")) return
+        
         if (className === 'toggle') {
             onToggleClick(index)
         } else if (className === 'destroy') {
@@ -37,9 +41,9 @@ function TodoList({ $target, $targetFilter, data, onToggleClick, onTodoEdit, onR
         const { className } = e.target;
         const { index } = e.target.parentNode.dataset;
         if (className === 'edit') {
-            if (e.code === "Enter") {
+            if (e.key === "Enter") {
                 onTodoChange(index, e.target.value)
-            } else if (e.code === "Escape") {
+            } else if (e.key === "Escape") {
                 onTodoEdit(index)
             }
         }
@@ -47,23 +51,28 @@ function TodoList({ $target, $targetFilter, data, onToggleClick, onTodoEdit, onR
 
     this.$targetFilter.addEventListener('click', (e) => {
         const { className } = e.target;
-        // const { index } = dataset
-        // console.log(e.target)
-        if (className === 'all selected') {
+        for (let val of filterTypes) {
+            if (val.classList.contains("selected")) {
+                val.classList.remove("selected")
+            }
+        }
+        e.target.classList.add("selected");
+
+        if (className.includes('all')) {
             onFilterClick()
-        } else if (className === 'active') {
+        } else if (className.includes('active')) {
             onFilterClick(true)
-        } else if (className === 'completed') {
+        } else if (className.includes('completed')) {
             onFilterClick(false)
         }
     })
 
     this.render = function () {
-        const renderHTMLText = this.data.map((val, idx) => {
+        const renderedHTMLText = this.data.map((val, idx) => {
             if (!val.text) {
                 throw new Error(error.NOT_DATA)
             }
-            else if (typeof (val.text) != "string") {
+            else if (typeof (val.text) !== "string") {
                 throw new Error(error.INVALID_DATA)
             }
             return `
@@ -76,8 +85,7 @@ function TodoList({ $target, $targetFilter, data, onToggleClick, onTodoEdit, onR
                     <input class="edit" value="${val.text}">
                 </li>`
         }).join('');
-        // console.log("list",renderHTMLText)
-        this.$target.innerHTML = renderHTMLText
+        this.$target.innerHTML = renderedHTMLText
     }
     this.render()
 }
