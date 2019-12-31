@@ -4,7 +4,11 @@ function FormApp() {
 
   new Form()
 
-  const materialDesignInit = () => window.mdc.autoInit()
+  const dialog = new mdc.dialog.MDCDialog(document.querySelector('.mdc-dialog'))
+  dialog.open()
+
+
+  const materialDesignInit = () => mdc.autoInit()
 
   this.init = () => {
     materialDesignInit()

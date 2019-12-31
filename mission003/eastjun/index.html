@@ -9,81 +9,89 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="css/index.css">
   <style>
-    .field-container {
-      width: 320px;
-    }
 
-    .hidden {
-      display: none;
-    }
   </style>
 </head>
 <body>
 
-<!--이름, 전화번호, 이메일, 비밀번호, 자기소개-->
-<div class="mdc-card signup-card">
-  <h2 class="text-center">mission003 회원가입</h2>
-  <form class="signup">
-    <div class="field-container">
-      <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-        <input type="text" class="mdc-text-field__input" type="text" name="name" id="name">
-        <label for="name" class="mdc-floating-label">이름</label>
-        <div class="mdc-line-ripple"></div>
-      </div>
+<div class="mdc-dialog"
+     role="alertdialog"
+     aria-modal="true"
+     aria-labelledby="my-dialog-title"
+     aria-describedby="my-dialog-content">
+  <div class="mdc-dialog__container">
+    <div class="mdc-dialog__surface">
+      <h1 class="mdc-dialog__title text-center" id="my-dialog-title">mission003 회원가입</h1>
+      <div class="mdc-dialog__content" id="my-dialog-content">
+        <form class="signup">
+          <div class="field-container">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+              <input type="text" class="mdc-text-field__input" type="text" name="name" id="name">
+              <label for="name" class="mdc-floating-label">이름</label>
+              <div class="mdc-line-ripple"></div>
+            </div>
 
-      <div class="privacy-policy-filed">
-        <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-          <input type="text" class="mdc-text-field__input" type="text" name="phone" id="phone">
-          <label for="phone" class="mdc-floating-label">전화번호</label>
-          <div class="mdc-line-ripple"></div>
-        </div>
+            <div class="privacy-policy-filed">
+              <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" type="text" name="phone" id="phone">
+                <label for="phone" class="mdc-floating-label">전화번호</label>
+                <div class="mdc-line-ripple"></div>
+              </div>
 
-        <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-          <input type="email" class="mdc-text-field__input" type="text" name="email" id="email">
-          <label for="email" class="mdc-floating-label">이메일</label>
-          <div class="mdc-line-ripple"></div>
-        </div>
-      </div>
+              <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="email" class="mdc-text-field__input" type="text" name="email" id="email">
+                <label for="email" class="mdc-floating-label">이메일</label>
+                <div class="mdc-line-ripple"></div>
+              </div>
+            </div>
 
-      <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-        <input class="mdc-text-field__input" type="text" name="name" id="password">
-        <label type="password" for="password" class="mdc-floating-label">비밀번호</label>
-        <div class="mdc-line-ripple"></div>
-      </div>
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+              <input class="mdc-text-field__input" type="text" name="name" id="password">
+              <label type="password" for="password" class="mdc-floating-label">비밀번호</label>
+              <div class="mdc-line-ripple"></div>
+            </div>
 
-      <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-        <input class="mdc-text-field__input" type="text" name="name" id="introduce">
-        <label type="text" for="introduce" class="mdc-floating-label">자기소개</label>
-        <div class="mdc-line-ripple"></div>
-      </div>
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+              <input class="mdc-text-field__input" type="text" name="name" id="introduce">
+              <label type="text" for="introduce" class="mdc-floating-label">자기소개</label>
+              <div class="mdc-line-ripple"></div>
+            </div>
 
-      <div class="mdc-form-field privacy-policy-agree-container hidden">
-        <div class="mdc-checkbox">
-          <input type="checkbox"
-                 class="mdc-checkbox__native-control"
-                 id="agreement"/>
-          <div class="mdc-checkbox__background">
-            <svg class="mdc-checkbox__checkmark"
-                 viewBox="0 0 24 24">
-              <path class="mdc-checkbox__checkmark-path"
-                    fill="none"
-                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-            </svg>
-            <div class="mdc-checkbox__mixedmark"></div>
+            <div class="mdc-form-field privacy-policy-agree-container hidden">
+              <div class="mdc-checkbox">
+                <input type="checkbox"
+                       class="mdc-checkbox__native-control"
+                       id="agreement"/>
+                <div class="mdc-checkbox__background">
+                  <svg class="mdc-checkbox__checkmark"
+                       viewBox="0 0 24 24">
+                    <path class="mdc-checkbox__checkmark-path"
+                          fill="none"
+                          d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                  </svg>
+                  <div class="mdc-checkbox__mixedmark"></div>
+                </div>
+                <div class="mdc-checkbox__ripple"></div>
+              </div>
+              <label for="agreement">개인정보보호방침에 동의합니다</label>
+            </div>
+
+            <footer class="mdc-dialog__actions">
+              <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                <span class="mdc-button__label">취소</span>
+              </button>
+              <button class="mdc-button mdc-button--raised dialog__button" data-mdc-dialog-action="yes">
+                <span class="mdc-button__ripple"></span>다음
+              </button>
+            </footer>
+
           </div>
-          <div class="mdc-checkbox__ripple"></div>
-        </div>
-        <label for="agreement">개인정보보호방침에 동의합니다</label>
-      </div>
-
-      <div class="mdc-card__actions">
-        <div class="mdc-card__action-icons">
-          <button class="mdc-button mdc-button--raised bg-dark">  <span class="mdc-button__ripple"></span> 다음</button>
-        </div>
+        </form>
       </div>
 
     </div>
-  </form>
+  </div>
+  <div class="mdc-dialog__scrim"></div>
 </div>
 
 <script type="module" src="js/app.js"></script>
