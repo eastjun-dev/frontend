@@ -19,12 +19,8 @@ function TodoApp() {
 
     const setIsOnline = () => {
         this.isOnline = navigator.onLine
-        const $offlineAlert = document.querySelector('.alert-container .offline')
-        if (!this.isOnline) {
-            $offlineAlert.classList.remove('hidden')
-        } else {
-            $offlineAlert.classList.add('hidden')
-        }
+        const offlineAlertClassList = document.querySelector('.alert-container .offline').classList
+        this.isOnline ? offlineAlertClassList.add('hidden') : offlineAlertClassList.remove('hidden')
     }
 
     this.render = (items) => {
