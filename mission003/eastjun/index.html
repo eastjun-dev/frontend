@@ -12,6 +12,10 @@
     .field-container {
       width: 320px;
     }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -27,16 +31,18 @@
         <div class="mdc-line-ripple"></div>
       </div>
 
-      <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-        <input type="text" class="mdc-text-field__input" type="text" name="name" id="phone">
-        <label for="phone" class="mdc-floating-label">전화번호</label>
-        <div class="mdc-line-ripple"></div>
-      </div>
+      <div class="privacy-policy-filed">
+        <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+          <input type="text" class="mdc-text-field__input" type="text" name="phone" id="phone">
+          <label for="phone" class="mdc-floating-label">전화번호</label>
+          <div class="mdc-line-ripple"></div>
+        </div>
 
-      <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-        <input type="email" class="mdc-text-field__input" type="text" name="name" id="email">
-        <label for="email" class="mdc-floating-label">이메일</label>
-        <div class="mdc-line-ripple"></div>
+        <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+          <input type="email" class="mdc-text-field__input" type="text" name="email" id="email">
+          <label for="email" class="mdc-floating-label">이메일</label>
+          <div class="mdc-line-ripple"></div>
+        </div>
       </div>
 
       <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
@@ -51,21 +57,35 @@
         <div class="mdc-line-ripple"></div>
       </div>
 
+      <div class="mdc-form-field privacy-policy-agree-container hidden">
+        <div class="mdc-checkbox">
+          <input type="checkbox"
+                 class="mdc-checkbox__native-control"
+                 id="agreement"/>
+          <div class="mdc-checkbox__background">
+            <svg class="mdc-checkbox__checkmark"
+                 viewBox="0 0 24 24">
+              <path class="mdc-checkbox__checkmark-path"
+                    fill="none"
+                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+            </svg>
+            <div class="mdc-checkbox__mixedmark"></div>
+          </div>
+          <div class="mdc-checkbox__ripple"></div>
+        </div>
+        <label for="agreement">개인정보보호방침에 동의합니다</label>
+      </div>
+
       <div class="mdc-card__actions">
         <div class="mdc-card__action-icons">
           <button class="mdc-button mdc-button--raised bg-dark">  <span class="mdc-button__ripple"></span> 다음</button>
         </div>
       </div>
+
     </div>
   </form>
 </div>
 
-
-
-
-<script type="text/javascript">
-  window.mdc.autoInit();
-</script>
-<!--<script src="js/app.js"></script>-->
+<script type="module" src="js/app.js"></script>
 </body>
 </html>
