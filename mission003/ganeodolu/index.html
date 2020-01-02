@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mission003</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- <div id="modal" class="searchModal">
+        <div class="search-modal-content">
+            <div class="page-header">
+                <h1>MODAL</h1>
+            </div>
+            <div>
+                <div>
+                    <h2>
+                        블랙커피 가입하기
+                    </h2>
+                </div>
+                <div>
+                    이 름 : <input type="text">
+                </div>
+                <div>
+                    전화번호 : <input type="text">
+                </div>
+                <div>
+                    이메일 : <input type="text">
+                </div>
+                <div>
+                    비밀번호 : <input type="password">
+                </div>
+                <div>
+                    자기소개 : <input type="text">
+                </div>
+            </div>
+
+            <hr>
+            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;"
+                onClick="closeModal();">
+                <span class="pop_bt modalCloseBtn" style="font-size: 13pt;">
+                </span>
+            </div>
+        </div>
+    </div> -->
+    <button id="open">블랙커피 가입하기</button>
+    <div class="modal hidden">
+        <div class="modal_overlay"></div>
+        <div class="modal_content">
+            <h1>가입신청하기</h1>
+            <input type="submit" value="제출">
+            <button>닫기</button>
+        </div>
+    </div>
+    <script>
+        const openButton = document.getElementById("open")
+        const modal = document.querySelector(".modal");
+        const overlay = modal.querySelector(".modal_overlay");
+        const closeBtn = modal.querySelector("button");
+        const openModal = () => {
+            modal.classList.remove("hidden");
+        }
+        const closeModal = () => {
+            modal.classList.add("hidden");
+        }
+        overlay.addEventListener("click", closeModal);
+        closeBtn.addEventListener("click", closeModal);
+        openButton.addEventListener("click", openModal);
+    </script>
+</body>
+
+</html>
