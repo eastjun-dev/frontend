@@ -1,4 +1,4 @@
-function TodoList({ $target, $targetFilter, data, onToggleClick, onTodoEdit, onRemoveClick, onTodoChange, onFilterClick }) {
+function TodoList({ $target, $targetFilter, data, onToggleClick, onRemoveClick, onFilterClick }) {
     this.$target = $target;
     this.$targetFilter = $targetFilter
     this.data = data;
@@ -29,26 +29,6 @@ function TodoList({ $target, $targetFilter, data, onToggleClick, onTodoEdit, onR
         }
     })
 
-    this.$target.addEventListener('dblclick', (e) => {
-        const { className } = e.target;
-        const { index } = e.target.closest('li').dataset
-        if (className === 'label') {
-            onTodoEdit(index)
-        }
-    })
-
-    this.$target.addEventListener('keydown', (e) => {
-        const { className } = e.target;
-        const { index } = e.target.parentNode.dataset;
-        if (className === 'edit') {
-            if (e.key === "Enter") {
-                onTodoChange(index, e.target.value)
-            } else if (e.key === "Escape") {
-                onTodoEdit(index)
-            }
-        }
-    })
-
     this.$targetFilter.addEventListener('click', (e) => {
         const { className } = e.target;
         for (let val of filterTypes) {
@@ -69,22 +49,24 @@ function TodoList({ $target, $targetFilter, data, onToggleClick, onTodoEdit, onR
 
     this.render = function () {
         const renderedHTMLText = this.data.map((val, idx) => {
-            if (!val.text) {
+            if (!val.content) {
                 throw new Error(error.NOT_DATA)
             }
-            else if (typeof (val.text) !== "string") {
+            else if (typeof (val.content) !== "string") {
                 throw new Error(error.INVALID_DATA)
             }
+            // <li ${val.isCompleted ? 'class="completed"' : (val.isCompleted === false && val.isEditing === false) ? "" : 'class="editing"'} data-index=${idx}>
             return `
-                <li ${val.isCompleted ? 'class="completed"' : (val.isCompleted === false && val.isEditing === false) ? "" : 'class="editing"'} data-index=${idx}>
+                <li ${val.isCompleted ? 'class="completed"' : ""} data-index=${idx}>
                     <div class="view">
                         <input class="toggle" type="checkbox"  ${val.isCompleted ? 'checked' : ""}>
-                        <label class="label">${val.text}</label>
+                        <label class="label">${val.content}</label>
                         <button class="destroy"></button>
                     </div>
-                    <input class="edit" value="${val.text}">
+                    <input class="edit" value="${val.content}">
                 </li>`
         }).join('');
+
         this.$target.innerHTML = renderedHTMLText
     }
     this.render()

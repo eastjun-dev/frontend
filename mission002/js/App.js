@@ -26,25 +26,9 @@ function App(data) {
             nextData[index].isCompleted = !nextData[index].isCompleted
             this.setState(nextData)
         },
-        onTodoEdit: (index) => {
-            const nextData = [...this.data]
-            if (!nextData[index].isCompleted) {
-                nextData[index].isEditing = !nextData[index].isEditing
-            }
-            this.setState(nextData)
-        },
         onRemoveClick: (index) => {
             const nextData = [...this.data]
             nextData.splice(index, 1)
-            this.setState(nextData)
-        },
-        onTodoChange: (index, value) => {
-            const nextData = [...this.data]
-            nextData[index] = {
-                text: value,
-                isCompleted: false,
-                isEditing: false
-            };
             this.setState(nextData)
         },
         onFilterClick: (filterBoolean) => {
@@ -69,9 +53,8 @@ function App(data) {
             onAdd: (text) => {
                 const nextData = [...this.data]
                 nextData.push({
-                    text: text,
+                    content: text,
                     isCompleted: false,
-                    isEditing: false
                 })
                 this.setState(nextData)
             }

@@ -7,13 +7,8 @@ const error = {
 
 const data = [
     {
-        text: 'JS 공부하기',
-        isCompleted : false,
-        isEditing : false,
-    },
-    {
-        text: 'JS 복습하기',
-        isCompleted: true,
-        isEditing : false,
-    },
+        "_id": 'TODO01',
+        "content": 'Fetch 공부',
+        "isCompleted": false,
+    }
 ]
