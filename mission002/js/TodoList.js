@@ -7,7 +7,6 @@ function TodoList({ $target, $targetFilter, data, onToggleClick, onRemoveClick, 
         this.data = nextData;
         this.render()
     }
-
     const filterTypes = document.querySelectorAll(".filters li a")
 
     if (this === window) {

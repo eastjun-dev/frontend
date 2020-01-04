@@ -5,10 +5,13 @@ const error = {
     INVALID_DATA: "data타입이 문자열이 아닙니다.",
 };
 
-const data = [
-    {
-        "_id": 'TODO01',
-        "content": 'Fetch 공부',
-        "isCompleted": false,
-    }
-]
+const USERNAME = 'ganeodolu';
+
+const APIURL = `http://todo-api.roto.codes/${USERNAME}/`;
+// const data = [
+//     {
+//         "_id": 'TODO01',
+//         "content": 'Fetch 공부',
+//         "isCompleted": false,
+//     }
+// ]
