@@ -57,14 +57,32 @@
     const $todoInput = document.querySelector('.new-todo')
     const todoInput = TodoInput($todoInput,
         {
-            onAdd: (text) => {
-                const nextData = [...this.data]
-                nextData.push({
-                    content: text,
-                    isCompleted: false,
-                })
-                this.setState(nextData)
+            onAdd: async (todoText) => {
+                if(todoText.length > 0){
+                    await fetch(APIURL,{
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            content: todoText,
+                        }),
+                    })
+                    const updatedData = await fetchData();
+                    todoList.setState(updatedData)
+
+                }
+
             }
+
+            // onAdd: (text) => {
+            //     const nextData = [...this.data]
+            //     nextData.push({
+            //         content: text,
+            //         isCompleted: false,
+            //     })
+            //     this.setState(nextData)
+            // }
         }
     )
 })()
