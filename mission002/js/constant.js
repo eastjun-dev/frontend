@@ -8,10 +8,4 @@ export const error = {
 const USERNAME = 'ganeodolu';
 
 export const APIURL = `http://todo-api.roto.codes/${USERNAME}`;
-// const data = [
-//     {
-//         "_id": 'TODO01',
-//         "content": 'Fetch 공부',
-//         "isCompleted": false,
-//     }
-// ]
+

@@ -18,15 +18,13 @@ export default function TodoList({ $target, $targetFilter, data, onToggleClick, 
         throw new Error(error.NOARRAY_DATA)
     }
 
-    this.$target.addEventListener('click', (e) => {
+    this.$target.addEventListener('click', async (e) => {
         const { className } = e.target;
         const { index } = e.target.parentNode.parentNode.dataset
-        console.log(index)
-        const id = data[index]._id
-        if(!filterTypes[0].classList.contains("selected")) return
-        
+
+        const id = await data[index]._id
+        if (!filterTypes[0].classList.contains("selected")) return
         if (className === 'toggle') {
-            console.log(data[index])
             onToggleClick(id)
         } else if (className === 'destroy') {
             onRemoveClick(id)
