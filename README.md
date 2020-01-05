@@ -16,6 +16,7 @@
 
 - [mission001](https://github.com/EastjunDev/frontend/issues/1) : TodoList CRUD
 - [mission002](https://github.com/EastjunDev/frontend/issues/7) : TodoList Ajax, localStorage
+- [mission003](https://github.com/EastjunDev/frontend/issues/8) : 자바스크립트로 Form 과 Modal 에 대한 UI 만들기
 
 <br>
 
