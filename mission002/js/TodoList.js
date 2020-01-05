@@ -1,4 +1,6 @@
-function TodoList({ $target, $targetFilter, data, onToggleClick, onRemoveClick, onFilterClick }) {
+import { error } from './constant.js'
+
+export default function TodoList({ $target, $targetFilter, data, onToggleClick, onRemoveClick, onFilterClick }) {
     this.$target = $target;
     this.$targetFilter = $targetFilter
     this.data = data;

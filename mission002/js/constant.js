@@ -1,4 +1,4 @@
-const error = {
+export const error = {
     NO_USED_NEW_KEYWORD: "함수 선언시 new를 사용해주세요.",
     NOARRAY_DATA: "data타입이 Array가 아닙니다.",
     NOT_DATA: "data가 null 또는 undefined 입니다.",
@@ -7,7 +7,7 @@ const error = {
 
 const USERNAME = 'ganeodolu';
 
-const APIURL = `http://todo-api.roto.codes/${USERNAME}`;
+export const APIURL = `http://todo-api.roto.codes/${USERNAME}`;
 // const data = [
 //     {
 //         "_id": 'TODO01',
