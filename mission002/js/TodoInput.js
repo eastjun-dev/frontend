@@ -1,8 +1,8 @@
 function TodoInput($targetInput, {onAdd}) {
     
-    $targetInput.addEventListener('keydown', async (e) => {
+    $targetInput.addEventListener('keydown', (e) => {
         if (e.key === "Enter") {
-            await onAdd($targetInput.value)
+            onAdd($targetInput.value)
             $targetInput.value = '';
         }
     })

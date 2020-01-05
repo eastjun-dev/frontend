@@ -19,12 +19,15 @@ function TodoList({ $target, $targetFilter, data, onToggleClick, onRemoveClick, 
     this.$target.addEventListener('click', (e) => {
         const { className } = e.target;
         const { index } = e.target.parentNode.parentNode.dataset
+        console.log(index)
+        const id = data[index]._id
         if(!filterTypes[0].classList.contains("selected")) return
         
         if (className === 'toggle') {
-            onToggleClick(index)
+            console.log(data[index])
+            onToggleClick(id)
         } else if (className === 'destroy') {
-            onRemoveClick(index)
+            onRemoveClick(id)
         }
     })
 

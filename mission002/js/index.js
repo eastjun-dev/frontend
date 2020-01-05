@@ -6,20 +6,20 @@
     const data = await fetchData()
 
     this.data = data;
-    this.render = function (filteredData) {
-        todoList.setState(filteredData)
-        todoCount.render(filteredData)
-        todoCount.setState({
-            totalCount: filteredData.length,
-        })
-    }
-    this.setState = function (nextData) {
-        this.data = nextData;
-        todoList.setState(this.data)
-        todoCount.setState({
-            totalCount: this.data.length,
-        })
-    }
+    // this.render = function (filteredData) {
+    //     todoList.setState(filteredData)
+    //     todoCount.render(filteredData)
+    //     todoCount.setState({
+    //         totalCount: filteredData.length,
+    //     })
+    // }
+    // this.setState = function (nextData) {
+    //     this.data = nextData;
+    //     todoList.setState(this.data)
+    //     todoCount.setState({
+    //         totalCount: this.data.length,
+    //     })
+    // }
 
 
     const $todoList = document.querySelector('.todo-list')
@@ -28,15 +28,22 @@
         $target: $todoList,
         $targetFilter: $todoFilter,
         data: this.data,
-        onToggleClick: (index) => {
-            const nextData = [...this.data]
-            nextData[index].isCompleted = !nextData[index].isCompleted
-            this.setState(nextData)
+        onToggleClick: async (id) => {
+            console.log(id)
+            await fetch(`${APIURL}/${id}/toggle`, {
+                method: "PUT",
+            })
+            const updatedData = await fetchData()
+            todoList.setState(updatedData)
         },
-        onRemoveClick: (index) => {
-            const nextData = [...this.data]
-            nextData.splice(index, 1)
-            this.setState(nextData)
+        onRemoveClick: async (id) => {
+            console.log(id)
+            await fetch(`${APIURL}/${id}`, {
+                method: 'DELETE'
+            })
+
+            const updatedData = await fetchData()
+            todoList.setState(updatedData)
         },
         onFilterClick: (filterBoolean) => {
             let filteredData = [...this.data]
@@ -74,15 +81,6 @@
                 }
 
             }
-
-            // onAdd: (text) => {
-            //     const nextData = [...this.data]
-            //     nextData.push({
-            //         content: text,
-            //         isCompleted: false,
-            //     })
-            //     this.setState(nextData)
-            // }
         }
     )
 })()

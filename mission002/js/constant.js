@@ -7,7 +7,7 @@ const error = {
 
 const USERNAME = 'ganeodolu';
 
-const APIURL = `http://todo-api.roto.codes/${USERNAME}/`;
+const APIURL = `http://todo-api.roto.codes/${USERNAME}`;
 // const data = [
 //     {
 //         "_id": 'TODO01',
