@@ -1,14 +1,6 @@
-const checkInput = id => {
-  const input = document.getElementById(id);
-  const value = document.getElementById(id).nodeValue;
+import Modal from "./components/Modal.js";
+import NextButton from "./components/NextButton.js";
+import { getData } from "./store/store.js";
 
-  if (value === "") {
-    input.classList.remove("has-value");
-  }
-
-  if (value !== "") {
-    input.classList.add("has-value");
-  }
-};
-
-checkInput("inputName");
+const modal = new Modal(getData());
+modal.setState(getData());
