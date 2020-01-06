@@ -9,23 +9,23 @@ function TodoList(selector) {
   this.$filters = document.querySelector('ul.filters')
 
   this.$filters.addEventListener('click', (e) => {
-    if(e.target === this.$filters) return 
+    const { target } = e
+    if(target === this.$filters) return 
 
-    const aTags = document.querySelectorAll('ul.filters li a')
+    const aTags = document.querySelectorAll('.selected')
     for(const tag of aTags) tag.classList.contains('selected') && tag.classList.remove('selected')
      
-    this.filter = e.target.className
-    e.target.classList.add('selected')
+    this.filter = target.className
+    target.classList.add('selected')
 
     this.renderByFilter()
   })
 
   this.$todoList.addEventListener('click', (e) => {
     const { CHECK, REMOVE } = dataActions
-    const datasetAction = e.target.dataset.action
-    if(!datasetAction) return 
+    const { action, id } = e.target.dataset
+    if(!action || !id) return 
 
-    const [action, id] = datasetAction.split('-')
     switch(action) {
       case CHECK: this.toggleState(id); break
       case REMOVE: this.removeState(id); break
@@ -34,10 +34,9 @@ function TodoList(selector) {
 
   this.$todoList.addEventListener('dblclick', (e) => {
     const { EDIT } = dataActions
-    const datasetAction = e.target.dataset.action
-    if(!datasetAction) return 
+    const { action, id } = e.target.dataset
+    if(!action) return 
 
-    const [action, id] = datasetAction.split('-')
     switch(action) {
       case EDIT: this.toggleEditView(id); break
     } 
@@ -68,11 +67,11 @@ TodoList.prototype.render = function(items) {
   const itemsHtmlString = items.reduce((acc, item) => {
     const { id, content, completed } = item
     const todoItemTemplate = `
-      <li ${completed && 'class="completed"'} data-action=${EDIT}-${id}>
+      <li ${completed && 'class="completed"'} data-action=${EDIT} data-id=${id}>
         <div class="view">
-          <input class="toggle" type="checkbox" data-action=${CHECK}-${id} ${completed && 'checked'}>
-          <label class="label" data-action=${EDIT}-${id}>${content}</label>
-          <button class="destroy" data-action=${REMOVE}-${id}></button>
+          <input class="toggle" type="checkbox" data-action=${CHECK} data-id=${id} ${completed && 'checked'}>
+          <label class="label" data-action=${EDIT} data-id=${id}>${content}</label>
+          <button class="destroy" data-action=${REMOVE} data-id=${id}></button>
         </div>
         <input class="edit" value="${content}">
       </li> 
@@ -105,7 +104,8 @@ TodoList.prototype.removeState = function(id) {
 }
 
 TodoList.prototype.toggleEditView = function(id) {
-  const $liElement = document.querySelector(`li[data-action=edit-${id}]`)
+  const { EDIT } = dataActions 
+  const $liElement = document.querySelector(`li[data-action="${EDIT}"][data-id="${id}"]`)
   const $inputElement = $liElement.querySelector('input.edit')
  
   $liElement.classList.add('editing')

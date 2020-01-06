@@ -1,4 +1,5 @@
 import TodoList from './TodoList.js'
+import { eventKeyboards } from './utils/Contants.js'
 
 function App(inputSelector, todoListSelector) {
   this.index = 0
@@ -6,12 +7,14 @@ function App(inputSelector, todoListSelector) {
   this.todoListComponent = new TodoList(todoListSelector)
 
   this.$input.addEventListener('keydown', e => {
-    if(e.key === 'Enter') {
+    const { ENTER } = eventKeyboards
+    if(e.key === ENTER) {
       const item = {
-        id: this.index++,
+        id: this.index,
         content: e.target.value,
         completed: false,
       }
+      this.index+=1
       e.target.value = ''
       this.todoListComponent.addItem(item)
     } 
