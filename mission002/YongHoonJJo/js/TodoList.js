@@ -39,14 +39,10 @@ function TodoList(selector) {
   })
 
   this.$todoList.addEventListener('dblclick', (e) => {
-    const { EDIT } = dataActions
-    const datasetAction = e.target.dataset.action
-    if(!datasetAction) return 
+    const { id } = e.target.dataset
+    if(!id) return 
 
-    const [action, id] = datasetAction.split('-')
-    switch(action) {
-      case EDIT: this.toggleEditView(id); break
-    } 
+    this.toggleEditView(id)
   })
 
   ;(async function() {
@@ -80,14 +76,14 @@ TodoList.prototype.renderCompleted = function(items) {
 }
 
 TodoList.prototype.render = function(items) {
-  const { CHECK, REMOVE, EDIT } = dataActions
+  const { CHECK, REMOVE } = dataActions
   const itemsHtmlString = items.reduce((acc, item) => {
     const { _id, content, isCompleted } = item
     const todoItemTemplate = `
-      <li ${isCompleted && 'class="completed"'} data-action=${EDIT}-${_id}>
+      <li ${isCompleted ? 'class="completed"' : ''} data-id=${_id}>
         <div class="view">
-          <input class="toggle" type="checkbox" data-action=${CHECK}-${_id} ${isCompleted && 'checked'}>
-          <label class="label" data-action=${EDIT}-${_id}>${content}</label>
+          <input class="toggle" type="checkbox" data-action=${CHECK}-${_id} ${isCompleted ? 'checked' : ''}>
+          <label class="label" data-id=${_id}>${content}</label>
           <button class="destroy" data-action=${REMOVE}-${_id}></button>
         </div>
         <input class="edit" value="${content}">
@@ -121,7 +117,7 @@ TodoList.prototype.removeState = async function(id) {
 }
 
 TodoList.prototype.toggleEditView = function(id) {
-  const $liElement = document.querySelector(`li[data-action=edit-${id}]`)
+  const $liElement = document.querySelector(`li[data-id=${id}]`)
   const $inputElement = $liElement.querySelector('input.edit')
  
   $liElement.classList.add('editing')

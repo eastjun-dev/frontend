@@ -11,6 +11,5 @@ export const counterFilters = {
 
 export const dataActions = {
   CHECK: 'check',
-  EDIT: 'edit',
   REMOVE: 'remove',
 }
