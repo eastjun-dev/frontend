@@ -2,7 +2,6 @@ import TodoList from './TodoList.js'
 import { eventKeyboards } from './utils/Contants.js'
 
 function App(inputSelector, todoListSelector) {
-  this.index = 0
   this.$input = document.querySelector(inputSelector)
   this.todoListComponent = new TodoList(todoListSelector)
 
