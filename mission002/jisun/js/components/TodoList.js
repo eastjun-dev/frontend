@@ -16,7 +16,6 @@ export function TodoList(data) {
   };
 }
 
-// 초기 데이터에 따라 todoList render
 export const renderTodoList = list => {
   todoList.innerHTML = "";
 
@@ -28,7 +27,9 @@ export const renderTodoList = list => {
         data.isCompleted ? ` class="completed"` : ``
       } id="${data._id}">
             <div class="view">
-              <input class="toggle" type="checkbox"${data.isCompleted ? ` checked` : ''}>
+              <input class="toggle" type="checkbox"${
+                data.isCompleted ? ` checked` : ""
+              }>
               <label class="label">${data.content}</label>
               <button class="destroy"></button>
             </div>

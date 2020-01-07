@@ -1,34 +1,31 @@
-  
-const URL = 'http://todo-api.roto.codes';
+const URL = "http://todo-api.roto.codes";
 
 export let isLoading = true;
 
-export const getData = async (username) => {
+export const getData = async username => {
   return await fetch(`${URL}/${username}`);
 };
 
 export const putData = async (username, id) => {
   await fetch(`${URL}/${username}/${id}/toggle`, {
-    method: 'PUT',
-  }).then(() => {
-    
-  })
+    method: "PUT"
+  });
 };
 
 export const deleteData = async (username, id) => {
   await fetch(`${URL}/${username}/${id}`, {
-    method: 'DELETE',
-  })
+    method: "DELETE"
+  });
 };
 
 export const postData = async (username, data) => {
   await fetch(`${URL}/${username}`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      content: data,
-    }),
-  })
+      content: data
+    })
+  });
 };
