@@ -8,16 +8,12 @@ export default class TodoList {
 
   init = () => {
     this.$selector.addEventListener('click', (e) => {
-      if (e.target.className === DESTROY) this.onDeleteTodo(e.target.parentNode.dataset.idx)
-      if (e.target.className === TOGGLE) this.onToggleTodo(e.target.parentNode.dataset.idx)
+      if (e.target.className === DESTROY) return this.onDeleteTodo(e.target.parentNode.dataset.idx)
+      if (e.target.className === TOGGLE) return this.onToggleTodo(e.target.parentNode.dataset.idx)
     })
   }
 
-  createLiClassName = (isCompleted) => {
-    if (!isCompleted) return 'view'
-    if (isCompleted) return 'completed'
-    return ''
-  }
+  createLiClassName = (isCompleted) => isCompleted ? 'completed' : 'view'
 
   createTodoListHtmlString = ({ content, isCompleted, _id }) => {
     return `<li class=${this.createLiClassName(isCompleted)}>

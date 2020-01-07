@@ -9,9 +9,14 @@ export default class TodoCheck {
 
   init = () => {
     this.$selector.addEventListener('click', (e) => {
-      if (e.target.className === ACTIVE) this.onTodoCheck(ACTIVE)
-      if (e.target.className === COMPLETED) this.onTodoCheck(COMPLETED)
-      if (e.target.className === ALLSELECTED) this.onTodoCheck(ALLSELECTED)
+      switch (e.target.className) {
+        case ACTIVE:
+          return this.onTodoCheck(ACTIVE)
+        case COMPLETED:
+          return this.onTodoCheck(COMPLETED)
+        default:
+          return this.onTodoCheck(ALLSELECTED)
+      }
     })
   }
 }
