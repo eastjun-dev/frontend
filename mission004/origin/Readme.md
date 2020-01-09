@@ -1,0 +1,4 @@
+- [ ] Get movie list
+- [ ] Search movie
+- [ ] Get movie detail info (router)
+- [ ] Infinity scroll

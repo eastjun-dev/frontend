@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  color: #000;
+  color: #fff;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   border: 0;
@@ -20,7 +20,8 @@ body {
 }
 
 body {
-  background-color: #fff;
+  background-color: #020e2f;
+  color: #fff;
   height: 100%;
 }
 
@@ -38,7 +39,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: '';
+  content: "";
   content: none;
 }
 
@@ -71,3 +72,131 @@ a {
   color: inherit;
 }
 
+.header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.header-cont {
+  height: 78px;
+  max-width: 1200px;
+  padding: 0 24px;
+}
+
+.logo {
+  position: absolute;
+  font-weight: bold;
+  font-size: 20px;
+  top: 26px;
+}
+
+.search-bar {
+  position: absolute;
+  height: 24px;
+  right: 24px;
+  top: 20px;
+  width: 240px;
+}
+
+.input-search {
+  width: 210px;
+  height: 24px;
+  background-color: transparent;
+  border-bottom: 2px solid #fff;
+}
+
+.main {
+  padding: 36px;
+  text-align: center;
+}
+
+.movie-list {
+  text-align: left;
+  margin: 0 auto;
+  width: 934px;
+}
+
+.movie-list-item {
+  width: 300px;
+  height: 300px;
+  display: inline-block;
+  -webkit-box-shadow: 3px 3px 9px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 3px 3px 9px 0px rgba(0, 0, 0, 0.16);
+  margin: 0 12px 12px 0;
+  background-color: #1e2746;
+  border-radius: 12px;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+}
+
+.movie-list-dim {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: -webkit-gradient(
+    linear,
+    left top, left bottom,
+    from(rgba(0, 0, 0, 0.1)),
+    to(rgba(0, 0, 0, 0.8))
+  );
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+.poster {
+  width: 300px;
+  height: auto;
+}
+
+.movie-info {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+}
+
+.movie-title {
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-size: 16px;
+}
+
+@media (min-width: 1013px) {
+  .movie-list-item:nth-of-type(3n) {
+    margin: 0 0 12px 0;
+  }
+}
+
+@media (max-width: 1012px) {
+  .movie-list {
+    width: 618px;
+  }
+
+  .movie-list-item:nth-of-type(2n) {
+    margin: 0 0 12px 0;
+  }
+}
+
+@media (max-width: 1012px) {
+  .movie-list {
+    width: 618px;
+  }
+
+  .movie-list-item:nth-of-type(2n) {
+    margin: 0 0 12px 0;
+  }
+}
+
+@media (max-width: 668px) {
+  .movie-list {
+    width: 300px;
+  }
+
+  .movie-list-item {
+    margin: 0 0 12px 0;
+  }
+}
