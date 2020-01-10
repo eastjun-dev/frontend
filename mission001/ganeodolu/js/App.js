@@ -1,4 +1,9 @@
-function App(data) {
+import TodoList from "./TodoList.js"
+import TodoCount from "./TodoCount.js"
+import TodoInput from "./TodoInput.js"
+import {error} from "./constant.js"
+
+export default function App(data) {
     this.data = data;
     this.render = function (filteredData) {
         todoList.setState(filteredData)
@@ -21,24 +26,24 @@ function App(data) {
         $target: $todoList,
         $targetFilter: $todoFilter,
         data: this.data,
-        onToggleClick: (index) => {
+        onClickToggle: (index) => {
             const nextData = [...this.data]
             nextData[index].isCompleted = !nextData[index].isCompleted
             this.setState(nextData)
         },
-        onTodoEdit: (index) => {
+        onEditTodo: (index) => {
             const nextData = [...this.data]
             if (!nextData[index].isCompleted) {
                 nextData[index].isEditing = !nextData[index].isEditing
             }
             this.setState(nextData)
         },
-        onRemoveClick: (index) => {
+        onClickRemoval: (index) => {
             const nextData = [...this.data]
             nextData.splice(index, 1)
             this.setState(nextData)
         },
-        onTodoChange: (index, value) => {
+        onChangeTodo: (index, value) => {
             const nextData = [...this.data]
             nextData[index] = {
                 text: value,
@@ -47,7 +52,7 @@ function App(data) {
             };
             this.setState(nextData)
         },
-        onFilterClick: (filterBoolean) => {
+        onClickFilter: (filterBoolean) => {
             let filteredData = [...this.data]
             filteredData = this.data.filter(todo => todo.isCompleted !== filterBoolean)
             this.render(filteredData)
@@ -77,4 +82,7 @@ function App(data) {
             }
         }
     )
+    if(!todoList instanceof TodoList || !todoCount instanceof TodoCount){
+        throw new Error(error.NO_USED_NEW_KEYWORD)
+    }
 }

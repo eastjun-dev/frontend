@@ -1,7 +1,9 @@
-function TodoInput($targetInput, {onAdd}) {
+import {keyName} from "./constant.js"
+
+export default function TodoInput($targetInput, {onAdd}) {
     
     $targetInput.addEventListener('keydown', (e) => {
-        if (e.key === "Enter") {
+        if (e.key === keyName.ENTER) {
             onAdd($targetInput.value)
             $targetInput.value = '';
         }

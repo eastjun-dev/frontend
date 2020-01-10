@@ -1,4 +1,4 @@
-function TodoCount({$targetCount, $targetFilter, data, onFilterClick}) {
+export default function TodoCount({$targetCount, $targetFilter, data, onFilterClick}) {
     this.data = data;
     this.$targetCount = $targetCount;
     this.$targetFilter = $targetFilter;

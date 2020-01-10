@@ -1,4 +1,6 @@
-function TodoList({ $target, $targetFilter, data, onToggleClick, onTodoEdit, onRemoveClick, onTodoChange, onFilterClick }) {
+import {error, keyName} from "./constant.js"
+
+export default function TodoList({ $target, $targetFilter, data, onClickToggle, onEditTodo, onClickRemoval, onChangeTodo, onClickFilter }) {
     this.$target = $target;
     this.$targetFilter = $targetFilter
     this.data = data;
@@ -20,12 +22,13 @@ function TodoList({ $target, $targetFilter, data, onToggleClick, onTodoEdit, onR
     this.$target.addEventListener('click', (e) => {
         const { className } = e.target;
         const { index } = e.target.parentNode.parentNode.dataset
-        if(!filterTypes[0].classList.contains("selected")) return
-        
-        if (className === 'toggle') {
-            onToggleClick(index)
-        } else if (className === 'destroy') {
-            onRemoveClick(index)
+        if (!filterTypes[0].classList.contains("selected")) return
+
+        switch (className) {
+            case 'toggle': onClickToggle(index) 
+                break;
+            case 'destroy': onClickRemoval(index)
+                break;
         }
     })
 
@@ -33,7 +36,7 @@ function TodoList({ $target, $targetFilter, data, onToggleClick, onTodoEdit, onR
         const { className } = e.target;
         const { index } = e.target.closest('li').dataset
         if (className === 'label') {
-            onTodoEdit(index)
+            onEditTodo(index)
         }
     })
 
@@ -41,10 +44,10 @@ function TodoList({ $target, $targetFilter, data, onToggleClick, onTodoEdit, onR
         const { className } = e.target;
         const { index } = e.target.parentNode.dataset;
         if (className === 'edit') {
-            if (e.key === "Enter") {
-                onTodoChange(index, e.target.value)
-            } else if (e.key === "Escape") {
-                onTodoEdit(index)
+            if (e.key === keyName.ENTER) {
+                onChangeTodo(index, e.target.value)
+            } else if (e.key === keyName.ESC) {
+                onEditTodo(index)
             }
         }
     })
@@ -59,11 +62,11 @@ function TodoList({ $target, $targetFilter, data, onToggleClick, onTodoEdit, onR
         e.target.classList.add("selected");
 
         if (className.includes('all')) {
-            onFilterClick()
+            onClickFilter()
         } else if (className.includes('active')) {
-            onFilterClick(true)
+            onClickFilter(true)
         } else if (className.includes('completed')) {
-            onFilterClick(false)
+            onClickFilter(false)
         }
     })
 
