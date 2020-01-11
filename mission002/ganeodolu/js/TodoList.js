@@ -1,7 +1,7 @@
 import { error } from './constant.js'
 import renderedTemplate from './template.js'
 
-export default function TodoList({ $target, $targetFilter, data, onToggleClick, onRemoveClick, onFilterClick }) {
+export default function TodoList({ $target, $targetFilter, data, onClickToggle, onClickRemoval, onClickFilter }) {
     this.$target = $target;
     this.$targetFilter = $targetFilter
     this.data = data;
@@ -22,13 +22,13 @@ export default function TodoList({ $target, $targetFilter, data, onToggleClick, 
     this.$target.addEventListener('click', async (e) => {
         const { className } = e.target;
         const { index } = e.target.parentNode.parentNode.dataset
-
-        const id = await data[index]._id
+        const id = this.data[index]._id
         if (!filterTypes[0].classList.contains('selected')) return
-        if (className === 'toggle') {
-            onToggleClick(id)
-        } else if (className === 'destroy') {
-            onRemoveClick(id)
+        switch (className){
+            case 'toggle': await onClickToggle(id)
+            break;
+            case 'destroy': await onClickRemoval(id)
+            break;
         }
     })
 
@@ -42,11 +42,11 @@ export default function TodoList({ $target, $targetFilter, data, onToggleClick, 
         e.target.classList.add('selected');
 
         if (className.includes('all')) {
-            onFilterClick()
+            onClickFilter()
         } else if (className.includes('active')) {
-            onFilterClick(true)
+            onClickFilter(true)
         } else if (className.includes('completed')) {
-            onFilterClick(false)
+            onClickFilter(false)
         }
     })
 

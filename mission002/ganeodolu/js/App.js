@@ -12,7 +12,7 @@ export default async function app(){
             $target: $todoList,
             $targetFilter: $todoFilter,
             data: data,
-            onToggleClick: async (id) => {
+            onClickToggle: async (id) => {
                 await fetch(`${APIURL}/${id}/toggle`, {
                     method: "PUT",
                 })
@@ -22,7 +22,7 @@ export default async function app(){
                     totalCount: updatedData.length
                 })
             },
-            onRemoveClick: async (id) => {
+            onClickRemoval: async (id) => {
                 await fetch(`${APIURL}/${id}`, {
                     method: 'DELETE'
                 })
@@ -32,7 +32,7 @@ export default async function app(){
                     totalCount: updatedData.length
                 })
             },
-            onFilterClick: (filterBoolean) => {
+            onClickFilter: (filterBoolean) => {
                 let filteredData = [...data]
                 filteredData = data.filter(todo => todo.isCompleted !== filterBoolean)
                 todoList.setState(filteredData)

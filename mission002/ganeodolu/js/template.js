@@ -1,4 +1,4 @@
-export default function renderedTemplate (val, idx) {
+export default function renderedTemplate(val, idx) {
     return `
                 <li ${val.isCompleted ? 'class="completed"' : ''} data-index=${idx}>
                     <div class="view">
