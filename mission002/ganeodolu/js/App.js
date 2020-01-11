@@ -2,7 +2,7 @@ import TodoList from './TodoList.js'
 import TodoInput from './TodoInput.js'
 import TodoCount from './TodoCount.js'
 import { APIURL } from './constant.js' 
-import { fetchData } from './api.js';
+import { fetchData } from './api.js'
 
 export default async function app(){
         const data = await fetchData()

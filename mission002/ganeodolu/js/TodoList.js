@@ -1,4 +1,5 @@
 import { error } from './constant.js'
+import renderedTemplate from './template.js'
 
 export default function TodoList({ $target, $targetFilter, data, onToggleClick, onRemoveClick, onFilterClick }) {
     this.$target = $target;
@@ -57,15 +58,7 @@ export default function TodoList({ $target, $targetFilter, data, onToggleClick, 
             else if (typeof (val.content) !== 'string') {
                 throw new Error(error.INVALID_DATA)
             }
-            return `
-                <li ${val.isCompleted ? 'class="completed"' : ''} data-index=${idx}>
-                    <div class="view">
-                        <input class="toggle" type="checkbox"  ${val.isCompleted ? 'checked' : ''}>
-                        <label class="label">${val.content}</label>
-                        <button class="destroy"></button>
-                    </div>
-                    <input class="edit" value="${val.content}">
-                </li>`
+            return renderedTemplate(val, idx)
         }).join('');
 
         this.$target.innerHTML = renderedHTMLText
