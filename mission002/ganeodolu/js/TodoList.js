@@ -9,12 +9,12 @@ export default function TodoList({ $target, $targetFilter, data, onToggleClick, 
         this.data = nextData;
         this.render()
     }
-    const filterTypes = document.querySelectorAll(".filters li a")
+    const filterTypes = document.querySelectorAll('.filters li a')
 
     if (this === window) {
         throw new Error(error.NO_USED_NEW_KEYWORD)
     }
-    else if (Array.isArray(this.data) === false) {
+    else if (!Array.isArray(this.data)) {
         throw new Error(error.NOARRAY_DATA)
     }
 
@@ -23,7 +23,7 @@ export default function TodoList({ $target, $targetFilter, data, onToggleClick, 
         const { index } = e.target.parentNode.parentNode.dataset
 
         const id = await data[index]._id
-        if (!filterTypes[0].classList.contains("selected")) return
+        if (!filterTypes[0].classList.contains('selected')) return
         if (className === 'toggle') {
             onToggleClick(id)
         } else if (className === 'destroy') {
@@ -34,11 +34,11 @@ export default function TodoList({ $target, $targetFilter, data, onToggleClick, 
     this.$targetFilter.addEventListener('click', (e) => {
         const { className } = e.target;
         for (let val of filterTypes) {
-            if (val.classList.contains("selected")) {
-                val.classList.remove("selected")
+            if (val.classList.contains('selected')) {
+                val.classList.remove('selected')
             }
         }
-        e.target.classList.add("selected");
+        e.target.classList.add('selected');
 
         if (className.includes('all')) {
             onFilterClick()
@@ -54,14 +54,13 @@ export default function TodoList({ $target, $targetFilter, data, onToggleClick, 
             if (!val.content) {
                 throw new Error(error.NOT_DATA)
             }
-            else if (typeof (val.content) !== "string") {
+            else if (typeof (val.content) !== 'string') {
                 throw new Error(error.INVALID_DATA)
             }
-            // <li ${val.isCompleted ? 'class="completed"' : (val.isCompleted === false && val.isEditing === false) ? "" : 'class="editing"'} data-index=${idx}>
             return `
-                <li ${val.isCompleted ? 'class="completed"' : ""} data-index=${idx}>
+                <li ${val.isCompleted ? 'class="completed"' : ''} data-index=${idx}>
                     <div class="view">
-                        <input class="toggle" type="checkbox"  ${val.isCompleted ? 'checked' : ""}>
+                        <input class="toggle" type="checkbox"  ${val.isCompleted ? 'checked' : ''}>
                         <label class="label">${val.content}</label>
                         <button class="destroy"></button>
                     </div>

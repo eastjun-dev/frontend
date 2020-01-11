@@ -5,9 +5,7 @@ import { APIURL } from './constant.js'
 import { fetchData } from './api.js';
 
 export default async function app(){
-    // ;(async function(){
         const data = await fetchData()
-
         const $todoList = document.querySelector('.todo-list')
         const $todoFilter = document.querySelector('.filters');
         const todoList = new TodoList({
@@ -76,6 +74,5 @@ export default async function app(){
                 }
             }
         )
-    // })
 }
 
