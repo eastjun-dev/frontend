@@ -1,8 +1,8 @@
 import { setStyle } from '../Utils/Util.js'
 
 function Button({name}) {
-  this.mainComponent = document.createElement('button')
-  this.mainComponent.innerText = name
+  this.$main = document.createElement('button')
+  this.$main.innerText = name
 
   const buttonStyle = {
     height: '50px',
@@ -17,16 +17,16 @@ function Button({name}) {
     transition: 'all .2s ease-in'
   }
   
-  setStyle(this.mainComponent, buttonStyle)
-  this.mainComponent.addEventListener('mouseover', () => {
-    setStyle(this.mainComponent, {
+  setStyle(this.$main, buttonStyle)
+  this.$main.addEventListener('mouseover', () => {
+    setStyle(this.$main, {
       ...buttonStyle,
       'background-color': '#259ffa',
       color: 'white'
     })
   })
-  this.mainComponent.addEventListener('mouseout', () => {
-    setStyle(this.mainComponent, buttonStyle) 
+  this.$main.addEventListener('mouseout', () => {
+    setStyle(this.$main, buttonStyle) 
   })
 }
 

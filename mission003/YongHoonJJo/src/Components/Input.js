@@ -2,7 +2,7 @@ import { setAttrs, setStyle } from '../Utils/Util.js'
 
 function InputComponent({label, type='text', name, placeholder}, addCss={}) {
   
-  this.mainComponent = document.createElement('div')
+  this.$main = document.createElement('div')
   
   this.$label = document.createElement('label')
   setAttrs(this.$label, {
@@ -15,10 +15,10 @@ function InputComponent({label, type='text', name, placeholder}, addCss={}) {
     type, name, placeholder
   })
 
-  this.mainComponent.append(this.$label)
-  this.mainComponent.append(this.$input)
+  this.$main.append(this.$label)
+  this.$main.append(this.$input)
 
-  setStyle(this.mainComponent, {
+  setStyle(this.$main, {
     margin: '20px 0',
     ...addCss
   })

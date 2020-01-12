@@ -7,22 +7,22 @@ function AddFamily() {
   this.state = []
   this.$main = document.createElement('div')
 
-  this.$nameInput = new InputComponent(
+  this.nameInput = new InputComponent(
     { label: '이름', type: 'text', name: 'name' }, 
     { display: 'inline-block', width: '40%' }
   )
-  this.$relationInput = new InputComponent(
+  this.relationInput = new InputComponent(
     { label: '관계', type: 'text', name: 'relation'}, 
     { display: 'inline-block', width: '40%' }
   )
 
   const addFamilyRelationInfoHandler = () => {
-    const name = this.$nameInput.getInputValue()
-    const relation = this.$relationInput.getInputValue()
+    const name = this.nameInput.getInputValue()
+    const relation = this.relationInput.getInputValue()
 
     if(!name && !relation) return ;
-    this.$nameInput.resetInputValue()
-    this.$relationInput.resetInputValue() 
+    this.nameInput.resetInputValue()
+    this.relationInput.resetInputValue() 
 
     const state = {id: this.idx+=1, name, relation}
     this.state.push(state)
@@ -30,14 +30,14 @@ function AddFamily() {
     this.$main.appendChild(familyRelation.$main) 
   }
 
-  this.$plusButton = new ButtonPlus({
+  this.plusButton = new ButtonPlus({
     addCss: { display: 'inline-block', top: '20px', left: '20px' },
     onClick: addFamilyRelationInfoHandler
   })
 
-  this.$main.appendChild(this.$nameInput.mainComponent) 
-  this.$main.appendChild(this.$relationInput.mainComponent) 
-  this.$main.appendChild(this.$plusButton.$main)
+  this.$main.appendChild(this.nameInput.$main) 
+  this.$main.appendChild(this.relationInput.$main) 
+  this.$main.appendChild(this.plusButton.$main)
 }
 
 AddFamily.prototype.getState = function() {

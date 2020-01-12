@@ -5,9 +5,9 @@ import TitleComponent from './Title.js'
 import { setStyle } from '../Utils/Util.js'
 
 function Form() {
-  this.mainComponent = document.createElement('div')
+  this.$main = document.createElement('div')
 
-  setStyle(this.mainComponent, {
+  setStyle(this.$main, {
     width: '350px',
     margin: '0 auto'
   })
@@ -15,25 +15,25 @@ function Form() {
 
 Form.prototype.appendTitle = function({title}) {
   const $title = new TitleComponent({ title })
-  this.mainComponent.appendChild($title.mainComponent)
+  this.$main.appendChild($title.$main)
   return $title
 }
 
 Form.prototype.appendInput = function({label, type, name, placeholder}) {
   const $input = new InputComponent({ label, type, name })
-  this.mainComponent.appendChild($input.mainComponent) 
+  this.$main.appendChild($input.$main) 
   return $input
 }
 
 Form.prototype.appendButton = function({name, onClick}) {
-  const $button = new ButtonComponent({ name })
-  this.mainComponent.appendChild($button.mainComponent)
-  $button.mainComponent.addEventListener('click', onClick)
-  return $button
+  const button = new ButtonComponent({ name })
+  this.$main.appendChild(button.$main)
+  button.$main.addEventListener('click', onClick)
+  return button
 }
 
 Form.prototype.appendComponent = function(Component) {
-  this.mainComponent.appendChild(Component)
+  this.$main.appendChild(Component)
 }
 
 export default Form
