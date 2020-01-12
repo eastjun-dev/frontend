@@ -1,0 +1,178 @@
+/*mdc override*/
+:root {
+  --mdc-theme-primary: #333;
+}
+
+.mdc-button__raised:not(:disabled), .mdc-button__unelevated:not(:disabled) {
+  background-color: var(--mdc-theme-primary,#333);
+}
+
+.mdc-dialog__surface {
+  width: 400px;
+}
+
+.mdc-card__actions {
+  padding: 0;
+}
+
+.mdc-text-field {
+  margin: 10px auto;
+}
+
+.mdc-dialog__actions {
+  padding-right: 0;
+}
+/*mdc override*/
+
+body {
+  margin: 0;
+}
+
+.background-img {
+  background-size: cover;
+  background-image: url("https://user-images.githubusercontent.com/56821976/71782829-d68f7000-3021-11ea-833d-9e286c629503.jpg");
+  position: fixed;
+  width: 100%;
+  height: 50vh;
+}
+
+.dark-overlay {
+  width: 100%;
+  background-color: rgba(0,0,0,.2);
+  height: 50vh;
+  z-index: 10;
+}
+
+.signup-card {
+  max-width: 400px;
+  margin: 100px auto;
+}
+
+.signup-card h2{
+  margin-top: 32px;
+}
+
+form.signup {
+  padding: 24px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.bullet-o{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.bullet-o > div{
+  height: 15px;
+  width: 15px;
+  margin: 20px 10px;
+  border-radius: 100px;
+  z-index: 2;
+}
+
+.bullet{
+  background-color: lightgrey;
+
+}
+
+.bullet-active{
+  background-color: #333 !important;
+}
+
+.bullet-line{
+  opacity: 0.3;
+  background: lightgrey;
+  height: 3px;
+  width: 70px;
+  display: block;
+  left: 50%;
+  margin-top: -29px;
+  margin-left: -35px;
+  position: absolute;
+  z-index: 1;
+}
+
+.pdd-top-0 {
+  padding-top: 0px !important;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.mrg-right-10 {
+  margin-right: 10px;
+}
+
+#add-family-button {
+  display: block;
+  margin: 0 auto;
+}
+
+.stepper {
+  position: relative;
+}
+
+.coffee-emoji {
+  font-size: 100px;
+  margin: 40px 0 70px 0;
+}
+
+.margin-center {
+  margin: 0% auto;
+}
+
+.my-info-view-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.my-info {
+  padding: 30px;
+}
+
+.my-info-card {
+  width: 400px;
+  padding: 30px;
+  position: relative;
+}
+
+#my-info-edit-button {
+  top: 16px;
+  right: 16px;
+  position: absolute;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+.margin-16 {
+  margin: 16px;
+}
+
+.margin-8 {
+  margin: 8px;
+}
+
+.text-gray {
+  color: gray;
+}
