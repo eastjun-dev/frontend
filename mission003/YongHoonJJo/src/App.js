@@ -1,5 +1,6 @@
 import AddFamilyComponent from './Components/AddFamily.js'
 import FormComponent from './Components/Form.js'
+import SignUpInfo from './Components/SignUpInfo.js'
 
 function App() {
   this.state = {}
@@ -7,6 +8,8 @@ function App() {
 
   const signForm = new FormComponent()
   const familyForm = new FormComponent() 
+  const checkForm = new FormComponent()
+  const signUpInfo = new SignUpInfo()
   
   $signUp.appendChild(signForm.$main)
 
@@ -21,6 +24,7 @@ function App() {
     onClick: () => {
       $signUp.replaceChild(familyForm.$main, signForm.$main)
       this.state = {
+        ...this.state,
         name: getName(),
         phone: getPhone(),
         email: getEmail(),
@@ -34,11 +38,21 @@ function App() {
   familyForm.appendButton({
     name: '제출',
     onClick: () => {
-      
       this.state = {
         ...this.state,
         familyInfo: getFamilyInfo()
-      } 
+      }
+      $signUp.replaceChild(checkForm.$main, familyForm.$main) 
+      signUpInfo.setState(this.state)
+    }
+  })
+
+  checkForm.appendTitle({ title: '입력정보 확인' })
+  checkForm.appendComponent(signUpInfo)
+  checkForm.appendButton({
+    name: '회원가입 완료',
+    onClick: () => {
+      console.log('Success')
     }
   })
 }
