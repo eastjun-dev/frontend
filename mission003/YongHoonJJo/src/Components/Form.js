@@ -14,15 +14,14 @@ function Form() {
 }
 
 Form.prototype.appendTitle = function({title}) {
-  const $title = new TitleComponent({ title })
-  this.$main.appendChild($title.$main)
-  return $title
+  const _title = new TitleComponent({ title })
+  this.$main.appendChild(_title.$main)
 }
 
 Form.prototype.appendInput = function({label, type, name, placeholder}) {
-  const $input = new InputComponent({ label, type, name })
-  this.$main.appendChild($input.$main) 
-  return $input
+  const input = new InputComponent({ label, type, name })
+  this.$main.appendChild(input.$main) 
+  return () => input.$input.value
 }
 
 Form.prototype.appendButton = function({name, onClick}) {
@@ -33,7 +32,8 @@ Form.prototype.appendButton = function({name, onClick}) {
 }
 
 Form.prototype.appendComponent = function(Component) {
-  this.$main.appendChild(Component)
+  this.$main.appendChild(Component.$main)
+  return () => Component.state
 }
 
 export default Form
