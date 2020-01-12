@@ -4,9 +4,12 @@ export default class Form {
   }
 
   init = () => {
-    document.querySelector('#phoneNumber').addEventListener('change', (e) => {
-      console.log(e.target.value)
-      this.onChangeFormData(e)
+    document.querySelector('#phoneNumber').addEventListener('blur', (e) => {
+      this.onChangeFormData('#phoneNumber', e)
     })
+  }
+
+  onChangeFormData = (target, e) => {
+    console.log(target, e)
   }
 }

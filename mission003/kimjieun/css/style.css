@@ -64,11 +64,8 @@
   z-index: 1;
 }
 
-.text-field {
+.text-field, .policy {
   margin-bottom: 20px;
-}
-
-.name, .phoneNumber, .email, .my-introduce, .agree{
   font-size: 16px;
   font-weight: 300;
   font-family: Arial, Helvetica, sans-serif;

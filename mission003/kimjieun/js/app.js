@@ -1,4 +1,6 @@
 import Form from '../components/Form.js'
+import { basicInfoTemplate } from '../js/templates.js'
+import { STEP1_MODAL_TITLE } from '../utils/constants.js'
 
 export default class App {
   constructor() {
@@ -6,12 +8,9 @@ export default class App {
   }
 
   init = () => {
+    document.querySelector('.modal-title').innerHTML = STEP1_MODAL_TITLE
+    document.querySelector('.step-form').innerHTML = basicInfoTemplate
     this.form = new Form()
-    this.form.onChangeFormData = this.onChangeFormData.bind(this)
-  }
-
-  onChangeFormData = (e) => {
-    console.log(e.target.value)
   }
 }
 
