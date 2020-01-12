@@ -25,10 +25,15 @@ Form.prototype.appendInput = function({label, type, name, placeholder}) {
   return $input
 }
 
-Form.prototype.appendButton = function({name}) {
+Form.prototype.appendButton = function({name, onClick}) {
   const $button = new ButtonComponent({ name })
   this.mainComponent.appendChild($button.mainComponent)
+  $button.mainComponent.addEventListener('click', onClick)
   return $button
+}
+
+Form.prototype.appendComponent = function(Component) {
+  this.mainComponent.appendChild(Component)
 }
 
 export default Form

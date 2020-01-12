@@ -1,6 +1,6 @@
 import { setAttrs, setStyle } from '../Utils/Util.js'
 
-function InputComponent({label, type='text', name, placeholder}) {
+function InputComponent({label, type='text', name, placeholder}, addCss={}) {
   
   this.mainComponent = document.createElement('div')
   
@@ -20,6 +20,7 @@ function InputComponent({label, type='text', name, placeholder}) {
 
   setStyle(this.mainComponent, {
     margin: '20px 0',
+    ...addCss
   })
   setStyle(this.$label, {
     display: 'block',
@@ -44,6 +45,14 @@ function InputComponent({label, type='text', name, placeholder}) {
   this.$input.addEventListener('blur', () => {
     setStyle(this.$input, inputStyle)
   })
+}
+
+InputComponent.prototype.getInputValue = function() {
+  return this.$input.value
+}
+
+InputComponent.prototype.resetInputValue = function() {
+  this.$input.value = '' 
 }
 
 export default InputComponent
