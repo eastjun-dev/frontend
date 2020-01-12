@@ -9,6 +9,9 @@ function FamilyRelation({id, name, relation, onClick}) {
     margin: '10px 0',
   })
 
+  this.$main.addEventListener('click', () => {
+    onClick(id, this.$main)
+  })
 }
 
 export default FamilyRelation

@@ -26,7 +26,15 @@ function AddFamily() {
 
     const state = {id: this.idx+=1, name, relation}
     this.state.push(state)
-    const familyRelation = new FamilyRelation(state)
+
+    const removeHandler = (id, el) => {
+      this.$main.removeChild(el)
+      this.state = this.state.filter(s => s.id !== id)
+    }
+    const familyRelation = new FamilyRelation({
+      ...state,
+      onClick: removeHandler
+    })
     this.$main.appendChild(familyRelation.$main) 
   }
 
