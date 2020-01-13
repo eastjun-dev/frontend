@@ -1,5 +1,5 @@
 import { error } from './constant.js'
-import renderedTemplate from './template.js'
+import { renderedTemplate } from './template.js'
 
 export default function TodoList({ $target, $targetFilter, data, onClickToggle, onClickRemoval, onClickFilter }) {
     this.$target = $target;
@@ -24,11 +24,11 @@ export default function TodoList({ $target, $targetFilter, data, onClickToggle, 
         const { index } = e.target.parentNode.parentNode.dataset
         const id = this.data[index]._id
         if (!filterTypes[0].classList.contains('selected')) return
-        switch (className){
+        switch (className) {
             case 'toggle': await onClickToggle(id)
-            break;
+                break;
             case 'destroy': await onClickRemoval(id)
-            break;
+                break;
         }
     })
 

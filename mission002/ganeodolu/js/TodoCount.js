@@ -1,3 +1,5 @@
+import { totalCountTemplate } from './template.js'
+
 export default function TodoCount({$targetCount, $targetFilter, data, onFilterClick}) {
     this.data = data;
     this.$targetCount = $targetCount;
@@ -14,7 +16,7 @@ export default function TodoCount({$targetCount, $targetFilter, data, onFilterCl
 
     this.render = function () {
         const { totalCount } = this.data
-        $targetCount.innerHTML = `총 <strong>${totalCount}</strong>개`
+        $targetCount.innerHTML = totalCountTemplate(totalCount)
     }
     this.render();
 
