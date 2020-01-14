@@ -18,6 +18,7 @@
 - [mission002](https://github.com/EastjunDev/frontend/issues/7) : TodoList Ajax, localStorage
 - [mission003](https://github.com/EastjunDev/frontend/issues/8) : 자바스크립트로 Form 과 Modal 에 대한 UI 만들기
 - [mission004](https://github.com/EastjunDev/frontend/issues/9) : Movie List 사이트 만들기
+- [mission005](https://github.com/EastjunDev/frontend/issues/10) : 가게 찾기 사이트 
 <br>
 
 ## ⚙️ Before Started
