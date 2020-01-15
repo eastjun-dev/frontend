@@ -23,7 +23,7 @@ const TodoApp = class {
   }
   handleUpdateTodo(){
     const { todoList } = this.store.state;
-    console.log('updated')
+    console.log('updated', todoList)
     this.todoList.setState(todoList)
   } 
 }

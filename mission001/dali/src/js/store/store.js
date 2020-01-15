@@ -6,17 +6,20 @@ const initialState = {
     { 
       id: 1, 
       todoText: "안녕", 
-      completed: false
+      completed: false,
+      editing: false,
     },
     {
       id: 2, 
       todoText: "하세요", 
-      completed: true
+      completed: true,
+      editing: false,
     },
     {
       id: 3, 
       todoText: "공부 좀 하세요", 
-      completed: false
+      completed: false,
+      editing: false,
     },
   ]
 }

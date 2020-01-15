@@ -7,6 +7,7 @@ export default (type, payload, state) => {
           id: 1,
           todoText: payload,
           completed: false,
+          editing: false,
         })
       }
     }
@@ -25,6 +26,37 @@ export default (type, payload, state) => {
       return {
         ...state,
         todoList: state.todoList.filter(({id})=> id !== payload)
+      }
+    }
+    case 'EDIT_TODO': {
+      return {
+        ...state,
+        todoList: state.todoList.map(todo => ({
+          ...todo,
+          editing: todo.id === payload 
+        }))
+      }
+    }
+    case 'UPDATE_TODO': {
+      return {
+        ...state,
+        todoList: state.todoList.map(todo => {
+          const updated  = todo.id === payload.id
+          return updated ? {
+            ...todo,
+            todoText: payload.value,
+            editing: false,
+          }: todo
+        })
+      }
+    }
+    case 'OUT_EDITMODE': {
+      return {
+        ...state,
+        todoList: state.todoList.map(todo => ({
+          ...todo,
+          editing: false 
+        }))
       }
     }
   }

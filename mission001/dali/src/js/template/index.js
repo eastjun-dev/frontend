@@ -9,10 +9,11 @@ const todoFormTemplate = () =>
   </button>
 `;
 
-const todoItempTemplate = ({ id, completed, todoText}) => {
-  const getTodoClass = (completed, editing = '') => {
+const todoItempTemplate = ({ id, completed, todoText, editing}) => {
+  const getTodoClass = (completed, editing) => {
     const todoItemClass = [];
     console.log('completed', completed);
+    console.log('editing', editing);
     if(completed) todoItemClass.push('completed')
     if(editing) todoItemClass.push('editing')
     return todoItemClass.join(' ');
@@ -20,7 +21,7 @@ const todoItempTemplate = ({ id, completed, todoText}) => {
 
   return `<li 
       data-id="${id}"
-      class="${getTodoClass(completed)}"
+      class="${getTodoClass(completed, editing)}"
     >
   <div class="view">
     <input class="toggle" type="checkbox">
