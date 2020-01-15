@@ -1,2 +1,2 @@
 import app from './App.js'
-app()
+new App()
