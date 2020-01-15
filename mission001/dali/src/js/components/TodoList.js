@@ -42,10 +42,16 @@ const TodoList = class extends View {
       case 'toggle': {
         this.handleUpdateCompleted(Number(id))
       }
+      case 'destroy': {
+        this.handleDelete(Number(id))
+      }
     }
   }
   handleUpdateCompleted(id){
     this.$_dispatch('TOGGLE_TODO', id) 
+  }
+  handleDelete(id){
+    this.$_dispatch('DELETE_TODO', id) 
   }
   setState(state){
     this.$_renderTemplate(state)

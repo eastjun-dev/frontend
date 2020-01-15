@@ -21,5 +21,11 @@ export default (type, payload, state) => {
         }))
       }
     }
+    case 'DELETE_TODO': {
+      return {
+        ...state,
+        todoList: state.todoList.filter(({id})=> id !== payload)
+      }
+    }
   }
 }
