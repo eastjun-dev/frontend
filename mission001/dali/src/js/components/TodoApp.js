@@ -19,10 +19,11 @@ const TodoApp = class {
     this.init()
   }
   init(){
-    this.store.subscribe(this.handleUpdateTodo.bind(this))
+    this.store.$_subscribe(this.handleUpdateTodo.bind(this))
   }
   handleUpdateTodo(){
     const { todoList } = this.store.state;
+    console.log('updated')
     this.todoList.setState(todoList)
   } 
 }

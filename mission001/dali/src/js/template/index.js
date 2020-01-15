@@ -12,6 +12,7 @@ const todoFormTemplate = () =>
 const todoItempTemplate = ({ id, completed, todoText}) => {
   const getTodoClass = (completed, editing = '') => {
     const todoItemClass = [];
+    console.log('completed', completed);
     if(completed) todoItemClass.push('completed')
     if(editing) todoItemClass.push('editing')
     return todoItemClass.join(' ');

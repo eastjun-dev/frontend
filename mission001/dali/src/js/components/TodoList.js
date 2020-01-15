@@ -1,6 +1,6 @@
 import View from './View.js';
 import { todoListTemplate } from '../template/index.js';
-import { qsAll } from '../utils/dom.js';
+import { qsAll, getClosetLI } from '../utils/dom.js';
 
 
 const TodoList = class extends View {
@@ -15,6 +15,7 @@ const TodoList = class extends View {
   init(){
     this.$_bindEvents('dblclick', this.handleDBClicked.bind(this))
     this.$_bindEvents('focusout', this.handleFocusOut.bind(this))
+    this.$_bindEvents('click', this.handleClicked.bind(this))
   }
   handleDBClicked({target}){
     console.log('edit start');
@@ -33,6 +34,18 @@ const TodoList = class extends View {
     console.log('focus out');
     const $todoItem = target.closest('li')
     $todoItem.classList.remove('editing'); 
+  }
+  handleClicked({target}){
+    const id = getClosetLI(target).dataset.id
+    console.log(target.className)
+    switch(target.className){
+      case 'toggle': {
+        this.handleUpdateCompleted(Number(id))
+      }
+    }
+  }
+  handleUpdateCompleted(id){
+    this.$_dispatch('TOGGLE_TODO', id) 
   }
   setState(state){
     this.$_renderTemplate(state)

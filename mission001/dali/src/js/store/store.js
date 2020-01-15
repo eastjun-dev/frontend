@@ -9,12 +9,12 @@ const initialState = {
       completed: false
     },
     {
-      id: 1, 
+      id: 2, 
       todoText: "하세요", 
       completed: true
     },
     {
-      id: 2, 
+      id: 3, 
       todoText: "공부 좀 하세요", 
       completed: false
     },
@@ -30,7 +30,7 @@ const Store = class extends Dep {
   }
   setState({state}){
     this.state = state;
-    this.notify();
+    this.$_notify();
   }
   
 }

@@ -8,6 +8,7 @@ const View = class {
     this.$_renderTemplate(state)
   }
   $_dispatch(actionType, payload){
+    console.log(actionType, payload)
     dispatch(actionType, payload)
   }
   $_renderTemplate(state){

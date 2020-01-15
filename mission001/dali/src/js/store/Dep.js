@@ -2,10 +2,10 @@ class Dep {
   constructor() {
     this.subscribers = new Set();
   }
-  subscribe(handler) {
+  $_subscribe(handler) {
       this.subscribers.add(handler);
   }
-  notify() {
+  $_notify() {
     this.subscribers.forEach(sub => sub());
   }
 }

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   window.app = new App({
     store,
     todoForm: '#todo-form',
-    todoList: '#todo-list-2'
+    todoList: '#todo-list'
   })
  
 });
