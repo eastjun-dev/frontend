@@ -4,7 +4,7 @@ import TodoCount from './TodoCount.js'
 import { APIURL } from './constant.js' 
 import { fetchData } from './api.js'
 
-export default function App(){
+export default function app(){
     ;(async function(){
         const data = await fetchData()
         const $todoList = document.querySelector('.todo-list')
