@@ -33,7 +33,7 @@ export default async function app(){
                 })
             },
             onClickFilter: (filterBoolean) => {
-                let filteredData = [...data]
+                let filteredData = data;
                 filteredData = data.filter(todo => todo.isCompleted !== filterBoolean)
                 todoList.setState(filteredData)
                 todoCount.setState({
