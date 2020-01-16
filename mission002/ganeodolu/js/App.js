@@ -1,12 +1,35 @@
 import TodoList from './TodoList.js'
 import TodoInput from './TodoInput.js'
 import TodoCount from './TodoCount.js'
-import { APIURL } from './constant.js' 
-import { fetchData } from './api.js'
+import { APIURL } from './constant.js'
+import { fetchData, methods } from './api.js'
 
-export default function app(){
-    ;(async function(){
-        const data = await fetchData()
+export default function app() {
+    async function getData(){
+        if (navigator.onLine) {
+            return await fetchData()
+        } else {
+            return JSON.parse(localStorage.getItem('todoItems'))
+        }
+    }
+    const $networkDisplay = document.querySelector('.network-display')
+    window.addEventListener("offline", function () {
+        console.log('offline')
+        $networkDisplay.classList.remove('hidden')
+    });
+    window.addEventListener("online", function () {
+        console.log('online')
+        $networkDisplay.classList.add('hidden')
+    });
+    
+    ; (async function () {
+        const data = await getData()
+
+        function saveLocalStorage(data) {
+            localStorage.setItem('todoItems', JSON.stringify(data))
+        }
+        saveLocalStorage(data)
+
         const $todoList = document.querySelector('.todo-list')
         const $todoFilter = document.querySelector('.filters');
         const todoList = new TodoList({
@@ -14,14 +37,14 @@ export default function app(){
             $targetFilter: $todoFilter,
             data: data,
             onClickToggle: async (id) => {
-                await fetch(`${APIURL}/${id}/toggle`, {
-                    method: "PUT",
-                })
+                const isUpdated = await methods.put(id)
                 const updatedData = await fetchData()
                 todoList.setState(updatedData)
                 todoCount.setState({
                     totalCount: updatedData.length
                 })
+                saveLocalStorage(updatedData)
+
             },
             onClickRemoval: async (id) => {
                 await fetch(`${APIURL}/${id}`, {
@@ -32,6 +55,8 @@ export default function app(){
                 todoCount.setState({
                     totalCount: updatedData.length
                 })
+                saveLocalStorage(updatedData)
+
             },
             onClickFilter: (filterBoolean) => {
                 let filteredData = data;
@@ -42,7 +67,7 @@ export default function app(){
                 })
             }
         });
-    
+
         const $todoCount = document.querySelector('.todo-count');
         const todoCount = new TodoCount({
             $targetCount: $todoCount,
@@ -51,7 +76,7 @@ export default function app(){
                 totalCount: data.length,
             },
         })
-    
+
         const $todoInput = document.querySelector('.new-todo')
         const todoInput = TodoInput($todoInput,
             {
@@ -71,6 +96,8 @@ export default function app(){
                         todoCount.setState({
                             totalCount: updatedData.length
                         })
+                        saveLocalStorage(updatedData)
+
                     }
                 }
             }

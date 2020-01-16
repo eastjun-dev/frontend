@@ -19,15 +19,16 @@ export default function TodoList({ $target, $targetFilter, data, onClickToggle, 
         throw new Error(error.NOARRAY_DATA)
     }
 
-    this.$target.addEventListener('click', async (e) => {
+    this.$target.addEventListener('click', (e) => {
         const { className } = e.target;
-        const { index } = e.target.parentNode.parentNode.dataset
+        const index = e.target.closest('div li').dataset.index
         const id = this.data[index]._id
+
         if (!filterTypes[0].classList.contains('selected')) return
         switch (className) {
-            case 'toggle': await onClickToggle(id)
+            case 'toggle': onClickToggle(id)
                 break;
-            case 'destroy': await onClickRemoval(id)
+            case 'destroy': onClickRemoval(id)
                 break;
         }
     })
@@ -63,5 +64,6 @@ export default function TodoList({ $target, $targetFilter, data, onClickToggle, 
 
         this.$target.innerHTML = renderedHTMLText
     }
+
     this.render()
 }
