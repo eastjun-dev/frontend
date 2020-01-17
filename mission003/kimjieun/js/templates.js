@@ -12,7 +12,7 @@ const basicInfoTemplate = `
     <label>비밀번호</label> : <input id="password" type="password" autocomplete="on"/>
   </div>
   <div class="text-field">
-    <label class="my-introduce" id="my-introduce">자기소개</label> : <textarea id="my-introduce"></textarea>
+    <label class="myIntroduce" id="myIntroduce">자기소개</label> : <textarea id="myIntroduce"></textarea>
   </div>
 `
 
