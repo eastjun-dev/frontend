@@ -87,19 +87,7 @@ export default function App(data) {
 
     })
 
-    // for(let i = 0; i < 4; i++){
-    //     console.log($targetInput[i].name)
-    //     console.log($targetInput[i].value)
-    //     // data.push($targetInput[i].name + ':',$targetInput[i].value)
-    //     data[$targetInput[i].name] = $targetInput[i].value
 
-    //     if($targetInput[i].value){
-    //         console.log($targetInput[i].name)
-    //         data.push(`${$targetInput[i].name}:`)
-    //     }
-    // }
-
-    // data['introduce'] = $targetIntroduce.value
     // data.push({
     //     name: $targetInput[0].value,
     //     phone: $targetInput[1].value,
@@ -112,7 +100,7 @@ export default function App(data) {
     //     }
 
     // )
-    // console.log(this.data)
+
 
 
 
