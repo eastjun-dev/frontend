@@ -17,10 +17,7 @@ const render = data => {
 
   const inputs = document.querySelectorAll("input");
   Array.from(inputs).map(elem => {
-    elem.addEventListener("change", e => {
-      onCheckNull(e);
-    });
-  });
+    elem.addEventListener("change", onCheckNull);
 
   const btnAdd = document.getElementById("btnAdd");
   btnAdd.addEventListener("click", () => {
