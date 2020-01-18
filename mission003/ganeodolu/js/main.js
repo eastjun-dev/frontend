@@ -1,3 +1,4 @@
 import App from './App.js'
+let data = {};
 
-new App()
+new App(data)
