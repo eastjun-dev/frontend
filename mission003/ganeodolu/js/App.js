@@ -12,9 +12,6 @@ export default function App() {
     const $targetEmail = document.getElementById('email')
     const $targetInput = document.querySelectorAll('.mdc-text-field input')
     const $targetCompleteButton1 = document.querySelector('.step1-complete-btn')
-    console.log($targetInput)
-    console.log($targetInput[3])
-    console.log($targetInput[3].value)
     const userForm = new UserForm({
         $target: $targetUserForm,
         data: data,
@@ -30,29 +27,16 @@ export default function App() {
                 $targetAgreement.classList.add('hidden')
             }
         }
-        console.log($targetInput[3].value)
-
         let count = 0
         for(let i = 0; i < $targetInput.length; i++){
             if($targetInput[i].value){
                 count++
             }
         }
-
         if(count === 4 && $targetCompleteButton1.classList.contains('hidden')){
             $targetCompleteButton1.classList.remove('hidden')
-        } else {
+        } else if (!$targetCompleteButton1.classList.contains('hidden')) {
             $targetCompleteButton1.classList.add('hidden')
         }
-
-
-
-
     })
-
-
-
-
-
-
 }
