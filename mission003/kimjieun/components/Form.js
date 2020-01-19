@@ -18,7 +18,7 @@ export default function Form({ userData }) {
   }
   
   this.init()
-
+  
   this.onChangeFormData = (target, e) => {
     switch (target) {
       case 'phoneNumber':
@@ -35,6 +35,7 @@ export default function Form({ userData }) {
         break
       case 'myIntroduce':
         userData.introduceData = e.target.value
+        break
       default:
         return ''
     }
