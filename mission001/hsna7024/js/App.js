@@ -8,7 +8,11 @@ export default function App(params) {
 
   const todoList = new TodoList({
     $target: $targetTodoList,
-    data
+    data,
+    toggleTodo: id => {
+      data[id].isCompleted = !data[id].isCompleted;
+      this.render();
+    }
   });
 
   const todoInput = new TodoInput({
@@ -24,7 +28,7 @@ export default function App(params) {
   const todoCount = new TodoCount({
     $target: $targetTodoCount,
     data
-  })
+  });
 
   this.setState = nextData => {
     data = nextData;
