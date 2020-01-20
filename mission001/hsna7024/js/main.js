@@ -3,15 +3,18 @@ import App from "./App.js";
 const data = [
   {
     content: "새로운 타이틀",
-    isCompleted: false
+    isCompleted: false,
+    onEdit: false
   },
   {
     content: "완료된 타이틀",
-    isCompleted: true
+    isCompleted: true,
+    onEdit: false
   },
   {
     content: "완료된 타이틀",
-    isCompleted: true
+    isCompleted: true,
+    onEdit: false
   }
 ];
 
