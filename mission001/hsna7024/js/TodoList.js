@@ -2,6 +2,14 @@ export default function TodoList(params) {
   const { $target } = params;
   let data = params.data || [];
 
+  $target.addEventListener("click", e => {
+    if (e.target.className === "toggle") {
+      const { id } = e.toElement.parentElement.parentElement.dataset
+      data[id].isCompleted = e.toElement.checked
+      this.render();
+    }
+  });
+
   this.setState = nextData => {
     data = nextData;
     this.render();
@@ -10,7 +18,15 @@ export default function TodoList(params) {
   this.render = () => {
     $target.innerHTML = data
       .map((todo, index) => {
-        return `<li data-id="${index}">
+        return todo.isCompleted
+        ? `<li class="completed" data-id="${index}">
+        <div class="view">
+         <input class="toggle" type="checkbox" checked="true">
+         <label class="label">${todo.content}</label>
+         <button class="destroy"></button>
+       </div></li>`
+        :
+        `<li data-id="${index}">
         <div class="view">
          <input class="toggle" type="checkbox">
          <label class="label">${todo.content}</label>
