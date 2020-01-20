@@ -12,6 +12,10 @@ export default function App(params) {
     toggleTodo: id => {
       data[id].isCompleted = !data[id].isCompleted;
       this.render();
+    },
+    removeTodo: id => {
+      data.splice(id, 1);
+      this.render();
     }
   });
 

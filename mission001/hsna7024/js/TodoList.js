@@ -1,17 +1,14 @@
 export default function TodoList(params) {
-  const { $target, toggleTodo } = params;
+  const { $target, toggleTodo, removeTodo } = params;
   let data = params.data || [];
 
   $target.addEventListener("click", e => {
+    const { id } = e.toElement.parentElement.parentElement.dataset;
     if (e.target.className === "toggle") {
-      const { id } = e.toElement.parentElement.parentElement.dataset;
       toggleTodo(id);
     }
-
     if (e.target.className === "destroy") {
-      const { id } = e.toElement.parentElement.parentElement.dataset;
-      data.splice(id, 1);
-      this.render();
+      removeTodo(id);
     }
   });
 
