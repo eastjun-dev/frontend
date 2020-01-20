@@ -1,5 +1,5 @@
 export default function TodoList(params) {
-  const $target = params.$target;
+  const { $target } = params;
   let data = params.data || [];
 
   this.setState = nextData => {
