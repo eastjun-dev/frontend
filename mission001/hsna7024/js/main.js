@@ -15,6 +15,7 @@ const data = [
 const init = () => {
   const app = new App({
     $targetTodoList: document.querySelector("#todo-list"),
+    $targetTodoInput: document.querySelector("#new-todo-title"),
     data
   });
 };
