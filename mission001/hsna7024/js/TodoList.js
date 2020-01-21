@@ -1,4 +1,5 @@
-import { classNames, keyCodes } from "./utils/constants"
+import { classNames, keyCodes } from "./utils/constants.js";
+import { todoListTemplate } from "./utils/templates.js";
 
 export default function TodoList(params) {
   const { $target, toggleTodo, removeTodo, filterTodos } = params;
@@ -51,23 +52,7 @@ export default function TodoList(params) {
   };
 
   this.render = () => {
-    $target.innerHTML = filteredData
-      .map((todo, index) => {
-        const contentHtmlString = `<div class="view"> 
-        <input class="toggle" type="checkbox" ${
-          todo.isCompleted ? "checked" : ""
-        }>
-        <label class="label">${todo.content}</label>
-        <button class="destroy"></button></div>
-        <input class="edit" value="${todo.content}">`;
-        const completedClassName = todo.isCompleted
-          ? `class = "completed"`
-          : "";
-        const editingClassName = todo.onEdit ? `class = "editing"` : "";
-
-        return `<li ${completedClassName} ${editingClassName} data-id="${index}">${contentHtmlString}</li>`;
-      })
-      .join("");
+    $target.innerHTML = filteredData.map(todoListTemplate).join("");
   };
 
   this.render();
