@@ -1,3 +1,5 @@
+import { todoCountTemplate } from "./utils/templates.js";
+
 export default function TodoCount(params) {
   const { $target } = params;
   let data = params.data || [];
@@ -8,6 +10,6 @@ export default function TodoCount(params) {
   };
 
   this.render = () => {
-    $target.innerHTML = `총 <strong>${data.length}</strong> 개`;
+    $target.innerHTML = todoCountTemplate(data.length);
   };
 }

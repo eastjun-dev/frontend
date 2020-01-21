@@ -21,3 +21,7 @@ export const todoFilterTemplate = () => {
     <a class="completed" href="#/completed">완료한 일</a>
   </li>`;
 };
+
+export const todoCountTemplate = length => {
+  return `총 <strong>${length}</strong> 개`;
+};
