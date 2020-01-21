@@ -1,10 +1,26 @@
 import TodoList from "./TodoList.js";
 import TodoInput from "./TodoInput.js";
 import TodoCount from "./TodoCount.js";
+import TodoFilter from "./TodoFilter.js";
+import { filters } from "./utils/constants.js";
 
 export default function App(params) {
-  const { $targetTodoList, $targetTodoInput, $targetTodoCount } = params;
+  const {
+    $targetTodoList,
+    $targetTodoInput,
+    $targetTodoCount,
+    $targetTodoFilter,
+  } = params;
   let data = params.data || [];
+  let filter = params.data || filters.ALL;
+
+  const filterTodos = (todos, filter) => {
+    switch(filter){
+      case filters.ACTIVE: return todos.filter(todo => !todo.isCompleted);
+      case filters.COMPLETED: return todos.filter(todo => todo.isCompleted);
+      default : return todos;
+    }
+  }
 
   const todoList = new TodoList({
     $target: $targetTodoList,
@@ -16,7 +32,9 @@ export default function App(params) {
     removeTodo: id => {
       data.splice(id, 1);
       this.render();
-    }
+    },
+    filter,
+    filterTodos
   });
 
   const todoInput = new TodoInput({
@@ -34,10 +52,18 @@ export default function App(params) {
     data
   });
 
-  this.setState = nextData => {
+  const todoFilter = new TodoFilter({
+    $target: $targetTodoFilter,
+    changeFilter: nextFilter => {
+      this.setState(data, nextFilter);
+    }
+  });
+
+  this.setState = (nextData, nextFilter) => {
     data = nextData;
-    todoList.setState(data);
-    todoCount.setState(data);
+    filter = nextFilter
+    todoList.setState(data, filter);
+    todoCount.setState(filterTodos(data, filter));
     this.render();
   };
 

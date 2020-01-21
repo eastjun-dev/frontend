@@ -1,6 +1,8 @@
 export default function TodoList(params) {
-  const { $target, toggleTodo, removeTodo } = params;
+  const { $target, toggleTodo, removeTodo, filterTodos } = params;
   let data = params.data || [];
+  let filter = params.filter || "";
+  let filteredData = [];
 
   $target.addEventListener("click", e => {
     const { id } = e.toElement.parentElement.parentElement.dataset;
@@ -38,15 +40,20 @@ export default function TodoList(params) {
     }
   });
 
-  this.setState = nextData => {
-    data = nextData;
+  filteredData = filterTodos(data, filter)
+
+  this.setState = (nextData, nextFilter) => {
+    data = nextData || data;
+    filter = nextFilter || filter;
+    console.log(filter)
+    filteredData = filterTodos(data, filter)
     this.render();
   };
 
   this.render = () => {
-    $target.innerHTML = data
+    $target.innerHTML = filteredData
       .map((todo, index) => {
-        const contentHtmlString = `<div class="view">
+        const contentHtmlString = `<div class="view"> 
         <input class="toggle" type="checkbox" ${
           todo.isCompleted ? "checked" : ""
         }>

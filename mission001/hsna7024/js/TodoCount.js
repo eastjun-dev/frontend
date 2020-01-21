@@ -1,6 +1,6 @@
 export default function TodoCount(params) {
   const { $target } = params;
-  const data = params.data || [];
+  let data = params.data || [];
 
   this.setState = nextData => {
     data = nextData;

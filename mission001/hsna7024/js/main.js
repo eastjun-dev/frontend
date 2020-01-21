@@ -23,6 +23,8 @@ const init = () => {
     $targetTodoList: document.querySelector("#todo-list"),
     $targetTodoInput: document.querySelector("#new-todo-title"),
     $targetTodoCount: document.querySelector(".todo-count"),
+    $targetTodoFilter: document.querySelector(".filters"),
+    filter: "all selected",
     data
   });
 };
