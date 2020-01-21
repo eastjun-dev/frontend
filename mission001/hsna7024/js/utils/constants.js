@@ -10,3 +10,8 @@ export const classNames = {
   LABEL: "label",
   EDIT: "edit"
 };
+
+export const keyCodes = {
+  ENTER: 13,
+  ESC: 27
+}

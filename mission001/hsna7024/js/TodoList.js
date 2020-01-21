@@ -1,4 +1,4 @@
-import { classNames } from "./utils/constants"
+import { classNames, keyCodes } from "./utils/constants"
 
 export default function TodoList(params) {
   const { $target, toggleTodo, removeTodo, filterTodos } = params;
@@ -26,15 +26,13 @@ export default function TodoList(params) {
 
   $target.addEventListener("keydown", e => {
     if (e.target.className === classNames.EDIT) {
-      const ENTER_KEY_CODE = 13;
-      const ESC_KEY_CODE = 27;
-      if (e.keyCode === ENTER_KEY_CODE) {
+      if (e.keyCode === keyCodes.ENTER) {
         const { id } = e.target.parentElement.dataset;
         data[id].content = e.target.value;
         data[id].onEdit = false;
         this.render();
       }
-      if (e.keyCode === ESC_KEY_CODE) {
+      if (e.keyCode === keyCodes.ESC) {
         const { id } = e.target.parentElement.dataset;
         data[id].onEdit = false;
         this.render();
