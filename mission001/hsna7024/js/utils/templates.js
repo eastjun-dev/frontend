@@ -11,7 +11,7 @@ export const todoListTemplate = (todo, index) => {
 };
 
 export const todoFilterTemplate = () => {
-  `<li>
+  return `<li>
     <a class="all selected" href="#/">전체보기</a>
   </li>
   <li>

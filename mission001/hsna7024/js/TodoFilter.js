@@ -8,6 +8,8 @@ export default function TodoFilter(params) {
   });
 
   this.render = () => {
-    $target.innerHTML = todoFilterTemplate;
+    $target.innerHTML = todoFilterTemplate();
   };
+
+  this.render();
 }
