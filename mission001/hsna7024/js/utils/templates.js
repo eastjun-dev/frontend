@@ -1,3 +1,5 @@
+import { filters } from "./constants.js";
+
 export const todoListTemplate = (todo, index) => {
   const contentHtmlString = `<div class="view"> 
   <input class="toggle" type="checkbox" ${todo.isCompleted ? "checked" : ""}>
@@ -10,15 +12,19 @@ export const todoListTemplate = (todo, index) => {
   return `<li ${completedClassName} ${editingClassName} data-id="${index}">${contentHtmlString}</li>`;
 };
 
-export const todoFilterTemplate = () => {
+export const todoFilterTemplate = filter => {
+  const allSelected = filter === filters.ALL ? " selected" : "";
+  const activeSelected = filter === filters.ACTIVE ? " selected" : "";
+  const completedSelected = filter === filters.COMPLETED ? " selected" : "";
+
   return `<li>
-    <a class="all selected" href="#/">전체보기</a>
+    <a class="all${allSelected}" href="#/">전체보기</a>
   </li>
   <li>
-    <a class="active" href="#/active">해야할 일</a>
+    <a class="active${activeSelected}" href="#/active">해야할 일</a>
   </li>
   <li>
-    <a class="completed" href="#/completed">완료한 일</a>
+    <a class="completed${completedSelected}" href="#/completed">완료한 일</a>
   </li>`;
 };
 

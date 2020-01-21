@@ -1,4 +1,5 @@
 import App from "./App.js";
+import { filters } from "./utils/constants.js";
 
 const data = [
   {
@@ -24,7 +25,7 @@ const init = () => {
     $targetTodoInput: document.querySelector("#new-todo-title"),
     $targetTodoCount: document.querySelector(".todo-count"),
     $targetTodoFilter: document.querySelector(".filters"),
-    filter: "all selected",
+    filter: filters.ALL,
     data
   });
 };

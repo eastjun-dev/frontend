@@ -9,18 +9,21 @@ export default function App(params) {
     $targetTodoList,
     $targetTodoInput,
     $targetTodoCount,
-    $targetTodoFilter,
+    $targetTodoFilter
   } = params;
   let data = params.data || [];
-  let filter = params.data || filters.ALL;
+  let filter = params.filter || filters.ALL;
 
   const filterTodos = (todos, filter) => {
-    switch(filter){
-      case filters.ACTIVE: return todos.filter(todo => !todo.isCompleted);
-      case filters.COMPLETED: return todos.filter(todo => todo.isCompleted);
-      default : return todos;
+    switch (filter) {
+      case filters.ACTIVE:
+        return todos.filter(todo => !todo.isCompleted);
+      case filters.COMPLETED:
+        return todos.filter(todo => todo.isCompleted);
+      default:
+        return todos;
     }
-  }
+  };
 
   const todoList = new TodoList({
     $target: $targetTodoList,
@@ -56,20 +59,23 @@ export default function App(params) {
     $target: $targetTodoFilter,
     changeFilter: nextFilter => {
       this.setState(data, nextFilter);
-    }
+    },
+    filter
   });
 
   this.setState = (nextData, nextFilter) => {
     data = nextData;
-    filter = nextFilter
+    filter = nextFilter;
     todoList.setState(data, filter);
     todoCount.setState(filterTodos(data, filter));
+    todoFilter.setState(filter);
     this.render();
   };
 
   this.render = () => {
     todoList.render();
     todoCount.render();
+    todoFilter.render();
   };
 
   this.render();

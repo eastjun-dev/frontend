@@ -46,7 +46,6 @@ export default function TodoList(params) {
   this.setState = (nextData, nextFilter) => {
     data = nextData || data;
     filter = nextFilter || filter;
-    console.log(filter);
     filteredData = filterTodos(data, filter);
     this.render();
   };
