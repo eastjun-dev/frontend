@@ -1,4 +1,4 @@
-import { classNames, keyCodes } from "./utils/constants.js";
+import { classNameMap, keyCodeMap } from "./utils/constants.js";
 import { todoListTemplate } from "./utils/templates.js";
 
 export default function TodoList(params) {
@@ -9,16 +9,16 @@ export default function TodoList(params) {
 
   $target.addEventListener("click", e => {
     const { id } = e.toElement.parentElement.parentElement.dataset;
-    if (e.target.className === classNames.TOGGLE) {
+    if (e.target.className === classNameMap.TOGGLE) {
       toggleTodo(id);
     }
-    if (e.target.className === classNames.REMOVE) {
+    if (e.target.className === classNameMap.REMOVE) {
       removeTodo(id);
     }
   });
 
   $target.addEventListener("dblclick", e => {
-    if (e.target.className === classNames.LABEL) {
+    if (e.target.className === classNameMap.LABEL) {
       const { id } = e.toElement.parentElement.parentElement.dataset;
       data[id].onEdit = true;
       this.render();
@@ -26,14 +26,14 @@ export default function TodoList(params) {
   });
 
   $target.addEventListener("keydown", e => {
-    if (e.target.className === classNames.EDIT) {
-      if (e.keyCode === keyCodes.ENTER) {
+    if (e.target.className === classNameMap.EDIT) {
+      if (e.keyCode === keyCodeMap.ENTER) {
         const { id } = e.target.parentElement.dataset;
         data[id].content = e.target.value;
         data[id].onEdit = false;
         this.render();
       }
-      if (e.keyCode === keyCodes.ESC) {
+      if (e.keyCode === keyCodeMap.ESC) {
         const { id } = e.target.parentElement.dataset;
         data[id].onEdit = false;
         this.render();

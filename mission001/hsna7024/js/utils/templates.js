@@ -1,4 +1,4 @@
-import { filters } from "./constants.js";
+import { filterMap } from "./constants.js";
 
 export const todoListTemplate = (todo, index) => {
   const contentHtmlString = `<div class="view"> 
@@ -13,9 +13,9 @@ export const todoListTemplate = (todo, index) => {
 };
 
 export const todoFilterTemplate = filter => {
-  const allSelected = filter === filters.ALL ? " selected" : "";
-  const activeSelected = filter === filters.ACTIVE ? " selected" : "";
-  const completedSelected = filter === filters.COMPLETED ? " selected" : "";
+  const allSelected = filter === filterMap.ALL ? " selected" : "";
+  const activeSelected = filter === filterMap.ACTIVE ? " selected" : "";
+  const completedSelected = filter === filterMap.COMPLETED ? " selected" : "";
 
   return `<li>
     <a class="all${allSelected}" href="#/">전체보기</a>

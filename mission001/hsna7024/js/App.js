@@ -2,7 +2,7 @@ import TodoList from "./TodoList.js";
 import TodoInput from "./TodoInput.js";
 import TodoCount from "./TodoCount.js";
 import TodoFilter from "./TodoFilter.js";
-import { filters } from "./utils/constants.js";
+import { filterMap } from "./utils/constants.js";
 
 export default function App(params) {
   const {
@@ -12,13 +12,13 @@ export default function App(params) {
     $targetTodoFilter
   } = params;
   let data = params.data || [];
-  let filter = params.filter || filters.ALL;
+  let filter = params.filter || filterMap.ALL;
 
   const filterTodos = (todos, filter) => {
     switch (filter) {
-      case filters.ACTIVE:
+      case filterMap.ACTIVE:
         return todos.filter(todo => !todo.isCompleted);
-      case filters.COMPLETED:
+      case filterMap.COMPLETED:
         return todos.filter(todo => todo.isCompleted);
       default:
         return todos;
