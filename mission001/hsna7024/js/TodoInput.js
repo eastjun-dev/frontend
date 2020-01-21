@@ -8,7 +8,7 @@ export default function TodoInput(params) {
   }
 
   $target.addEventListener("keydown", e => {
-    if (e.keyCode === keyCodeMap.ENTER) {
+    if (e.keyCode === keyCodeMap.ENTER && $target.value) {
       onKeyEnter($target.value);
       $target.value = "";
     }
