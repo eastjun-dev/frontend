@@ -11,9 +11,9 @@ export const classNameMap = {
   EDIT: "edit"
 };
 
-export const keyCodeMap = {
-  ENTER: 13,
-  ESC: 27
+export const keyMap = {
+  ENTER: "Enter",
+  ESC: "Escape"
 }
 
 export const errorMessageMap = {

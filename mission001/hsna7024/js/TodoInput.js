@@ -1,4 +1,4 @@
-import { keyCodeMap } from "./utils/constants.js";
+import { keyMap } from "./utils/constants.js";
 
 export default function TodoInput(params) {
   const { $target, onKeyEnter } = params;
@@ -8,7 +8,7 @@ export default function TodoInput(params) {
   }
 
   $target.addEventListener("keydown", e => {
-    if (e.keyCode === keyCodeMap.ENTER && $target.value) {
+    if (e.key === keyMap.ENTER  && $target.value) {
       onKeyEnter($target.value);
       $target.value = "";
     }
