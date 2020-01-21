@@ -2,18 +2,18 @@ import { todoCountTemplate } from "./utils/templates.js";
 
 export default function TodoCount(params) {
   const { $target } = params;
-  let data = params.data || [];
+  let count = params.count || 0;
 
   if($target === null) {
     throw new Error(errorMessageMap.IS_NO_TARGET);
   }
 
-  this.setState = nextData => {
-    data = nextData;
+  this.setState = nextCount => {
+    count = nextCount;
     this.render();
   };
 
   this.render = () => {
-    $target.innerHTML = todoCountTemplate(data.length);
+    $target.innerHTML = todoCountTemplate(count);
   };
 }

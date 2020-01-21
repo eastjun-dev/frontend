@@ -52,7 +52,7 @@ export default function App(params) {
 
   const todoCount = new TodoCount({
     $target: $targetTodoCount,
-    data
+    count : data.length
   });
 
   const todoFilter = new TodoFilter({
@@ -67,7 +67,7 @@ export default function App(params) {
     data = nextData;
     filter = nextFilter;
     todoList.setState(data, filter);
-    todoCount.setState(filterTodos(data, filter));
+    todoCount.setState(filterTodos(data, filter).length);
     todoFilter.setState(filter);
     this.render();
   };
