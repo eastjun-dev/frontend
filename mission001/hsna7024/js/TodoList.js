@@ -1,4 +1,4 @@
-import { classNameMap, keyCodeMap } from "./utils/constants.js";
+import { classNameMap, keyCodeMap, errorMessageMap } from "./utils/constants.js";
 import { todoListTemplate } from "./utils/templates.js";
 
 export default function TodoList(params) {
@@ -6,6 +6,10 @@ export default function TodoList(params) {
   let data = params.data || [];
   let filter = params.filter || "";
   let filteredData = [];
+
+  if($target === null) {
+    throw new Error(errorMessageMap.IS_NO_TARGET);
+  }
 
   $target.addEventListener("click", e => {
     const { id } = e.toElement.parentElement.parentElement.dataset;

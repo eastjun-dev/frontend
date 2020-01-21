@@ -15,3 +15,7 @@ export const keyCodeMap = {
   ENTER: 13,
   ESC: 27
 }
+
+export const errorMessageMap = {
+  IS_NO_TARGET: 'target element가 없습니다.',
+}
