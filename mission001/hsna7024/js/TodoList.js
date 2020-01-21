@@ -27,14 +27,13 @@ export default function TodoList(params) {
 
   $target.addEventListener("keydown", e => {
     if (e.target.className === classNameMap.EDIT) {
+      const { id } = e.target.parentElement.dataset;
       if (e.keyCode === keyCodeMap.ENTER) {
-        const { id } = e.target.parentElement.dataset;
         data[id].content = e.target.value;
         data[id].onEdit = false;
         this.render();
       }
       if (e.keyCode === keyCodeMap.ESC) {
-        const { id } = e.target.parentElement.dataset;
         data[id].onEdit = false;
         this.render();
       }
