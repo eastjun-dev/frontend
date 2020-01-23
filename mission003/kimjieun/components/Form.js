@@ -1,3 +1,5 @@
+import { policyTemplate } from '../js/templates.js'
+
 export default function Form({ userData }) {
   this.init = () => {
     document.querySelector('#phoneNumber').addEventListener('blur', (e) => {
@@ -23,12 +25,14 @@ export default function Form({ userData }) {
     switch (target) {
       case 'phoneNumber':
         userData.phoneNumber = e.target.value
+        getTempleteWithPolicy()
         break
       case 'name':
         userData.name = e.target.value
         break
       case 'email':
         userData.email = e.target.value
+        getTempleteWithPolicy()
         break
       case 'password':
         userData.password = e.target.value
@@ -41,6 +45,11 @@ export default function Form({ userData }) {
     }
 
     this.setState(userData)
+  }
+
+  this.getTempleteWithPolicy = () => {
+    console.log('getTempleteWithPolicy')
+    document.querySelector('.policy').innerHTML = policyTemplate
   }
 
   this.setState = (data) => {

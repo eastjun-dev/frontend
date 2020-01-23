@@ -26,7 +26,6 @@ const policyTemplate = `
 const footerTemplate = `
   <button type="submit">다음</button>
 `
-
 export {
   basicInfoTemplate,
   policyTemplate,
