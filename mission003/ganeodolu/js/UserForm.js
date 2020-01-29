@@ -1,3 +1,5 @@
+import {FORMNAME, TITLENAME} from './constant.js'
+
 export default function UserForm({$targetTitle, $targetUserForm, $targetInput, $targetPhone, $targetEmail, $targetIntroduce, $targetAgreement, $targetCheckBox, $targetCompleteButton1, $targetStep1, $targetStep2, data}){
     this.data = data;
 
@@ -5,16 +7,16 @@ export default function UserForm({$targetTitle, $targetUserForm, $targetInput, $
 
     $targetUserForm.addEventListener('change', (e) => {
         let eventName = e.target.name
-        if (eventName === 'email' || eventName === 'phone') {
+        if (eventName === FORMNAME.EMAIL || eventName === FORMNAME.PHONE) {
             if ($targetPhone.value || $targetEmail.value && $targetAgreement.classList.contains('hidden')) {
                 $targetAgreement.classList.remove('hidden')
             } else {
                 $targetAgreement.classList.add('hidden')
             }
         }
-        let count = 0
-        for (let i = 0; i < $targetInput.length; i++) {
-            if ($targetInput[i].value) {
+        let count = 0;
+        for (let inputIndex = 0; inputIndex < $targetInput.length; inputIndex++) {
+            if ($targetInput[inputIndex].value) {
                 count++
             }
         }
@@ -34,15 +36,15 @@ export default function UserForm({$targetTitle, $targetUserForm, $targetInput, $
 
     $targetCompleteButton1.addEventListener('click', (e) => {
         e.preventDefault()
-        for (let i = 0; i < 3; i++) { // 인덱스가 3인 비밀번호제외
-            data[$targetInput[i].name] = $targetInput[i].value
-            if ($targetInput[i].value) {
-                this.data[$targetInput[i].name] = $targetInput[i].value
+        for (let inputIndex = 0; inputIndex < 3; inputIndex++) { // 인덱스가 3인 비밀번호제외
+            data[$targetInput[inputIndex].name] = $targetInput[inputIndex].value
+            if ($targetInput[inputIndex].value) {
+                this.data[$targetInput[inputIndex].name] = $targetInput[inputIndex].value
             }
         }
         if (e.target.classList.contains('mdc-button__ripple') && agreementCheck) {
             $targetStep1.classList.add('hidden')
-            $targetTitle.textContent = '가족 구성원 추가 2/3'
+            $targetTitle.textContent = TITLENAME.STEP2
             $targetStep2.classList.remove('hidden')
             this.data['introduce'] = $targetIntroduce.value;
         }

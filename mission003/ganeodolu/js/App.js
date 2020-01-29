@@ -59,6 +59,7 @@ export default function App(data) {
         $targetStep3: $targetStep3, 
         data: this.data,
     })
+    
     const myInfoForm = new MyInfoForm({
         $targetTitle: $targetTitle, 
         $targetMyInfo: $targetMyInfo, 
