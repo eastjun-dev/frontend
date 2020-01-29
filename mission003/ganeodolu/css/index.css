@@ -26,15 +26,8 @@
 
 body {
   margin: 0;
+  background-color: darkslategrey;
 }
-
-/* .background-img {
-  background-size: cover;
-  background-image: url("https://user-images.githubusercontent.com/56821976/71782829-d68f7000-3021-11ea-833d-9e286c629503.jpg");
-  position: fixed;
-  width: 100%;
-  height: 50vh;
-} */
 
 .dark-overlay {
   width: 100%;
