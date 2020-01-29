@@ -1,6 +1,6 @@
-import UserForm from "./UserForm.js"
-import FamilyForm from "./FamilyForm.js"
-import MyInfoForm from "./MyInfoForm.js"
+import UserForm from "../form/UserForm.js"
+import FamilyForm from "../form/FamilyForm.js"
+import MyInfoForm from "../form/MyInfoForm.js"
 
 export default function App(data) {
     this.dialog = new mdc.dialog.MDCDialog(document.querySelector('.mdc-dialog'))
@@ -59,7 +59,7 @@ export default function App(data) {
         $targetStep3: $targetStep3, 
         data: this.data,
     })
-    
+
     const myInfoForm = new MyInfoForm({
         $targetTitle: $targetTitle, 
         $targetMyInfo: $targetMyInfo, 

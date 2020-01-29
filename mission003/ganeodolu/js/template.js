@@ -3,7 +3,7 @@ function renderedFamilyTemplate(renderedHTML, $targetFamilyContainer){
     return renderedHTML +=
     `
     <div data-index class="flex-container user-family-form-fields">
-        <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+        <div class="mdc-text-field  mrg-right-10" data-mdc-auto-init="MDCTextField">
             <input type="text" class="mdc-text-field__input" type="text" name="family-name-${FamilyContainerLength / 2}" value=${$targetFamilyContainer[0].value}>
             <label class="mdc-floating-label">이름</label>
             <div class="mdc-line-ripple"></div>
