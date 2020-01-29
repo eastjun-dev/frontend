@@ -1,4 +1,4 @@
 import App from './App.js'
-let data = {};
+let data = {Family: { name: [], relation: [] }};
 
 new App(data)
