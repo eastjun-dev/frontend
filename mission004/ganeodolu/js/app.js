@@ -1,4 +1,9 @@
 const $targetMovieList = document.querySelector('.movie-list')
+const $targetLogo = document.querySelector('.logo')
+
+$targetLogo.addEventListener('click', (e) => {
+    window.location.reload()
+})
 
 function fetchData(pageNumber) {
     return new Promise((resolve, reject) => {
@@ -36,7 +41,7 @@ function fetchData(pageNumber) {
     $targetMovieList.innerHTML = renderedListHTML
     let scrollTimer;
     window.onscroll = async function (e) {
-        if ((window.pageYOffset + document.body.clientHeight) >= document.body.scrollHeight * 0.95) {
+        if ((window.pageYOffset + document.body.clientHeight) >= document.body.scrollHeight) {
             if(!scrollTimer){
                 scrollTimer = setTimeout(async function(){
                     scrollTimer = null;
