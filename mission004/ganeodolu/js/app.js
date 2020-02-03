@@ -1,34 +1,32 @@
-import { fetchGetMovie, fetchSearchMovie } from './api.js'
-import SearchMovie from './searchMovie.js'
+import { fetchGetMovie, fetchSearchMovie } from '../util/api.js'
 import GetMovieList from './getMovieList.js'
+import SearchMovie from './searchMovie.js'
 import ShowMovieList from './showMovieList.js'
+import ScrollMovieList from './scrollMovieList.js'
 
 export default function App() {
+
     const $targetMovieList = document.querySelector('.main')
     const $targetLogo = document.querySelector('.logo')
     const $targetSearch = document.querySelector('.input-search')
     const $targetSearchIcon = document.querySelector('.material-icons')
 
     $targetLogo.addEventListener('click', (e) => {
+        sessionStorage.removeItem('getKeyword')
         window.location.reload()
     })
-    let keyword = sessionStorage.getItem('getKeyword')
-    console.log(keyword)
 
     const getMovieList = new GetMovieList({
         onLoad: async () => {
+            let keyword = sessionStorage.getItem('getKeyword')
             if (!keyword) {
                 const data = await fetchGetMovie()
                 showMovieList.setState(data)
             } else {
-                const data = await fetchSearchMovie(keyword)
+                const data = await fetchSearchMovie(1, keyword)
                 showMovieList.setState(data)
             }
-        },
-        onScroll: async (pageNumber) => {
-            const data = await fetchGetMovie(pageNumber)
-            showMovieList.addSetState(data)
-        },
+        }
     })
 
     const showMovieList = new ShowMovieList({
@@ -40,16 +38,23 @@ export default function App() {
         $targetSearch: $targetSearch,
         $targetSearchIcon: $targetSearchIcon,
         onClickSearch: async (keyword) => {
-            const data = await fetchSearchMovie(keyword)
-            console.log(data)
+            const data = await fetchSearchMovie(1, keyword)
             showMovieList.setState(data)
-        },
-        onScroll: async (keyword, pageNumber) => {
-            const data = await fetchSearchMovie(keyword, pageNumber)
-            console.log(data)
-            showMovieList.addSetState(data)
         }
     })
-    sessionStorage.removeItem('getKeyword')
+
+    const scrollMovieList = new ScrollMovieList({
+        onScroll: async (pageNumber, keyword) => {
+            if (!keyword) {
+                const data = await fetchGetMovie(pageNumber)
+                showMovieList.addSetState(data)
+            } else {
+                const data = await fetchSearchMovie(pageNumber, keyword)
+                showMovieList.addSetState(data)
+            }
+        }
+    })
 }
+
+new App()
 

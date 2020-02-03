@@ -1,43 +1,22 @@
-import { fetchSearchMovie } from './api.js'
-
-export default function SearchMovie({ $targetSearch, $targetSearchIcon, onClickSearch, onScroll }) {
-
-    let searchKeyword
-    let pageNumber = 1;
-    let scrollTimer;
+export default function SearchMovie({ $targetSearch, $targetSearchIcon, onClickSearch }) {
 
     $targetSearch.addEventListener('keypress', async (e) => {
         if (e.key === 'Enter') {
-            searchKeyword = e.target.value
-            console.log(searchKeyword)
+            let searchKeyword = e.target.value
             if (searchKeyword) {
                 onClickSearch(searchKeyword)
-                pageNumber = 1
+                sessionStorage.setItem('getKeyword', searchKeyword)
             }
         }
     })
 
     $targetSearchIcon.addEventListener('click', (e) => {
-        console.log(e.target.previousElementSibling.value)
         searchKeyword = e.target.previousElementSibling.value
         if (searchKeyword) {
             onClickSearch(searchKeyword)
-            pageNumber = 1
+            sessionStorage.setItem('getKeyword', searchKeyword)
         }
     })
-
-    window.onscroll = async function (e) {
-        if ((window.pageYOffset + document.body.clientHeight) >= document.body.scrollHeight * 0.95) {
-            console.log(searchKeyword, pageNumber)
-            if (!scrollTimer) {
-                scrollTimer = setTimeout(async function () {
-                    scrollTimer = null;
-                    pageNumber++
-                    onScroll(searchKeyword, pageNumber)
-                }, 200)
-            }
-        }
-    }
 
     $targetSearch.addEventListener('focus', (e) => {
         e.target.value = ''
