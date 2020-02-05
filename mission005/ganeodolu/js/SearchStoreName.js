@@ -1,7 +1,7 @@
 import { KEY_NAME, EVENT_NAME } from '../util/constant.js'
 
 
-export default function SearchStoreName({$targetInput, $targetButton, onSearch}){
+export default function SearchStoreName({$targetInput, $targetButton, onAccessSearch}){
     this.$targetInput = $targetInput
     this.$targetButton = $targetButton
 
@@ -9,12 +9,12 @@ export default function SearchStoreName({$targetInput, $targetButton, onSearch})
         if(e.key === KEY_NAME.ENTER){
             console.log(e.target.value)
             let keyword = e.target.value
-            onSearch(keyword, 1)
+            onAccessSearch(keyword, 1)
         }
     })
 
     this.$targetInput.addEventListener(EVENT_NAME.CLICK, (e) => {
-        onSearch(e.target.value, 1)
+        onAccessSearch(e.target.value, 1)
     })
 
     this.$targetButton.addEventListener('click', (e) => {

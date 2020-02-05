@@ -15,15 +15,19 @@
         <div class="header">
             <div class="title">가게 찾기</div>
             <div class="search">
-                <input id="txt-search" type="text" />
+                <input id="txt-search" type="text" list="searched"/>
+                <datalist id="searched">
+                    <option>구파발</option>
+                    <option>맘스터치</option>
+                </datalist> 
                 <button class="btn-search">검색</button>
             </div>
         </div>
         <div class="body">
-            <div class="history-search"></div>
+            <!-- <div class="history-search"></div>
             <div class="total"></div>
             <div class="list">
-            </div>
+            </div> -->
         </div>
         <div class="paging"></div>
     </div>

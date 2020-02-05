@@ -1,13 +1,15 @@
 import { renderedStoreListHTML } from '../util/template.js'
 
-export default function ShowStoreList({ $target, data, page }) {
+export default function ShowStoreList({ $target, data, keyword, page }) {
     this.$target = $target
     this.data = data
+    this.keyword = keyword
     this.page = page
 
 
-    this.setState = function (nextData, nextPage) {
+    this.setState = function (nextData, nextKeyword, nextPage) {
         this.data = nextData
+        this.keyword = nextKeyword
         this.page = nextPage
         this.render()
     }
@@ -15,7 +17,7 @@ export default function ShowStoreList({ $target, data, page }) {
     this.render = function () {
         console.log(this.data)
         if (this.data.list) {
-            this.$target.innerHTML = renderedStoreListHTML(this.data, this.page)
+            this.$target.innerHTML = renderedStoreListHTML(this.data, this.keyword, this.page)
         }
     }
 
