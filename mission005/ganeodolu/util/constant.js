@@ -15,4 +15,8 @@ const EVENT_NAME = {
     CLICK: 'clickSearchButton'
 }
 
-export { API_NAME, ERROR_NAME, KEY_NAME, EVENT_NAME }
+const MESSAGE_NAME = {
+    NO_RESULT: '최근 검색어가 없습니다'
+}
+
+export { API_NAME, ERROR_NAME, KEY_NAME, EVENT_NAME, MESSAGE_NAME }

@@ -1,4 +1,5 @@
 import { renderedHistoryHTML } from '../util/template.js'
+import { MESSAGE_NAME } from '../util/constant.js'
 
 export default function ShowHistoryList({ $target, data }) {
     this.$target = $target
@@ -15,7 +16,7 @@ export default function ShowHistoryList({ $target, data }) {
 
     this.getHistory = function () {
         const getKeyword = localStorage.getItem('storedKeywords')
-        let keywordList = getKeyword ? getKeyword.split(',') : ['최근 검색어가 없습니다']
+        let keywordList = getKeyword ? getKeyword.split(',') : [`${MESSAGE_NAME.NO_RESULT}`]
         return keywordList
     }
 

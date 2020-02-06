@@ -7,11 +7,13 @@ function App() {
 
     const $targetSearchInput = document.querySelector('#txt-search')
     const $targetSearchButton = document.querySelector('.btn-search')
+    const $targetDeleteButton = document.querySelector('.btn-delete')
     $targetSearchInput.focus()
 
     const searchStoreName = new SearchStoreName({
         $targetInput: $targetSearchInput,
         $targetButton: $targetSearchButton,
+        $targetDelete: $targetDeleteButton,
         onAccessSearch: async (keyword, page) => {
             const data = await apiHandler({
                 apiKeyword: keyword,
@@ -19,6 +21,9 @@ function App() {
             })
             showHistoryList.setState(keyword)
             showStoreList.setState(data, keyword, page)
+        },
+        onClickDelete: () => {
+            showHistoryList.render()
         }
     })
 

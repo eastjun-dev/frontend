@@ -20,6 +20,7 @@ function renderedHistoryHTML(inputValue){
     let result = inputValue.map((val)=> {
         return `
         <option>${val}</option>
+        <button>최근 검색어 삭제</button>
         `
     }).join('')
     return result

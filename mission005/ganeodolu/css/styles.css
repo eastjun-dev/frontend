@@ -46,6 +46,18 @@
     cursor: pointer;
 }
 
+.btn-stored {
+    width: 120px;
+    height: 30px;
+    border: 1px solid #cacaca;
+    border-radius: 7px;
+    background-color: #fff;
+    margin-left: 3px;
+    vertical-align: middle;
+    outline: none;
+    cursor: pointer;
+}
+
 .total {
     margin: 20px 10px 7px;
     font-size: 13px;
