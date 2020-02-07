@@ -1,12 +1,12 @@
 import { renderedPageHTML } from '../util/template.js'
-import { ERROR_NAME, TEXT_NAME } from '../util/constant.js'
+import { TEXT_NAME } from '../util/constant.js'
 
 export default function ShowPage({ $target, $page, $totalPage, $pageOffset }) {
     this.$target = $target
     this.$page = $page
     this.$totalPage = $totalPage
     this.$pageOffset = $pageOffset
-    const numPages = 5
+    const numPages = TEXT_NAME.NUM_PAGES
 
     this.setState = function (nextPage, nextTotalPage, nextPageOffset) {
         this.$page = nextPage

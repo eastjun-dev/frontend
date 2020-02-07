@@ -15,7 +15,8 @@ const MESSAGE_NAME = {
 }
 const TEXT_NAME = {
     PREVIOUS: '이전',
-    NEXT: '다음'
+    NEXT: '다음',
+    NUM_PAGES: 5
 }
 
 export { API_NAME, ERROR_NAME, KEY_NAME, EVENT_NAME, MESSAGE_NAME, TEXT_NAME }

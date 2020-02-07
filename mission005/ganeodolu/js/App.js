@@ -4,12 +4,13 @@ import ShowStoreList from './ShowStoreList.js'
 import ShowHistoryList from './ShowHistoryList.js'
 import ManagePage from './ManagePage.js'
 import ShowPage from './ShowPage.js'
+import ManageMap from './ManageMap.js'
+import ShowModalMap from './ShowModalMap.js'
 
 function App() {
     const $targetSearchInput = document.querySelector('#txt-search')
     const $targetSearchButton = document.querySelector('.btn-search')
     const $targetDeleteButton = document.querySelector('.btn-delete')
-    $targetSearchInput.focus()
 
     const searchStoreName = new SearchStoreName({
         $targetInput: $targetSearchInput,
@@ -65,6 +66,24 @@ function App() {
         $totalPage: [],
         $pageOffset: [],
     })
+    const $targetMap = document.querySelector('#map')
+    const $targetItem = document.querySelector('.item-detail')
+    const $targetDialog = document.querySelector('#dialog');
+    const manageMap = new ManageMap({
+        $target: $targetMap,
+        $targetItem: $targetShowResult,
+        $targetDialog: $targetDialog,
+        onClickStore: () => {
+            // manageMap.$targetItem
+        }
+    })
+    // const $targetDialogButton = document.querySelector('.dialog-button');
+    // const $targetDialog = document.querySelector('#dialog');
+    // const showModalMap = ShowModalMap({
+    //     $targetDialog: $targetDialog,
+    //     $targetDialogButton: $targetDialogButton
+    // })
+
 }
 
 new App()

@@ -1,37 +1,66 @@
 <!DOCTYPE html>
-<html lang="ko">
+<div lang="ko">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Mission 5</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Mission 5</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link href="css/styles.css" rel="stylesheet" />
+        <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05384f5ffa79058c52233387b2b1142b&libraries=services"></script>
 
-    <link href="css/styles.css" rel="stylesheet" />
+    </head>
 
-</head>
+    <body>
 
-<body>
+        <dialog id="dialog" class="mdl-dialog">
+            <h3 class="mdl-dialog__title">가게 위치</h3>
+            <div class="mdl-dialog__content">
+                <div id="map" style="width:500px;height:350px;"></div>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+        </dialog>
 
-    <div class="container">
-        <div class="header">
-            <div class="title">가게 찾기</div>
-            <div class="search">
-                <button class="btn-delete">최근 검색어 삭제</button>
-                <input id="txt-search" type="text" list="searched"/>
-                <datalist id="searched">
-                </datalist> 
-                <button class="btn-search">검색</button>
+        <!-- <button class="mdl-button mdl-button--raised mdl-js-button dialog-button">Show Dialog</button> -->
+
+        <div class="container">
+            <div class="header">
+                
+                <div class="title">가게 찾기</div>
+                <div class="search">
+                    <button class="btn-delete">최근 검색어 삭제</button>
+                    <input id="txt-search" type="text" list="searched" autofocus />
+                    <datalist id="searched">
+                    </datalist>
+                    <button class="btn-search">검색</button>
+                </div>
+            </div>
+            <div class="body">
+                <!-- <div class="total"></div>
+            <div class="list">
+                <div class="item">
+                    <div class="item-no"></div>
+                    <div class="item-detail">
+                        <div class="item-name"></div>
+                        <div class="item-addr"></div>
+                    </div>
+                </div>
+            </div> -->
+            </div>
+            
+            <div class="paging">
+
             </div>
         </div>
-        <div class="body">
-            <!-- <div class="total"></div>
-            <div class="list">
-            </div> -->
-        </div>
-        <div class="paging">
+        <script>
 
-        </div>
-    </div>
-    <script type='module' src='./js/App.js'></script>
-</body>
+        </script>
 
-</html>
+        <script type='module' src='./js/App.js'></script>
+    </body>
+
+</div>
