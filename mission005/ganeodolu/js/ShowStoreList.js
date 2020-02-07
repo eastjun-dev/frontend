@@ -15,7 +15,6 @@ export default function ShowStoreList({ $target, data, keyword, page }) {
     }
 
     this.render = function () {
-        console.log(this.data)
         if (this.data.list) {
             this.$target.innerHTML = renderedStoreListHTML(this.data, this.keyword, this.page)
         }

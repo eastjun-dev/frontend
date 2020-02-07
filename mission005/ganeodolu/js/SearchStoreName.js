@@ -1,21 +1,21 @@
 import { KEY_NAME, EVENT_NAME } from '../util/constant.js'
 
 
-export default function SearchStoreName({$targetInput, $targetButton, $targetDelete, onAccessSearch, onClickDelete}){
+export default function SearchStoreName({ $targetInput, $targetButton, $targetDelete, onAccessSearch, onClickDelete }) {
     this.$targetInput = $targetInput
     this.$targetButton = $targetButton
     this.$targetDelete = $targetDelete
 
     this.$targetInput.addEventListener('keypress', (e) => {
-        if(e.key === KEY_NAME.ENTER){
-            console.log(e.target.value)
+        if (e.key === KEY_NAME.ENTER) {
             let keyword = e.target.value
-            onAccessSearch(keyword, 1)
+            onAccessSearch(1, keyword)
         }
     })
 
     this.$targetInput.addEventListener(EVENT_NAME.CLICK, (e) => {
-        onAccessSearch(e.target.value, 1)
+        let keyword = e.target.value
+        onAccessSearch(1, keyword)
     })
 
     this.$targetButton.addEventListener('click', (e) => {
@@ -27,7 +27,6 @@ export default function SearchStoreName({$targetInput, $targetButton, $targetDel
     })
 
     this.$targetDelete.addEventListener('click', (e) => {
-
         localStorage.removeItem('storedKeywords')
         onClickDelete()
     })
