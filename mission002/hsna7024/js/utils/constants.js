@@ -19,3 +19,5 @@ export const keyMap = {
 export const errorMessageMap = {
   IS_NO_TARGET: 'target element가 없습니다.',
 }
+
+export const USERNAME = "hsna7024";

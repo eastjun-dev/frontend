@@ -2,7 +2,8 @@ import TodoList from "./TodoList.js";
 import TodoInput from "./TodoInput.js";
 import TodoCount from "./TodoCount.js";
 import TodoFilter from "./TodoFilter.js";
-import { filterMap } from "./utils/constants.js";
+import { filterMap, USERNAME } from "./utils/constants.js";
+import { api } from "./utils/api.js";
 
 export default function App(params) {
   const {
@@ -42,11 +43,10 @@ export default function App(params) {
 
   const todoInput = new TodoInput({
     $target: $targetTodoInput,
-    onKeyEnter: content => {
-      data.push({
-        content
-      });
-      this.render();
+    onKeyEnter: async content => {
+      const res = await api.postTodo(USERNAME, content);
+      const nextData = await api.getTodos(USERNAME);
+      this.setState(nextData, filter);
     }
   });
 
