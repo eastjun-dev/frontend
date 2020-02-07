@@ -39,13 +39,19 @@ export default function App(params) {
       const nextTodos = await api.getTodos(USERNAME);
       this.setState(nextTodos, filter);
     },
+    onKeyEnter: async (todo) => {
+      // TODO : 변경 된 todo로 갱신하기
+      // api.updateTodo(USERNAME, todo);
+      // const nextTodos = await api.getTodos(USERNAME);
+      // this.setState(nextTodos, filter);
+    },
     filter,
     filterTodos
   });
 
   const todoInput = new TodoInput({
     $target: $targetTodoInput,
-    onKeyEnter: async content => {
+    onKeyEnter : async content => {
       const res = await api.postTodo(USERNAME, content);
       const nextTodos = await api.getTodos(USERNAME);
       this.setState(nextTodos, filter);

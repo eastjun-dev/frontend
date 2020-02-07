@@ -2,7 +2,7 @@ import { classNameMap, keyMap, errorMessageMap } from "./utils/constants.js";
 import { todoListTemplate } from "./utils/templates.js";
 
 export default function TodoList(params) {
-  const { $target, toggleTodo, removeTodo, filterTodos } = params;
+  const { $target, toggleTodo, removeTodo, filterTodos, onKeyEnter } = params;
   let todos = params.todos || [];
   let filter = params.filter || "";
   let filteredTodos = [];
@@ -23,9 +23,7 @@ export default function TodoList(params) {
 
   $target.addEventListener("dblclick", e => {
     if (e.target.className === classNameMap.LABEL) {
-      const { id } = e.toElement.parentElement.parentElement.dataset;
-      todos[id].onEdit = true;
-      this.render();
+      e.target.closest('li').classList.toggle('editing');
     }
   });
 
@@ -33,13 +31,16 @@ export default function TodoList(params) {
     if (e.target.className === classNameMap.EDIT) {
       const { id } = e.target.parentElement.dataset;
       if (e.key === keyMap.ENTER && e.target.value) {
-        todos[id].content = e.target.value;
-        todos[id].onEdit = false;
+        const index = todos.findIndex(todo => {
+          return todo._id === id;
+        });
+        todos[index].content = e.target.value;
+        onKeyEnter(todos[index]);
+        e.target.closest('li').classList.toggle('editing');
         this.render();
       }
       if (e.key === keyMap.ESC) {
-        todos[id].onEdit = false;
-        this.render();
+        e.target.closest('li').classList.toggle('editing');
       }
     }
   });
