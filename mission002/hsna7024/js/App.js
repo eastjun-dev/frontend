@@ -4,6 +4,7 @@ import TodoCount from "./TodoCount.js";
 import TodoFilter from "./TodoFilter.js";
 import { filterMap, USERNAME } from "./utils/constants.js";
 import { api } from "./utils/api.js";
+import { loadTodos, saveTodos } from "./utils/localStorage.js";
 
 export default function App(params) {
   const {
@@ -14,6 +15,16 @@ export default function App(params) {
   } = params;
   let todos = params.todos || [];
   let filter = params.filter || filterMap.ALL;
+
+  const getTodos = async () => {
+    return nextTodos;
+  }
+
+  const refreshTodos = async () => {
+    const nextTodos = await api.getTodos(USERNAME);
+    saveTodos(nextTodos);
+    this.setState(nextTodos, filter);
+  }
 
   const filterTodos = (todos, filter) => {
     switch (filter) {
@@ -31,19 +42,16 @@ export default function App(params) {
     todos,
     toggleTodo: async id => {
       await api.toggleTodo(USERNAME, id);
-      const nextTodos = await api.getTodos(USERNAME);
-      this.setState(nextTodos, filter);
+      refreshTodos();
     },
     removeTodo: async id => {
       await api.removeTodo(USERNAME, id);
-      const nextTodos = await api.getTodos(USERNAME);
-      this.setState(nextTodos, filter);
+      refreshTodos();
     },
     onKeyEnter: async (todo) => {
       // TODO : 변경 된 todo로 갱신하기
       // api.updateTodo(USERNAME, todo);
-      // const nextTodos = await api.getTodos(USERNAME);
-      // this.setState(nextTodos, filter);
+      // refreshTodos();
     },
     filter,
     filterTodos
@@ -53,8 +61,7 @@ export default function App(params) {
     $target: $targetTodoInput,
     onKeyEnter : async content => {
       const res = await api.postTodo(USERNAME, content);
-      const nextTodos = await api.getTodos(USERNAME);
-      this.setState(nextTodos, filter);
+      refreshTodos();
     }
   });
 
