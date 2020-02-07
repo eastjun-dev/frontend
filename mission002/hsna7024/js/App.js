@@ -34,9 +34,10 @@ export default function App(params) {
       const nextTodos = await api.getTodos(USERNAME);
       this.setState(nextTodos, filter);
     },
-    removeTodo: id => {
-      todos.splice(id, 1);
-      this.render();
+    removeTodo: async id => {
+      await api.removeTodo(USERNAME, id);
+      const nextTodos = await api.getTodos(USERNAME);
+      this.setState(nextTodos, filter);
     },
     filter,
     filterTodos
