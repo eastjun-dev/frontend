@@ -9,7 +9,7 @@ export const todoListTemplate = (todo, index) => {
   const completedClassName = todo.isCompleted ? `class = "completed"` : "";
   const editingClassName = todo.onEdit ? `class = "editing"` : "";
 
-  return `<li ${completedClassName} ${editingClassName} data-id="${index}">${contentHtmlString}</li>`;
+  return `<li ${completedClassName} ${editingClassName} data-id="${todo._id}">${contentHtmlString}</li>`;
 };
 
 export const todoFilterTemplate = filter => {
