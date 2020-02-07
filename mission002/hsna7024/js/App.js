@@ -29,9 +29,10 @@ export default function App(params) {
   const todoList = new TodoList({
     $target: $targetTodoList,
     todos,
-    toggleTodo: id => {
-      todos[id].isCompleted = !todos[id].isCompleted;
-      this.render();
+    toggleTodo: async id => {
+      await api.toggleTodo(USERNAME, id);
+      const nextTodos = await api.getTodos(USERNAME);
+      this.setState(nextTodos, filter);
     },
     removeTodo: id => {
       todos.splice(id, 1);
