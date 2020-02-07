@@ -12,7 +12,7 @@ export default function App(params) {
     $targetTodoCount,
     $targetTodoFilter
   } = params;
-  let data = params.data || [];
+  let todos = params.todos || [];
   let filter = params.filter || filterMap.ALL;
 
   const filterTodos = (todos, filter) => {
@@ -28,13 +28,13 @@ export default function App(params) {
 
   const todoList = new TodoList({
     $target: $targetTodoList,
-    data,
+    todos,
     toggleTodo: id => {
-      data[id].isCompleted = !data[id].isCompleted;
+      todos[id].isCompleted = !todos[id].isCompleted;
       this.render();
     },
     removeTodo: id => {
-      data.splice(id, 1);
+      todos.splice(id, 1);
       this.render();
     },
     filter,
@@ -45,29 +45,29 @@ export default function App(params) {
     $target: $targetTodoInput,
     onKeyEnter: async content => {
       const res = await api.postTodo(USERNAME, content);
-      const nextData = await api.getTodos(USERNAME);
-      this.setState(nextData, filter);
+      const nextTodos = await api.getTodos(USERNAME);
+      this.setState(nextTodos, filter);
     }
   });
 
   const todoCount = new TodoCount({
     $target: $targetTodoCount,
-    count : data.length
+    count : todos.length
   });
 
   const todoFilter = new TodoFilter({
     $target: $targetTodoFilter,
     changeFilter: nextFilter => {
-      this.setState(data, nextFilter);
+      this.setState(todos, nextFilter);
     },
     filter
   });
 
-  this.setState = (nextData, nextFilter) => {
-    data = nextData;
+  this.setState = (nextTodos, nextFilter) => {
+    todos = nextTodos;
     filter = nextFilter;
-    todoList.setState(data, filter);
-    todoCount.setState(filterTodos(data, filter).length);
+    todoList.setState(todos, filter);
+    todoCount.setState(filterTodos(todos, filter).length);
     todoFilter.setState(filter);
     this.render();
   };

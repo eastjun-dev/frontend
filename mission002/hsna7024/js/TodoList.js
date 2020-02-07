@@ -3,9 +3,9 @@ import { todoListTemplate } from "./utils/templates.js";
 
 export default function TodoList(params) {
   const { $target, toggleTodo, removeTodo, filterTodos } = params;
-  let data = params.data || [];
+  let todos = params.todos || [];
   let filter = params.filter || "";
-  let filteredData = [];
+  let filteredTodos = [];
 
   if($target === null) {
     throw new Error(errorMessageMap.IS_NO_TARGET);
@@ -24,7 +24,7 @@ export default function TodoList(params) {
   $target.addEventListener("dblclick", e => {
     if (e.target.className === classNameMap.LABEL) {
       const { id } = e.toElement.parentElement.parentElement.dataset;
-      data[id].onEdit = true;
+      todos[id].onEdit = true;
       this.render();
     }
   });
@@ -33,28 +33,28 @@ export default function TodoList(params) {
     if (e.target.className === classNameMap.EDIT) {
       const { id } = e.target.parentElement.dataset;
       if (e.key === keyMap.ENTER && e.target.value) {
-        data[id].content = e.target.value;
-        data[id].onEdit = false;
+        todos[id].content = e.target.value;
+        todos[id].onEdit = false;
         this.render();
       }
       if (e.key === keyMap.ESC) {
-        data[id].onEdit = false;
+        todos[id].onEdit = false;
         this.render();
       }
     }
   });
 
-  filteredData = filterTodos(data, filter);
+  filteredTodos = filterTodos(todos, filter);
 
-  this.setState = (nextData, nextFilter) => {
-    data = nextData || data;
+  this.setState = (nextTodos, nextFilter) => {
+    todos = nextTodos || todos;
     filter = nextFilter || filter;
-    filteredData = filterTodos(data, filter);
+    filteredTodos = filterTodos(todos, filter);
     this.render();
   };
 
   this.render = () => {
-    $target.innerHTML = filteredData.map(todoListTemplate).join("");
+    $target.innerHTML = filteredTodos.map(todoListTemplate).join("");
   };
 
   this.render();

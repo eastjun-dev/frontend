@@ -3,7 +3,7 @@ import { filterMap, USERNAME } from "./utils/constants.js";
 import { api } from "./utils/api.js";
 
 const init = async () => {
-  const data = await api.getTodos(USERNAME);
+  const todos = await api.getTodos(USERNAME);
 
   const app = new App({
     $targetTodoList: document.querySelector("#todo-list"),
@@ -11,7 +11,7 @@ const init = async () => {
     $targetTodoCount: document.querySelector(".todo-count"),
     $targetTodoFilter: document.querySelector(".filters"),
     filter: filterMap.ALL,
-    data
+    todos
   });
 };
 
