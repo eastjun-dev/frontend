@@ -3,13 +3,15 @@ import { filterMap } from "./constants.js";
 export const todoListTemplate = (todo, index) => {
   const contentHtmlString = `
     <div class="view"> 
-      <input class="toggle" type="checkbox" ${todo.isCompleted ? "checked" : ""}>
+      <input class="toggle" type="checkbox" ${
+        todo.isCompleted ? "checked" : ""
+      }>
       <label class="label">${todo.content}</label>
       <button class="destroy"></button>
     </div>
     <input class="edit" value="${todo.content}">`;
-  const completedClassName = todo.isCompleted ? `class = "completed"` : "";
-  const editingClassName = todo.onEdit ? `class = "editing"` : "";
+  const completedClassName = todo.isCompleted ? 'class = "completed"' : "";
+  const editingClassName = todo.onEdit ? 'class = "editing"' : "";
 
   return `<li ${completedClassName} ${editingClassName} data-id="${index}">${contentHtmlString}</li>`;
 };
@@ -31,6 +33,4 @@ export const todoFilterTemplate = filter => {
     </li>`;
 };
 
-export const todoCountTemplate = length => {
-  return `총 <strong>${length}</strong> 개`;
-};
+export const todoCountTemplate = length => `총 <strong>${length}</strong> 개`;

@@ -2,12 +2,13 @@ import { classNameMap, keyMap, errorMessageMap } from "./utils/constants.js";
 import { todoListTemplate } from "./utils/templates.js";
 
 export default function TodoList(params) {
-  const { $target, toggleTodo, removeTodo, filterTodos } = params;
+  const { $target, toggleTodo, removeTodo, filterTodos 
+} = params;
   let data = params.data || [];
   let filter = params.filter || "";
   let filteredData = [];
 
-  if($target === null) {
+  if ($target === null) {
     throw new Error(errorMessageMap.IS_NO_TARGET);
   }
 
@@ -15,8 +16,7 @@ export default function TodoList(params) {
     const { id } = e.target.closest("li").dataset;
     if (e.target.classList.contains(classNameMap.TOGGLE)) {
       toggleTodo(id);
-    }
-    else if (e.target.classList.contains(classNameMap.REMOVE)) {
+    } else if (e.target.classList.contains(classNameMap.REMOVE)) {
       removeTodo(id);
     }
   });
@@ -36,8 +36,7 @@ export default function TodoList(params) {
         data[id].content = e.target.value;
         data[id].onEdit = false;
         this.render();
-      }
-      else if (e.key === keyMap.ESC) {
+      } else if (e.key === keyMap.ESC) {
         data[id].onEdit = false;
         this.render();
       }

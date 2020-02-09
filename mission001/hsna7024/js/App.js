@@ -52,7 +52,7 @@ export default function App(params) {
 
   const todoCount = new TodoCount({
     $target: $targetTodoCount,
-    count : data.length
+    count: data.length
   });
 
   const todoFilter = new TodoFilter({
