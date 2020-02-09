@@ -22,7 +22,7 @@ export default function TodoList(params) {
   });
 
   $target.addEventListener("dblclick", e => {
-    if (e.target.className === classNameMap.LABEL) {
+    if (e.target.classList.contains(classNameMap.LABEL)) {
       const { id } = e.target.closest("li").dataset;
       data[id].onEdit = true;
       this.render();
@@ -30,7 +30,7 @@ export default function TodoList(params) {
   });
 
   $target.addEventListener("keydown", e => {
-    if (e.target.className === classNameMap.EDIT) {
+    if (e.target.classList.contains(classNameMap.EDIT)) {
       const { id } = e.target.closest("li").dataset;
       if (e.key === keyMap.ENTER && e.target.value) {
         data[id].content = e.target.value;
