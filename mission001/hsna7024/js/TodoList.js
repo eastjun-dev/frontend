@@ -13,10 +13,10 @@ export default function TodoList(params) {
 
   $target.addEventListener("click", e => {
     const { id } = e.target.closest("li").dataset;
-    if (e.target.className === classNameMap.TOGGLE) {
+    if (e.target.classList.contains(classNameMap.TOGGLE)) {
       toggleTodo(id);
     }
-    else if (e.target.className === classNameMap.REMOVE) {
+    else if (e.target.classList.contains(classNameMap.REMOVE)) {
       removeTodo(id);
     }
   });
