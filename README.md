@@ -25,18 +25,6 @@
 
 <br>
 
-## 🏴 Missions
-
-이 Repository는 총 999개의 mission으로 채워지는 것을 목표로 하고 있습니다.  
-
-- [mission001](https://github.com/EastjunDev/frontend/issues/1) : TodoList CRUD
-- [M002](https://github.com/EastjunDev/frontend/issues/7) : TodoList Ajax, localStorage
-- [M003](https://github.com/EastjunDev/frontend/issues/8) : 자바스크립트로 Form 과 Modal 에 대한 UI 만들기
-- [M004](https://github.com/EastjunDev/frontend/issues/9) : Movie List 사이트 만들기
-- [M005](https://github.com/EastjunDev/frontend/issues/10) : 가게 찾기 사이트 만들기
-[M006](https://github.com/EastjunDev/frontend/issues/11)
-<br>
-
 ## ⚙️ Before Started
 
 #### <img alt="Tip" src="https://img.shields.io/static/v1.svg?label=&message=Tip&style=flat-square&color=673ab8"> 로컬에서 서버 띄워서 손쉽게 static resources 변경 및 확인하는 방법
