@@ -5,7 +5,6 @@ import ShowHistoryList from './ShowHistoryList.js'
 import ManagePage from './ManagePage.js'
 import ShowPage from './ShowPage.js'
 import ManageMap from './ManageMap.js'
-import ShowModalMap from './ShowModalMap.js'
 
 function App() {
     const $targetSearchInput = document.querySelector('#txt-search')
@@ -73,17 +72,7 @@ function App() {
         $target: $targetMap,
         $targetItem: $targetShowResult,
         $targetDialog: $targetDialog,
-        onClickStore: () => {
-            // manageMap.$targetItem
-        }
     })
-    // const $targetDialogButton = document.querySelector('.dialog-button');
-    // const $targetDialog = document.querySelector('#dialog');
-    // const showModalMap = ShowModalMap({
-    //     $targetDialog: $targetDialog,
-    //     $targetDialogButton: $targetDialogButton
-    // })
-
 }
 
 new App()
