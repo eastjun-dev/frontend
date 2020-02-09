@@ -16,7 +16,7 @@ export default function TodoList(params) {
     if (e.target.className === classNameMap.TOGGLE) {
       toggleTodo(id);
     }
-    if (e.target.className === classNameMap.REMOVE) {
+    else if (e.target.className === classNameMap.REMOVE) {
       removeTodo(id);
     }
   });
@@ -37,7 +37,7 @@ export default function TodoList(params) {
         data[id].onEdit = false;
         this.render();
       }
-      if (e.key === keyMap.ESC) {
+      else if (e.key === keyMap.ESC) {
         data[id].onEdit = false;
         this.render();
       }
