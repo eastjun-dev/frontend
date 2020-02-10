@@ -1,0 +1,23 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["airbnb-base", "prettier"],
+  "globals": {
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-console": false,
+    "ordered-imports": false,
+    "no-shadowed-variable": false,
+    "no-angle-bracket-type-assertion": false
+  },
+  "linterOptions": {
+    "exclude": ["configs/**/*.js", "node_modules/**/*.js"]
+  }
+}
