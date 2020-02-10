@@ -44,7 +44,7 @@ export default function UserForm({$targetTitle, $targetUserForm, $targetInput, $
 
     $targetCompleteButton1.addEventListener('click', (e) => {
         e.preventDefault()
-        for (let inputIndex = 0; inputIndex < 3; inputIndex++) { // 인덱스가 3인 비밀번호는 data에서 제외
+        for (let inputIndex = 0; inputIndex < 3; inputIndex++) {
             data[$targetInput[inputIndex].name] = $targetInput[inputIndex].value
             if ($targetInput[inputIndex].value) {
                 this.data[$targetInput[inputIndex].name] = $targetInput[inputIndex].value

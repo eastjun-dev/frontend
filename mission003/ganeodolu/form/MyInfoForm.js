@@ -1,7 +1,7 @@
-import {renderedMyInfoTemplate} from '../js/template.js'
+import { renderedMyInfoTemplate } from '../js/template.js'
 import { TITLENAME } from '../js/constant.js';
 
-export default function MyInfoForm({$targetTitle, $targetMyInfo, $targetCompleteButton3, $targetStep1, $targetStep3, dialog, data}){
+export default function MyInfoForm({ $targetTitle, $targetMyInfo, $targetCompleteButton3, $targetStep1, $targetStep3, dialog, data }) {
     this.data = data;
     this.dialog = dialog;
 

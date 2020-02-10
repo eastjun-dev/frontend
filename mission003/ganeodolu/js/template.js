@@ -1,6 +1,6 @@
-function renderedFamilyTemplate(renderedHTML, $targetFamilyContainer){
-    let FamilyContainerLength = $targetFamilyContainer.length;
-    return renderedHTML +=
+function renderedFamilyTemplate(renderedHTML, $targetFamilyContainer) {
+  let FamilyContainerLength = $targetFamilyContainer.length;
+  return renderedHTML +=
     `
     <div data-index class="flex-container user-family-form-fields">
         <div class="mdc-text-field  mrg-right-10" data-mdc-auto-init="MDCTextField">
@@ -17,12 +17,10 @@ function renderedFamilyTemplate(renderedHTML, $targetFamilyContainer){
     `
 }
 
-function renderedMyInfoTemplate(data){
-    let familyRelations = data.Family.name.map((val, idx) => {
-        return `<div>${val} (${data.Family.relation[idx]})</div>`
-    }).join('')
+function renderedMyInfoTemplate(data) {
+  let familyRelations = data.Family.name.map((val, idx) => `<div>${val} (${data.Family.relation[idx]})</div>`).join('')
 
-    return `
+  return `
     <div class="my-info-view-container">
           <div class="mdc-card my-info-card">
             <button id="my-info-edit-button" class="mdc-icon-button material-icons text-gray">edit</button>
@@ -45,7 +43,7 @@ function renderedMyInfoTemplate(data){
                   <div class="mdc-typography mdc-typography--subtitle1 text-bold">소개</div>
                   <div>${data.introduce}</div>
                 </div>
-                 <div class="margin-16">
+                <div class="margin-16">
                   <div class="mdc-typography mdc-typography--subtitle1 text-bold">가족</div>
                   ${familyRelations}
                   </div>
@@ -56,4 +54,4 @@ function renderedMyInfoTemplate(data){
     `
 }
 
-export {renderedFamilyTemplate, renderedMyInfoTemplate} 
+export { renderedFamilyTemplate, renderedMyInfoTemplate } 
