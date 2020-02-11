@@ -1,0 +1,17 @@
+{
+  "name": "hsna7024",
+  "version": "1.0.0",
+  "description": "mission02",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eslint-config-prettier": "^6.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}

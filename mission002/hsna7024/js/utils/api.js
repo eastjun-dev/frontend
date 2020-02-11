@@ -13,21 +13,21 @@ export const api = {
   getTodos: async username => request(`${API_URL}/${username}`),
   postTodo: async (username, todoText) => {
     return request(`${API_URL}/${username}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-type': 'application/json',
+        "Content-type": "application/json"
       },
-      body: JSON.stringify({ content: todoText }),
-    })
+      body: JSON.stringify({ content: todoText })
+    });
   },
   removeTodo: async (username, id) => {
     return request(`${API_URL}/${username}/${id}`, {
-      method: 'DELETE',
-    })
+      method: "DELETE"
+    });
   },
   toggleTodo: async (username, id) => {
     return request(`${API_URL}/${username}/${id}/toggle`, {
-      method: 'PUT',
-    })
-  },
-}
+      method: "PUT"
+    });
+  }
+};

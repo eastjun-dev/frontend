@@ -7,7 +7,7 @@ export default function TodoList(params) {
   let filter = params.filter || "";
   let filteredTodos = [];
 
-  if($target === null) {
+  if ($target === null) {
     throw new Error(errorMessageMap.IS_NO_TARGET);
   }
 
@@ -23,7 +23,7 @@ export default function TodoList(params) {
 
   $target.addEventListener("dblclick", e => {
     if (e.target.className === classNameMap.LABEL) {
-      e.target.closest('li').classList.toggle('editing');
+      e.target.closest("li").classList.toggle("editing");
     }
   });
 
@@ -36,11 +36,11 @@ export default function TodoList(params) {
         });
         todos[index].content = e.target.value;
         onKeyEnter(todos[index]);
-        e.target.closest('li').classList.toggle('editing');
+        e.target.closest("li").classList.toggle("editing");
         this.render();
       }
       if (e.key === keyMap.ESC) {
-        e.target.closest('li').classList.toggle('editing');
+        e.target.closest("li").classList.toggle("editing");
       }
     }
   });

@@ -1,6 +1,6 @@
 import { filterMap } from "./constants.js";
 
-export const todoListTemplate = (todo, index) => {
+export const todoListTemplate = todo => {
   const contentHtmlString = `<div class="view"> 
   <input class="toggle" type="checkbox" ${todo.isCompleted ? "checked" : ""}>
   <label class="label">${todo.content}</label>

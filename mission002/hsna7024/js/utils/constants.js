@@ -14,10 +14,10 @@ export const classNameMap = {
 export const keyMap = {
   ENTER: "Enter",
   ESC: "Escape"
-}
+};
 
 export const errorMessageMap = {
-  IS_NO_TARGET: 'target element가 없습니다.',
-}
+  IS_NO_TARGET: "target element가 없습니다."
+};
 
 export const USERNAME = "hsna7024";
