@@ -12,7 +12,7 @@ export default function TodoList(params) {
   }
 
   $target.addEventListener("click", e => {
-    const { id } = e.toElement.parentElement.parentElement.dataset;
+    const { id } = e.target.closest("li").dataset;
     if (e.target.className === classNameMap.TOGGLE) {
       toggleTodo(id);
     }
@@ -29,7 +29,7 @@ export default function TodoList(params) {
 
   $target.addEventListener("keydown", e => {
     if (e.target.className === classNameMap.EDIT) {
-      const { id } = e.target.parentElement.dataset;
+      const { id } = e.target.closest("li").dataset;
       if (e.key === keyMap.ENTER && e.target.value) {
         const index = todos.findIndex(todo => {
           return todo._id === id;
