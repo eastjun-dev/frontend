@@ -13,22 +13,22 @@ export default function TodoList(params) {
 
   $target.addEventListener("click", e => {
     const { id } = e.target.closest("li").dataset;
-    if (e.target.className === classNameMap.TOGGLE) {
+    if (e.target.classList.contains(classNameMap.TOGGLE)) {
       toggleTodo(id);
     }
-    else if (e.target.className === classNameMap.REMOVE) {
+    else if (e.target.classList.contains(classNameMap.REMOVE)) {
       removeTodo(id);
     }
   });
 
   $target.addEventListener("dblclick", e => {
-    if (e.target.className === classNameMap.LABEL) {
+    if (e.target.classList.contains(classNameMap.LABEL)) {
       e.target.closest("li").classList.toggle("editing");
     }
   });
 
   $target.addEventListener("keydown", e => {
-    if (e.target.className === classNameMap.EDIT) {
+    if (e.target.classList.contains(classNameMap.EDIT)) {
       const { id } = e.target.closest("li").dataset;
       if (e.key === keyMap.ENTER && e.target.value) {
         const index = todos.findIndex(todo => {
