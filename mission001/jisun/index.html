@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>이벤트 - TODOS</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <section class="todo-app">
+      <div>
+        <!-- <h1>TODOS</h1> -->
+        <input
+          class="new-todo"
+          id="inputTodo"
+          placeholder="please add"
+          autofocus
+        />
+      </div>
+      <div class="main">
+        <input class="toggle-all" type="checkbox" id="" />
+        <ul id="todoList" class="todo-list"></ul>
+      </div>
+      <div class="count-container">
+        <span class="todo-count" id="todoCount"></span>
+        <ul class="filters" id="tab">
+          <li>
+            <a class="all selected" href="#/">전체보기</a>
+          </li>
+          <li>
+            <a id="needTodo" class="active" href="#/active">해야할 일</a>
+          </li>
+          <li>
+            <a id="completed" class="completed" href="#/completed">완료한 일</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <script src="js/app.js" type="module"></script>
+  </body>
+</html>
