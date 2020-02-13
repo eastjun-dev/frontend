@@ -7,6 +7,9 @@ export default function TodoList(params) {
   let filter = params.filter || "";
   let filteredTodos = [];
 
+  const onEditMode = ($element) => $element.classList.add("editing");
+  const offEditMode = ($element) => $element.classList.remove("editing")
+
   if ($target === null) {
     throw new Error(errorMessageMap.IS_NO_TARGET);
   }
@@ -23,23 +26,22 @@ export default function TodoList(params) {
 
   $target.addEventListener("dblclick", e => {
     if (e.target.classList.contains(classNameMap.LABEL)) {
-      e.target.closest("li").classList.toggle("editing");
+      onEditMode(e.target.closest("li"));
     }
   });
 
   $target.addEventListener("keydown", e => {
     if (e.target.classList.contains(classNameMap.EDIT)) {
-      const { id } = e.target.closest("li").dataset;
       if (e.key === keyMap.ENTER && e.target.value) {
-        const index = todos.findIndex(todo => {
-          return todo._id === id;
-        });
-        updateTodoByIndex(index, e.target.value);
-        e.target.closest("li").classList.toggle("editing");
+        const { id } = e.target.closest("li").dataset;
+        const index = todos.findIndex(todo => todo._id === id);
+        const content = e.target.value
+        updateTodoByIndex(index, content);
+        offEditMode(e.target.closest("li"));
         this.render();
       }
       else if (e.key === keyMap.ESC) {
-        e.target.closest("li").classList.toggle("editing");
+        offEditMode(e.target.closest("li"));
       }
     }
   });
