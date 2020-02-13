@@ -2,7 +2,7 @@ import { classNameMap, keyMap, errorMessageMap } from "./utils/constants.js";
 import { todoListTemplate } from "./utils/templates.js";
 
 export default function TodoList(params) {
-  const { $target, toggleTodo, removeTodo, filterTodos, onKeyEnter } = params;
+  const { $target, toggleTodo, removeTodo, filterTodos, onKeyEnter, updateTodoByIndex } = params;
   let todos = params.todos || [];
   let filter = params.filter || "";
   let filteredTodos = [];
@@ -34,8 +34,7 @@ export default function TodoList(params) {
         const index = todos.findIndex(todo => {
           return todo._id === id;
         });
-        todos[index].content = e.target.value;
-        onKeyEnter(todos[index]);
+        updateTodoByIndex(index, e.target.value);
         e.target.closest("li").classList.toggle("editing");
         this.render();
       }
