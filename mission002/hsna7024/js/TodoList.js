@@ -20,6 +20,7 @@ export default function TodoList(params) {
     const { id } = $element.closest("li").dataset;
     const index = todos.findIndex(todo => todo._id === id);
     const content = $element.value;
+    
     updateTodoByIndex(index, content);
     offEditMode($element.closest("li"));
   };
