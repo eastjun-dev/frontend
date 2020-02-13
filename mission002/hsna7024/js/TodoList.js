@@ -9,6 +9,13 @@ export default function TodoList(params) {
 
   const onEditMode = ($element) => $element.classList.add(classNameMap.EDIT_MODE);
   const offEditMode = ($element) => $element.classList.remove(classNameMap.EDIT_MODE)
+  const onEnterInEditMode = ($element) => {
+    const { id } = $element.closest("li").dataset;
+    const index = todos.findIndex(todo => todo._id === id);
+    const content = $element.value
+    updateTodoByIndex(index, content);
+    offEditMode($element.closest("li"));
+  }
 
   if ($target === null) {
     throw new Error(errorMessageMap.IS_NO_TARGET);
@@ -33,11 +40,7 @@ export default function TodoList(params) {
   $target.addEventListener("keydown", e => {
     if (e.target.classList.contains(classNameMap.EDIT)) {
       if (e.key === keyMap.ENTER && e.target.value) {
-        const { id } = e.target.closest("li").dataset;
-        const index = todos.findIndex(todo => todo._id === id);
-        const content = e.target.value
-        updateTodoByIndex(index, content);
-        offEditMode(e.target.closest("li"));
+        onEnterInEditMode(e.target);
         this.render();
       }
       else if (e.key === keyMap.ESC) {
