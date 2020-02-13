@@ -1,4 +1,4 @@
-import {error, keyName} from "./constant.js"
+import { error, keyName } from "./constant.js"
 
 export default function TodoList({ $target, $targetFilter, data, onClickToggle, onEditTodo, onClickRemoval, onChangeTodo, onClickFilter }) {
     this.$target = $target;
@@ -25,7 +25,7 @@ export default function TodoList({ $target, $targetFilter, data, onClickToggle, 
         if (!filterTypes[0].classList.contains("selected")) return
 
         switch (className) {
-            case 'toggle': onClickToggle(index) 
+            case 'toggle': onClickToggle(index)
                 break;
             case 'destroy': onClickRemoval(index)
                 break;
@@ -70,15 +70,18 @@ export default function TodoList({ $target, $targetFilter, data, onClickToggle, 
         }
     })
 
-    this.render = function () {
-        const renderedHTMLText = this.data.map((val, idx) => {
-            if (!val.text) {
-                throw new Error(error.NOT_DATA)
-            }
-            else if (typeof (val.text) !== "string") {
-                throw new Error(error.INVALID_DATA)
-            }
-            return `
+    this.render()
+}
+
+TodoList.prototype.render = function () {
+    const renderedHTMLText = this.data.map((val, idx) => {
+        if (!val.text) {
+            throw new Error(error.NOT_DATA)
+        }
+        else if (typeof (val.text) !== "string") {
+            throw new Error(error.INVALID_DATA)
+        }
+        return `
                 <li ${val.isCompleted ? 'class="completed"' : (val.isCompleted === false && val.isEditing === false) ? "" : 'class="editing"'} data-index=${idx}>
                     <div class="view">
                         <input class="toggle" type="checkbox"  ${val.isCompleted ? 'checked' : ""}>
@@ -87,8 +90,7 @@ export default function TodoList({ $target, $targetFilter, data, onClickToggle, 
                     </div>
                     <input class="edit" value="${val.text}">
                 </li>`
-        }).join('');
-        this.$target.innerHTML = renderedHTMLText
-    }
-    this.render()
+    }).join('');
+    this.$target.innerHTML = renderedHTMLText
 }
+
