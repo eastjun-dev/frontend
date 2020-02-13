@@ -53,7 +53,7 @@ export default function App(params) {
     filterTodos
   });
 
-  const todoInput = new TodoInput({
+  new TodoInput({
     $target: $targetTodoInput,
     onKeyEnter: async content => {
       await api.postTodo(USERNAME, content);

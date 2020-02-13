@@ -6,7 +6,7 @@ import { loadTodos } from "./utils/localStorage.js";
 const init = async () => {
   const todos = loadTodos() || (await api.getTodos(USERNAME));
 
-  const app = new App({
+  new App({
     $targetTodoList: document.querySelector("#todo-list"),
     $targetTodoInput: document.querySelector("#new-todo-title"),
     $targetTodoCount: document.querySelector(".todo-count"),
