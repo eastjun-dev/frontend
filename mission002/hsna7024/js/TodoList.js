@@ -23,6 +23,14 @@ export default function TodoList(params) {
     updateTodoByIndex(index, content);
     offEditMode($element.closest("li"));
   };
+  const onKeydownInEditMode = e => {
+    if (e.key === keyMap.ENTER && e.target.value) {
+      onEnterInEditMode(event.target);
+      this.render();
+    } else if (e.key === keyMap.ESC) {
+      offEditMode(e.target.closest("li"));
+    }
+  };
 
   if ($target === null) {
     throw new Error(errorMessageMap.IS_NO_TARGET);
@@ -47,12 +55,7 @@ export default function TodoList(params) {
     if (!e.target.classList.contains(classNameMap.EDIT)) {
       return;
     } else {
-      if (e.key === keyMap.ENTER && e.target.value) {
-        onEnterInEditMode(e.target);
-        this.render();
-      } else if (e.key === keyMap.ESC) {
-        offEditMode(e.target.closest("li"));
-      }
+      onKeydownInEditMode(e);
     }
   });
 
