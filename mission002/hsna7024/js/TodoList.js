@@ -38,7 +38,10 @@ export default function TodoList(params) {
   });
 
   $target.addEventListener("keydown", e => {
-    if (e.target.classList.contains(classNameMap.EDIT)) {
+    if (!(e.target.classList.contains(classNameMap.EDIT))){
+      return;
+    }
+    else {
       if (e.key === keyMap.ENTER && e.target.value) {
         onEnterInEditMode(e.target);
         this.render();
