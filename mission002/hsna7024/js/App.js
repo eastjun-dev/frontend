@@ -44,11 +44,6 @@ export default function App(params) {
       await api.removeTodo(USERNAME, id);
       refreshTodos();
     },
-    onKeyEnter: async todo => {
-      // TODO : 변경 된 todo로 갱신하기
-      // api.updateTodo(USERNAME, todo);
-      // refreshTodos();
-    },
     updateTodoByIndex: async (index, content) => {
       todos[index].content = content;
       // TODO : 변경 된 todo로 갱신하기
