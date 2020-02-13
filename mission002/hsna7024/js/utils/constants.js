@@ -8,7 +8,8 @@ export const classNameMap = {
   TOGGLE: "toggle",
   REMOVE: "destroy",
   LABEL: "label",
-  EDIT: "edit"
+  EDIT: "edit",
+  EDIT_MODE: "editing"
 };
 
 export const keyMap = {

@@ -7,8 +7,8 @@ export default function TodoList(params) {
   let filter = params.filter || "";
   let filteredTodos = [];
 
-  const onEditMode = ($element) => $element.classList.add("editing");
-  const offEditMode = ($element) => $element.classList.remove("editing")
+  const onEditMode = ($element) => $element.classList.add(classNameMap.EDIT_MODE);
+  const offEditMode = ($element) => $element.classList.remove(classNameMap.EDIT_MODE)
 
   if ($target === null) {
     throw new Error(errorMessageMap.IS_NO_TARGET);
