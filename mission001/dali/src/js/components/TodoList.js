@@ -66,7 +66,7 @@ const TodoList = class extends View {
   handleESCKeyDown() {
     this.$_dispatch("OUT_EDITMODE");
   }
-  setState(state) {
+  render(state) {
     this.$_renderTemplate(state);
   }
 };

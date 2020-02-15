@@ -24,7 +24,7 @@ const todoItempTemplate = ({ id, completed, todoText, editing }) => {
       class="${getTodoClass(completed, editing)}"
     >
   <div class="view">
-    <input class="toggle" type="checkbox">
+    <input class="toggle" type="checkbox" ${completed ? "checked" : ""}>
     <label class="label">${todoText}</label>
     <button class="destroy"></button>
   </div>

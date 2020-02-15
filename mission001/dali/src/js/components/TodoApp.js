@@ -26,8 +26,8 @@ const TodoApp = class {
   handleUpdateTodo() {
     const { todoList } = this.store.state;
     console.log("updated", todoList);
-    this.todoList.setState(todoList);
-    this.todoCount.setState(todoList.length);
+    this.todoList.render(todoList);
+    this.todoCount.render(todoList.length);
   }
 };
 
