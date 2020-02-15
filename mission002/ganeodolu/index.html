@@ -1,40 +1,43 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fetch - TODOS</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-<section class="todoapp">
-  <div>
-    <h1>TODOS</h1>
-    <input id="new-todo-title" class="new-todo" placeholder="할일을 추가해주세요" autofocus>
-  </div>
-  <div class="main">
-    <input class="toggle-all" type="checkbox">
-    <ul id="todo-list" class="todo-list">
-    </ul>
-  </div>
-  <div class="count-container">
-    <span class="todo-count">총 <strong>0</strong> 개</span>
-    <ul class="filters">
-      <li>
-        <a class="all selected" href="#/">전체보기</a>
-      </li>
-      <li>
-        <a class="active" href="#/active">해야할 일</a>
-      </li>
-      <li>
-        <a class="completed" href="#/completed">완료한 일</a>
-      </li>
-      <li>
-        <font class="network-display hidden" color="red" bold style="font-weight:bold">오프라인 모드</font> 
-      </li>
-    </ul>
-  </div>
-</section>
-<script src="js/index.js" type="module"></script>
+  <section class="todoapp">
+    <div>
+      <h1>TODOS</h1>
+      <input id="new-todo-title" class="new-todo" placeholder="할일을 추가해주세요" autofocus>
+    </div>
+    <div class="main">
+      <input class="toggle-all" type="checkbox">
+      <ul id="todo-list" class="todo-list">
+      </ul>
+    </div>
+    <div class="count-container">
+      <span class="todo-count">총 <strong>0</strong> 개</span>
+      <ul class="filters">
+        <li>
+          <a class="all selected" href="#/">전체보기</a>
+        </li>
+        <li>
+          <a class="active" href="#/active">해야할 일</a>
+        </li>
+        <li>
+          <a class="completed" href="#/completed">완료한 일</a>
+        </li>
+        <li>
+          <div class="network-display hidden" color="red" bold style="font-weight:bold">오프라인 모드</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <script src="js/index.js" type="module"></script>
 </body>
+
 </html>

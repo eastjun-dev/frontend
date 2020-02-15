@@ -1,7 +1,17 @@
 import { error } from './constant.js'
 import { renderedTemplate } from './template.js'
 
-export default function TodoList({ $target, $targetFilter, data, onClickToggle, onClickRemoval, onClickFilter }) {
+export default function TodoList(
+    { 
+        $target, 
+        $targetFilter, 
+        data,
+        onLoad, 
+        onClickToggle, 
+        onClickRemoval, 
+        onClickFilter 
+    }) 
+{
     this.$target = $target;
     this.$targetFilter = $targetFilter
     this.data = data;
@@ -18,6 +28,11 @@ export default function TodoList({ $target, $targetFilter, data, onClickToggle, 
     else if (!Array.isArray(this.data)) {
         throw new Error(error.NOARRAY_DATA)
     }
+
+    window.addEventListener('load', async (e) => {
+        // const data = await apiHandler({})
+        onLoad()
+    })
 
     this.$target.addEventListener('click', (e) => {
         const { className } = e.target;
@@ -52,9 +67,10 @@ export default function TodoList({ $target, $targetFilter, data, onClickToggle, 
     })
 
     this.render = function () {
+        console.log(this.data)
         const renderedHTMLText = this.data.map((val, idx) => {
             if (!val.content) {
-                throw new Error(error.NOT_DATA)
+                // throw new Error(error.NOT_DATA)
             }
             else if (typeof (val.content) !== 'string') {
                 throw new Error(error.INVALID_DATA)

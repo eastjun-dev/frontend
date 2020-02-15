@@ -10,6 +10,6 @@ const KEYNAME = {
 }
 const USERNAME = 'ganeodolu';
 
-const APIURL = `http://todo-api.roto.codes/${USERNAME}`;
+const APIURL = `http://todo-api.roto.codes`;
 
-export { error, KEYNAME, APIURL }
+export { error, KEYNAME, APIURL, USERNAME }
