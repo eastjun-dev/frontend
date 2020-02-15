@@ -15,11 +15,11 @@ const TodoList = class extends View {
     this.$_bindEvents("dblclick", this.handleDBClicked.bind(this));
 
     this.$_bindEvents("click", this.handleClicked.bind(this));
-    window.addEventListener("keydown", this.handleKeyDown.bind(this));
+    this.$_bindEvents("keydown", this.handleKeyDown.bind(this));
   }
   handleDBClicked({ target }) {
     const $todoListItemEl = getClosetLI(target);
-    const id = $todoListItemEl.dataset.id;
+    const { id } = $todoListItemEl.dataset;
     this.setFocusOutEvent(qs("input", $todoListItemEl));
     this.$_dispatch("EDIT_TODO", id);
   }
@@ -32,7 +32,7 @@ const TodoList = class extends View {
     this.$_dispatch("OUT_EDITMODE");
   }
   handleClicked({ target }) {
-    const id = getClosetLI(target).dataset.id;
+    const { id } = getClosetLI(target).dataset;
     switch (target.className) {
       case "toggle": {
         return this.handleUpdateCompleted(id);
