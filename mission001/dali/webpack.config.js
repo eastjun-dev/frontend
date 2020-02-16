@@ -4,11 +4,13 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const templatePath = "./src/index.html";
 module.exports = (env, options) => {
+  const pathToMainJs = require.resolve("./src/js/app.js");
+  const pathToIndexHtml = require.resolve("./src/index.html");
+
   const config = {
     entry: {
-      app: ["./src/js/app.js"],
+      app: [pathToMainJs],
     },
     output: {
       filename: "[name].bundle.js",
@@ -47,7 +49,6 @@ module.exports = (env, options) => {
         },
       ],
     },
-    plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })],
   };
 
   if (options.mode === "development") {
@@ -58,7 +59,7 @@ module.exports = (env, options) => {
       new HtmlWebpackPlugin({
         title: "Development",
         filename: "index.html",
-        template: templatePath,
+        template: pathToIndexHtml,
         showErrors: true, // 에러 발생시 메세지가 브라우저 화면에 노출 된다.
         minify: {
           collapseWhitespace: true,
@@ -81,7 +82,21 @@ module.exports = (env, options) => {
     };
   } else {
     //... Production 설정
-    config.plugins = [new CleanWebpackPlugin()];
+    config.plugins = [
+      new CleanWebpackPlugin(),
+      new MiniCssExtractPlugin(),
+      new HtmlWebpackPlugin({
+        title: "todo-dali",
+        filename: "index.html",
+        template: pathToIndexHtml,
+        showErrors: false, // 에러 발생시 메세지가 브라우저 화면에 노출 된다.
+        minify: {
+          collapseWhitespace: true,
+          removeComments: true,
+        },
+        hash: true,
+      }),
+    ];
   }
 
   return config;
