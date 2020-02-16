@@ -29,7 +29,7 @@ export default function TodoList(
         throw new Error(error.NOARRAY_DATA)
     }
 
-    window.addEventListener('load', async (e) => {
+    window.addEventListener('load', (e) => {
         // const data = await apiHandler({})
         onLoad()
     })
@@ -67,7 +67,6 @@ export default function TodoList(
     })
 
     this.render = function () {
-        console.log(this.data)
         const renderedHTMLText = this.data.map((val, idx) => {
             if (!val.content) {
                 // throw new Error(error.NOT_DATA)

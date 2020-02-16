@@ -11,7 +11,7 @@ function renderedTemplate(val, idx) {
 }
 
 function totalCountTemplate(totalCount){
-    return `총 <strong>${totalCount}</strong>개`
+    return `총 <strong>${totalCount}</strong> 개`
 }
 
 export { renderedTemplate, totalCountTemplate }
