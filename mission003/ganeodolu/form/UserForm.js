@@ -1,6 +1,6 @@
-import {FORMNAME, TITLENAME} from '../js/constant.js'
+import { FORMNAME, TITLENAME } from '../js/constant.js'
 
-export default function UserForm({$targetTitle, $targetUserForm, $targetInput, $targetPhone, $targetEmail, $targetIntroduce, $targetAgreement, $targetCheckBox, $targetCompleteButton1, $targetStep1, $targetStep2, data}){
+export default function UserForm({ $targetTitle, $targetUserForm, $targetInput, $targetPhone, $targetEmail, $targetIntroduce, $targetAgreement, $targetCheckBox, $targetCompleteButton1, $targetStep1, $targetStep2, data }) {
     this.data = data;
 
     let agreementCheck = false;

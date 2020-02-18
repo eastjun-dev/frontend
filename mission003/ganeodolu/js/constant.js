@@ -9,4 +9,4 @@ const TITLENAME = {
     SETP3: '입력완료 3/3'
 }
 
-export {FORMNAME, TITLENAME}
+export { FORMNAME, TITLENAME }

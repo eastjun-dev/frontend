@@ -1,18 +1,17 @@
-import {renderedFamilyTemplate} from '../js/template.js'
+import { renderedFamilyTemplate } from '../js/template.js'
 import { TITLENAME } from '../js/constant.js';
 
 export default function FamilyForm(
     {
-        $targetTitle, 
-        $targetAddFamilyFormData, 
-        $targetAddFamilyButton, 
-        $targetFamilyContainer, 
-        $targetCompleteButton2, 
-        $targetStep2, 
-        $targetStep3, 
+        $targetTitle,
+        $targetAddFamilyFormData,
+        $targetAddFamilyButton,
+        $targetFamilyContainer,
+        $targetCompleteButton2,
+        $targetStep2,
+        $targetStep3,
         data
-    })
-{
+    }) {
     this.data = data;
 
     let renderedHTMLFamily = ``

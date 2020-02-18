@@ -55,17 +55,17 @@ export default function App(data) {
         $targetAddFamilyButton: $targetAddFamilyButton,
         $targetFamilyContainer: $targetFamilyContainer,
         $targetCompleteButton2: $targetCompleteButton2,
-        $targetStep2: $targetStep2, 
-        $targetStep3: $targetStep3, 
+        $targetStep2: $targetStep2,
+        $targetStep3: $targetStep3,
         data: this.data,
     })
 
     const myInfoForm = new MyInfoForm({
-        $targetTitle: $targetTitle, 
-        $targetMyInfo: $targetMyInfo, 
-        $targetCompleteButton3: $targetCompleteButton3, 
+        $targetTitle: $targetTitle,
+        $targetMyInfo: $targetMyInfo,
+        $targetCompleteButton3: $targetCompleteButton3,
         $targetStep1: $targetStep1,
-        $targetStep3: $targetStep3, 
+        $targetStep3: $targetStep3,
         dialog: this.dialog,
         data: this.data,
     })
