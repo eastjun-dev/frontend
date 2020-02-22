@@ -1,13 +1,13 @@
 import { renderedMyInfoTemplate } from '../js/template.js'
 import { TITLENAME } from '../js/constant.js';
 
-export default function MyInfoForm({ $targetTitle, $targetMyInfo, $targetCompleteButton3, $targetStep1, $targetStep3, dialog, data }) {
+export default function MyInfoForm({ $targetTitle, $targetMyInfo, $targetCompleteButton, $targetStep1, $targetStep3, dialog, data }) {
     this.data = data;
     this.dialog = dialog;
 
-    $targetCompleteButton3.addEventListener('click', (e) => {
+    $targetCompleteButton.addEventListener('click', (e) => {
         e.preventDefault()
-        if (e.target.classList.contains('mdc-button__ripple')) {
+        if (e.target.classList.contains('done')) {
             $targetStep3.classList.add('hidden')
 
             $targetMyInfo.innerHTML = renderedMyInfoTemplate(this.data)
