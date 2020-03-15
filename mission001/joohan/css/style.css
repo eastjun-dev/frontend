@@ -332,3 +332,11 @@ body {
 .info a:hover {
     text-decoration: underline;
 }
+
+.pikachu {
+    display: none;
+}
+
+.showing {
+    display: block;
+}
