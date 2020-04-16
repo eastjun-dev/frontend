@@ -16,6 +16,10 @@ function View() {
             target.className = '';
         }
     }
+
+    View.prototype.remove = (target) => {
+        target.parentElement.removeChild(target);
+    }
 }
 
 export default View;
