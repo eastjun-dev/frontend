@@ -7,6 +7,15 @@ function View() {
         const item = Template.getNewItem(entity);
         todoList.appendChild(item);
     };
+
+    View.prototype.toggle = (target) => {
+        const status = target.className;
+        if (!status) {
+            target.className = 'completed';
+        } else if (status === 'completed') {
+            target.className = '';
+        }
+    }
 }
 
 export default View;
