@@ -1,7 +1,8 @@
 const Template = {
     getNewItem: (entity) => {
         const li = document.createElement('li');
-        li.id = entity.id;
+        li.id = 'todo-' + entity.id;
+        li.className = entity.status;
 
         li.innerHTML = `
             <div class="view">
