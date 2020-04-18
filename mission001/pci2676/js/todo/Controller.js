@@ -3,7 +3,13 @@ function Controller(service, view) {
     const filters = document.querySelector(".filters");
 
     inputTextBox.addEventListener('keyup', event => Controller.prototype.inputListener(event));
-    filters.addEventListener('click', (event) => Controller.prototype.todoCountClickListener(event));
+    addFilterEvents();
+
+    function addFilterEvents() {
+        for (let filter of filters.getElementsByTagName('a')) {
+            filter.addEventListener('click', (event) => Controller.prototype.filterClick(event));
+        }
+    }
 
     Controller.prototype.inputListener = (event) => {
         const inputItem = inputTextBox.value;
@@ -54,11 +60,7 @@ function Controller(service, view) {
         return event.key === 'Escape';
     }
 
-    Controller.prototype.todoCountClickListener = (event) => {
-        const tagName = event.target.tagName;
-        if (tagName !== 'A') {
-            return;
-        }
+    Controller.prototype.filterClick = (event) => {
         const target = event.target.classList.item(0);
         view.select(target);
         view.updateCount();
