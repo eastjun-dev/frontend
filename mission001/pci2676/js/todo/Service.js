@@ -3,7 +3,7 @@ function Service(storage) {
     Service.prototype.addTodoItem = (callback, inputItem, eventListener) => {
         const entity = {};
         entity.value = inputItem;
-        entity.status = "ready";
+        entity.status = "active";
         storage.save(callback, entity, eventListener);
     };
 
@@ -22,10 +22,10 @@ function Service(storage) {
     };
 
     function toggle(status) {
-        if (status === 'ready') {
+        if (status === 'active') {
             return 'completed';
         } else if (status === 'completed') {
-            return 'ready';
+            return 'active';
         }
     }
 
@@ -37,6 +37,7 @@ function Service(storage) {
     function extractTodoId(id) {
         return id.replace('todo-', '');
     }
+
 }
 
 export default Service;
