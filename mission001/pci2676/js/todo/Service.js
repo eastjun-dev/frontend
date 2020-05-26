@@ -1,10 +1,10 @@
 function Service(storage) {
 
-    Service.prototype.addTodoItem = (callback, inputItem, eventListener) => {
+    Service.prototype.addTodoItem = (callback, inputItem) => {
         const entity = {};
         entity.value = inputItem;
         entity.status = "active";
-        storage.save(callback, entity, eventListener);
+        storage.save(callback, entity);
     };
 
     Service.prototype.delete = (callback, id) => {

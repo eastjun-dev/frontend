@@ -1,70 +1,74 @@
+import {EVENT_KEY} from "../utils/Contants.js"
+import {EVENT_VALIDATOR, STRING_VALIDATOR} from "../utils/Validators.js";
+
 function Controller(service, view) {
-    const inputTextBox = document.querySelector("#new-todo-title");
-    const filters = document.querySelector(".filters");
 
-    inputTextBox.addEventListener('keyup', event => Controller.prototype.inputListener(event));
-    addFilterEvents();
-
-    function addFilterEvents() {
-        for (let filter of filters.getElementsByTagName('a')) {
-            filter.addEventListener('click', (event) => Controller.prototype.filterClick(event));
-        }
-    }
-
-    Controller.prototype.inputListener = (event) => {
-        const inputItem = inputTextBox.value;
-        if (isEnter(event) && isNotEmpty(inputItem)) {
-            inputTextBox.value = "";
-
-            const eventListener = {};
-            eventListener.deleteClick = Controller.prototype.deleteClick;
-            eventListener.toggleClick = Controller.prototype.toggleClick;
-            eventListener.editContent = Controller.prototype.editContent;
-
-            service.addTodoItem(view.addNewItem, inputItem, eventListener);
+    Controller.prototype.inputListener = (event, $inputTextBox) => {
+        const inputItem = $inputTextBox.value;
+        if (EVENT_VALIDATOR.isEnter(event) && STRING_VALIDATOR.isNotEmpty(inputItem)) {
+            $inputTextBox.value = "";
+            service.addTodoItem(view.addNewItem, inputItem);
         }
     };
 
-    function isEnter(event) {
-        return event.key === 'Enter';
-    }
-
-    function isNotEmpty(item) {
-        return item && item.trim().length !== 0;
-    }
-
     Controller.prototype.toggleClick = (event) => {
-        const target = event.target.offsetParent;
-        service.changeStatus(view.toggle, target);
+        event.preventDefault()
+
+        if (event.target.classList.contains('toggle')) {
+            const $li = event.target.closest('li');
+            service.changeStatus(view.toggle, $li);
+        }
     };
 
     Controller.prototype.deleteClick = (event) => {
-        const target = event.target.offsetParent;
-        service.delete(view.remove, target.id);
+        event.preventDefault()
+
+        if (event.target.classList.contains('destroy')) {
+            const $li = event.target.closest('li');
+            service.delete(view.remove, $li.id);
+        }
     };
 
     Controller.prototype.editContent = (event) => {
-        const li = event.target.offsetParent;
+        event.preventDefault()
 
-        if (isEsc(event)) {
+        const $li = event.target.closest('li');
+
+        if (EVENT_VALIDATOR.isEsc(event)) {
             view.editExit(event);
             return;
         }
-        if (isEnter(event)) {
+        if (EVENT_VALIDATOR.isEnter(event)) {
             const edited = event.target.value;
-            service.update(view.update, li.id, edited);
+            service.update(view.update, $li.id, edited);
         }
     };
 
-    function isEsc(event) {
-        return event.key === 'Escape';
-    }
-
     Controller.prototype.filterClick = (event) => {
-        const target = event.target.classList.item(0);
-        view.select(target);
-        view.updateCount();
+        event.preventDefault()
+
+        const $target = event.target.closest('a');
+        if ($target) {
+            view.select($target);
+            view.updateCount();
+        }
     };
+
+    Controller.prototype.initEventListener = ($inputTextBox, $todoList, $filters) => {
+        $inputTextBox.addEventListener(EVENT_KEY.KEY_UP, event => Controller.prototype.inputListener(event, $inputTextBox));
+
+        $todoList.addEventListener(EVENT_KEY.CLICK, (event) => Controller.prototype.toggleClick(event));
+        $todoList.addEventListener(EVENT_KEY.CLICK, (event) => Controller.prototype.deleteClick(event));
+        $todoList.addEventListener(EVENT_KEY.CLICK, (event) => Controller.prototype.filterClick(event));
+        $todoList.addEventListener(EVENT_KEY.DOUBLE_CLICK, (event) => view.editMode(event));
+        $todoList.addEventListener(EVENT_KEY.KEY_UP, (event) => Controller.prototype.editContent(event));
+
+        $filters.addEventListener(EVENT_KEY.CLICK, (event) => Controller.prototype.filterClick(event));
+    };
+
+    Controller.prototype.init = ($inputTextBox, $todoList, $filters) => {
+        Controller.prototype.initEventListener($inputTextBox, $todoList, $filters);
+    }
 }
 
 export default Controller;

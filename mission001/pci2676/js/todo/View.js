@@ -1,23 +1,21 @@
 import Template from "./Template.js";
 
-function View() {
-    const todoList = document.querySelector("#todo-list");
-    const todoCount = document.querySelector(".count");
-    const filters = document.querySelector(".filters");
+function View($todoList, $todoCount) {
 
-    View.prototype.addNewItem = (entity, eventListener) => {
+    View.prototype.addNewItem = (entity) => {
         const item = Template.getNewItem(entity);
-        item.querySelector('.toggle').onclick = eventListener.toggleClick;
-        item.querySelector('.destroy').onclick = eventListener.deleteClick;
-        item.querySelector('.label').ondblclick = View.prototype.editMode;
-        item.querySelector('.edit').addEventListener('keyup', (event) => eventListener.editContent(event));
-        todoList.appendChild(item);
+        $todoList.insertAdjacentHTML('afterbegin', item);
         View.prototype.updateCount();
     };
 
     View.prototype.editMode = (event) => {
-        const li = event.target.offsetParent;
-        li.className = 'editing';
+        event.preventDefault();
+
+        const $label = event.target.closest('label');
+        if ($label) {
+            const $li = event.target.closest('li');
+            $li.className = 'editing';
+        }
     };
 
     View.prototype.toggle = (entity) => {
@@ -35,6 +33,8 @@ function View() {
     };
 
     View.prototype.editExit = (event) => {
+        event.preventDefault();
+
         const li = event.target.offsetParent;
 
         li.className = 'ready';
@@ -43,26 +43,26 @@ function View() {
 
     View.prototype.update = (entity) => {
         const id = '#todo-' + entity.id;
-        const li = document.querySelector(id);
-        li.querySelector('.label').textContent = entity.value;
-        li.querySelector('.edit').value = entity.value;
-        li.className = 'ready';
+        const $li = document.querySelector(id);
+        $li.querySelector('.label').textContent = entity.value;
+        $li.querySelector('.edit').value = entity.value;
+        $li.className = 'ready';
     };
 
     View.prototype.updateCount = () => {
-        let target = document.querySelector('.selected').classList.item(0);
+        const target = document.querySelector('.selected').classList.item(0);
 
         if (target === 'all') {
-            todoCount.innerHTML = todoList.getElementsByClassName('view').length.toString();
+            $todoCount.innerHTML = $todoList.getElementsByClassName('view').length.toString();
         } else {
-            todoCount.innerHTML = todoList.getElementsByClassName(target).length.toString();
+            $todoCount.innerHTML = $todoList.getElementsByClassName(target).length.toString();
         }
         showSelected();
     };
 
     View.prototype.select = (target) => {
         removeAllSelected();
-        filters.querySelector('.' + target).classList.add('selected');
+        target.classList.add('selected');
         showSelected();
     };
 
@@ -71,18 +71,17 @@ function View() {
     }
 
     function showSelected() {
-        const target = document.querySelector('.selected').classList.item(0);
-        if (target === 'all') {
-            for (let li of todoList.getElementsByTagName('li')) {
-                li.style.display = '';
-            }
-        } else {
-            for (let li of todoList.getElementsByTagName('li')) {
-                if (li.className === target) {
-                    li.style.display = '';
-                } else {
-                    li.style.display = 'none';
-                }
+        for (let $li of $todoList.getElementsByTagName('li')) {
+            $li.classList.remove('d-none');
+        }
+
+        const filter = document.querySelector('.selected').dataset.filter;
+        if (filter === 'all') {
+            return;
+        }
+        for (let $li of $todoList.getElementsByTagName('li')) {
+            if ($li.className !== filter) {
+                $li.classList.add('d-none')
             }
         }
     }

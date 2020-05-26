@@ -4,15 +4,22 @@ import View from "./todo/View.js";
 import Storage from "./todo/Storage.js";
 
 function App() {
-    initialize(this);
-}
 
-function initialize(app) {
-    console.log(app);
-    const view = new View();
-    const storage = new Storage();
-    const service = new Service(storage);
-    app.Controller = new Controller(service, view);
+    function initialize(app) {
+        const $inputTextBox = document.querySelector("#new-todo-title");
+        const $filters = document.querySelector(".filters");
+        const $todoList = document.querySelector("#todo-list");
+        const $todoCount = document.querySelector(".count");
+
+        const view = new View($todoList, $todoCount);
+        const storage = new Storage();
+        const service = new Service(storage);
+        const controller = new Controller(service, view);
+
+        controller.init($inputTextBox, $todoList, $filters);
+    }
+
+    initialize(this);
 }
 
 new App();

@@ -332,3 +332,7 @@ body {
 .info a:hover {
     text-decoration: underline;
 }
+
+.d-none {
+    display: none;
+}

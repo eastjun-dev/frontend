@@ -1,11 +1,11 @@
 function Storage() {
     let id = 0;
 
-    Storage.prototype.save = (callback, entity, eventListener) => {
+    Storage.prototype.save = (callback, entity) => {
         id++;
         entity.id = id.toString();
         save(entity);
-        callback(entity, eventListener);
+        callback(entity);
     };
 
     Storage.prototype.delete = (callback, id) => {
